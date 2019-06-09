@@ -12,11 +12,11 @@ namespace ExcelWorkbookSplitter
     {
         static void Main(string[] args)
         {
-            ExcelFile excelFile = new ExcelFunctions().OpenFile(@"E:\Temp\GitHubUnsorted\Wpf.ProductsFromExcelToXml\!Data\VAIRUMTIRDZNIECIBA_matraci_TEEN_2018.xlsx");
+            ExcelFile excelFile = new ExcelFunctions().OpenFile(@"C:\Temp\Test.xlsx");
 
             List<string> worksheets = new ExcelFunctions().GetWorksheets(excelFile);
 
-            ExcelObject.Worksheet worksheet = new ExcelFunctions().GetWorksheet(excelFile, "KIDS");
+            ExcelObject.Worksheet worksheet = new ExcelFunctions().GetWorksheet(excelFile, 1);
 
             //            using ()
             {

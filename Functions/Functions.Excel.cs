@@ -76,6 +76,11 @@ namespace ExcelWorkbookSplitter.Functions
             return excelFile.Sheet.Worksheets[worksheetName];
         }
 
+        public ExcelObject.Worksheet GetWorksheet(ExcelFile excelFile, int worksheetId)
+        {
+            return excelFile.Sheet.Worksheets[worksheetId];
+        }
+
         public List<string> GetWorksheets(ExcelFile excelFile)
         {
             List<string> result = new List<string>();
