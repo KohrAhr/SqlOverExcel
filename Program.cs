@@ -12,24 +12,28 @@ namespace ExcelWorkbookSplitter
     {
         static void Main(string[] args)
         {
-            ExcelFile excelFile = new ExcelFunctions().OpenFile(@"C:\Temp\Test.xlsx");
+            using (ExcelCore excelCore = new ExcelCore(@"C:\Temp\Test.xlsx"))
+            {
 
-            List<string> worksheets = new ExcelFunctions().GetWorksheets(excelFile);
+            }
+            //    ExcelFile excelFile = new ExcelFunctions().OpenFile(@"C:\Temp\Test.xlsx");
 
-            ExcelObject.Worksheet worksheet = new ExcelFunctions().GetWorksheet(excelFile, 1);
+            //List<string> worksheets = new ExcelFunctions().GetWorksheets(excelFile);
+
+            //ExcelObject.Worksheet worksheet = new ExcelFunctions().GetWorksheet(excelFile, 1);
 
             //            using ()
-            {
-                //                ExcelObject.Worksheet worksheet = excelFile.sheet.Worksheets["KIDS"];
+            //{
+            //    //                ExcelObject.Worksheet worksheet = excelFile.sheet.Worksheets["KIDS"];
 
-                foreach (String name in worksheets)
-                {
-                    Console.WriteLine(name);
-                }
+            //    foreach (String name in worksheets)
+            //    {
+            //        Console.WriteLine(name);
+            //    }
 
-                //                Console.WriteLine("Total lines: {0}", x.ToString());
-            }
-
+            //    //                Console.WriteLine("Total lines: {0}", x.ToString());
+            //}
+           
             Console.ReadKey();
         }
     }

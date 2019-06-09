@@ -9,6 +9,9 @@ using ExcelObject = Microsoft.Office.Interop.Excel;
 
 namespace ExcelWorkbookSplitter.Functions
 {
+    /// <summary>
+    ///     Structure contain different kind of Excel objects and common information about Excel file (file name)
+    /// </summary>
     public class ExcelFile
     {
         public string FileName { get; set; }
@@ -19,16 +22,36 @@ namespace ExcelWorkbookSplitter.Functions
         public ExcelObject.Worksheet Worksheet { set; get; } = null;
     }
 
-    public class ExcelFunctions 
+    /// <summary>
+    ///     Main class
+    /// </summary>
+    public class ExcelCore : IDisposable
     {
-        // ExcelFile, IDisposable
-        // private ExcelFunctions excelFunctions = new ExcelFunctions();
+        private ExcelFile excelFile = null;
+        private ExcelFunctions excelFunctions = null;
 
-        //public void Dispose()
-        //{
-        //    this.CloseFile(this);
-        //}
+        public ExcelCore()
+        {
+            excelFunctions = new ExcelFunctions();
+        }
 
+        public ExcelCore(String FileName)
+        {
+            excelFunctions = new ExcelFunctions();
+            excelFile = excelFunctions.OpenFile(FileName);
+        }
+
+        public void Dispose()
+        {
+            excelFunctions.CloseFile(excelFile);
+        }
+    }
+
+    /// <summary>
+    ///     Class contain set of functions for operat
+    /// </summary>
+    public class ExcelFunctions
+    {
         public ExcelFile OpenFile(string file)
         {
             ExcelFile result = new ExcelFile() { FileName = file };
@@ -69,6 +92,9 @@ namespace ExcelWorkbookSplitter.Functions
             {
                 System.Runtime.InteropServices.Marshal.ReleaseComObject(excelFile?.ExcelApp);
             }
+
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
 
         public ExcelObject.Worksheet GetWorksheet(ExcelFile excelFile, String worksheetName)
