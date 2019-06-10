@@ -14,11 +14,13 @@ namespace ExcelWorkbookSplitter
         {
             using (ExcelCore excelCore = new ExcelCore(@"C:\Temp\Test.xlsx"))
             {
+                List<string> worksheets = excelCore.GetWorksheets();
 
+//                foreach (String name in excelCore.excelFile.Worksheets)
+//               {
+ //                  Console.WriteLine(name);
+    //            }
             }
-            //    ExcelFile excelFile = new ExcelFunctions().OpenFile(@"C:\Temp\Test.xlsx");
-
-            //List<string> worksheets = new ExcelFunctions().GetWorksheets(excelFile);
 
             //ExcelObject.Worksheet worksheet = new ExcelFunctions().GetWorksheet(excelFile, 1);
 
