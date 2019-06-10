@@ -33,7 +33,8 @@ namespace ExcelWorkbookSplitter
 
             //    //                Console.WriteLine("Total lines: {0}", x.ToString());
             //}
-           
+
+            Console.WriteLine("Done!");
             Console.ReadKey();
         }
     }

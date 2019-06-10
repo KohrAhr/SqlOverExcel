@@ -49,7 +49,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\Core.Logic.cs" />
+    <Compile Include="Functions\Functions.Excel.Api.cs" />
     <Compile Include="Functions\Functions.Excel.cs" />
+    <Compile Include="Functions\Functions.Excel.Types.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
