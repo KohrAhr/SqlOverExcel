@@ -12,7 +12,7 @@ namespace ExcelWorkbookSplitter.Functions
         /// <summary>
         ///     Class with information about current Excel file/object
         /// </summary>
-        protected internal ExcelFile excelFile = null;
+//        protected internal ExcelFile excelFile = null;
 
         /// <summary>
         ///     Default constructor
@@ -42,45 +42,41 @@ namespace ExcelWorkbookSplitter.Functions
 
         public void OpenFile(string file)
         {
-            excelFile = new ExcelFile()
-            {
-                FileName = file
-            };
+            FileName = file;
 
             try
             {
-                excelFile.ExcelApp = new ExcelObject.Application();
-                excelFile.ExcelApp.Visible = false;
-                excelFile.Books = excelFile.ExcelApp.Workbooks;
-                excelFile.Sheet = excelFile.Books.Open(file);
+                ExcelApp = new ExcelObject.Application();
+                ExcelApp.Visible = false;
+                Books = ExcelApp.Workbooks;
+                Sheet = Books.Open(file);
             }
             catch
             {
                 CloseFile();
-                excelFile = null;
             }
         }
 
         public void CloseFile()
         {
-            if (excelFile?.Worksheet != null)
+            if (Worksheet != null)
             {
-                System.Runtime.InteropServices.Marshal.ReleaseComObject(excelFile.Worksheet);
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(Worksheet);
             }
-            excelFile?.Sheet?.Close(false);
-            excelFile?.Books?.Close();
-            if (excelFile?.Sheet != null)
+            Sheet?.Close(false);
+            Books?.Close();
+            if (Sheet != null)
             {
-                System.Runtime.InteropServices.Marshal.ReleaseComObject(excelFile.Sheet);
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(Sheet);
             }
-            if (excelFile?.Books != null)
+            if (Books != null)
             {
-                System.Runtime.InteropServices.Marshal.ReleaseComObject(excelFile.Books);
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(Books);
             }
-            excelFile?.ExcelApp?.Quit();
-            if (excelFile?.ExcelApp != null)
+            ExcelApp?.Quit();
+            if (ExcelApp != null)
             {
-                System.Runtime.InteropServices.Marshal.ReleaseComObject(excelFile?.ExcelApp);
+                System.Runtime.InteropServices.Marshal.ReleaseComObject(ExcelApp);
             }
 
             GC.Collect();

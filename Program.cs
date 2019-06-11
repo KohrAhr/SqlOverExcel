@@ -16,10 +16,10 @@ namespace ExcelWorkbookSplitter
             {
                 List<string> worksheets = excelCore.GetWorksheets();
 
-//                foreach (String name in excelCore.excelFile.Worksheets)
-//               {
- //                  Console.WriteLine(name);
-    //            }
+                foreach (String name in worksheets)
+                {
+                    Console.WriteLine(name);
+                }
             }
 
             //ExcelObject.Worksheet worksheet = new ExcelFunctions().GetWorksheet(excelFile, 1);
