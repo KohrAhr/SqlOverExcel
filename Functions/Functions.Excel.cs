@@ -83,16 +83,40 @@ namespace ExcelWorkbookSplitter.Functions
             GC.WaitForPendingFinalizers();
         }
 
-        public ExcelObject.Worksheet GetWorksheet(ExcelFile excelFile, String worksheetName)
+        /// <summary>
+        ///     Get worksheet by Worksheet name
+        /// </summary>
+        /// <param name="worksheetName">
+        ///     Worksheet name
+        /// </param>
+        /// <returns>
+        ///     Worksheet
+        /// </returns>
+        public ExcelObject.Worksheet GetWorksheet(String worksheetName)
         {
-            return excelFile.Sheet.Worksheets[worksheetName];
+            return Sheet.Worksheets[worksheetName];
         }
 
-        public ExcelObject.Worksheet GetWorksheet(ExcelFile excelFile, int worksheetId)
+        /// <summary>
+        ///     Get worksheet by Worksheet Id
+        /// </summary>
+        /// <param name="worksheetName">
+        ///     Worksheet Id
+        /// </param>
+        /// <returns>
+        ///     Worksheet
+        /// </returns>
+        public ExcelObject.Worksheet GetWorksheet(int worksheetId)
         {
-            return excelFile.Sheet.Worksheets[worksheetId];
+            return Sheet.Worksheets[worksheetId];
         }
 
+        /// <summary>
+        ///     Get list of all Worksheets
+        /// </summary>
+        /// <returns>
+        ///     List of Worksheets
+        /// </returns>
         public List<string> GetWorksheets()
         {
             List<string> result = new List<string>();
@@ -142,18 +166,41 @@ namespace ExcelWorkbookSplitter.Functions
         //
         //
 
+        /// <summary>
+        ///     Get cell value from specific Worksheet
+        /// </summary>
+        /// <param name="excelWorksheet">
+        ///     Worksheet
+        /// </param>
+        /// <param name="row">
+        ///     Row No
+        /// </param>
+        /// <param name="col">
+        ///     Col No
+        /// </param>
+        /// <returns>
+        ///     Value. If value is Null will be returned Empty string
+        /// </returns>
         public String GetCellValue(ExcelObject.Worksheet excelWorksheet, int row, int col)
         {
             return excelWorksheet.Cells[row, col].Value.ToString();
         }
 
-        //
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="excelWorksheet"></param>
+        /// <returns></returns>
         public int GetCountOfRows(ExcelObject.Worksheet excelWorksheet)
         {
             return excelWorksheet.Rows.Count;
         }
 
+        /// <summary>
+        ///     
+        /// </summary>
+        /// <param name="excelWorksheet"></param>
+        /// <returns></returns>
         public int GetCountOfCols(ExcelObject.Worksheet excelWorksheet)
         {
             return excelWorksheet.Columns.Count;
