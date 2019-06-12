@@ -12,7 +12,7 @@ namespace ExcelWorkbookSplitter
     {
         static void Main(string[] args)
         {
-            using (ExcelCore excelCore = new ExcelCore(@"C:\Temp\Excel\Book1.xlsx"))
+            using (ExcelCore excelCore = new ExcelCore(@"C:\Temp\Excel\test.xlsx"))
             {
                 if (excelCore.IsInitialized())
                 {
@@ -26,7 +26,14 @@ namespace ExcelWorkbookSplitter
                         ExcelObject.Worksheet worksheet = excelCore.GetWorksheet(name);
 
                         Console.WriteLine("\tMax rows: {0}; Max cols: {1}", excelCore.GetMaxCountOfRows(worksheet), excelCore.GetMaxCountOfCols(worksheet));
-                        Console.WriteLine("\tActual rows: {0}; Actual cols: {1}", excelCore.GetCountOfRows(worksheet), excelCore.GetCountOfCols(worksheet));
+
+                        int firstRowWithData = excelCore.GetFirstRow(worksheet);
+                        Console.WriteLine("\tFirst row with data: {0}", firstRowWithData);
+
+                        Console.WriteLine("\tTotal rows with data: {0}; Actual cols: {1}", 
+                            excelCore.GetCountOfRows(worksheet) + firstRowWithData, 
+                            excelCore.GetCountOfCols(worksheet)
+                        );
                     }
                 }
                 else

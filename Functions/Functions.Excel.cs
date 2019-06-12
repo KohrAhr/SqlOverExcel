@@ -224,6 +224,12 @@ namespace ExcelWorkbookSplitter.Functions
             return excelWorksheet.Cells[excelWorksheet.Rows.Count, 1].End(ExcelObject.XlDirection.xlUp).Row;
         }
 
+        public int GetFirstRow(ExcelObject.Worksheet excelWorksheet)
+        {
+            int z = excelWorksheet.Cells[1, 1].End(ExcelObject.XlDirection.xlDown).Row;
+            return z;
+        }
+
         /// <summary>
         ///     Get maximum allowed count of columns in Worksheet
         /// </summary>
@@ -245,7 +251,7 @@ namespace ExcelWorkbookSplitter.Functions
         /// <returns></returns>
         public int GetCountOfCols(ExcelObject.Worksheet excelWorksheet)
         {
-            return excelWorksheet.Cells[1, excelWorksheet.Columns.Count].End(ExcelObject.XlDirection.xlToLeft).Column;
+            return excelWorksheet.Cells[GetCountOfRows(excelWorksheet), excelWorksheet.Columns.Count].End(ExcelObject.XlDirection.xlToLeft).Column;
         }
     }
 }
