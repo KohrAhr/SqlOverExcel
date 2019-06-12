@@ -33,5 +33,14 @@ namespace ExcelWorkbookSplitter.Functions
         /// 
         /// </summary>
         protected internal ExcelObject.Worksheet Worksheet { set; get; } = null;
+
+        /// <summary>
+        ///     Verify that Excel object was loaded and initialized successfully
+        /// </summary>
+        /// <returns></returns>
+        public bool IsInitialized()
+        {
+            return ExcelApp != null && Books != null && Sheet != null;
+        }
     }
 }

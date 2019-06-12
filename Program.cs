@@ -12,29 +12,23 @@ namespace ExcelWorkbookSplitter
     {
         static void Main(string[] args)
         {
-            using (ExcelCore excelCore = new ExcelCore(@"C:\Temp\Test.xlsx"))
+            using (ExcelCore excelCore = new ExcelCore(@"C:\Temp\Excel\Book1.xlsx"))
             {
-                List<string> worksheets = excelCore.GetWorksheets();
-
-                foreach (String name in worksheets)
+                if (excelCore.IsInitialized())
                 {
-                    Console.WriteLine(name);
+                    List<string> worksheets = excelCore.GetWorksheets();
+
+                    Console.WriteLine("List of available worksheets:");
+                    foreach (String name in worksheets)
+                    {
+                        Console.WriteLine("\t{0}", name);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Requested file cannot be opened");
                 }
             }
-
-            //ExcelObject.Worksheet worksheet = new ExcelFunctions().GetWorksheet(excelFile, 1);
-
-            //            using ()
-            //{
-            //    //                ExcelObject.Worksheet worksheet = excelFile.sheet.Worksheets["KIDS"];
-
-            //    foreach (String name in worksheets)
-            //    {
-            //        Console.WriteLine(name);
-            //    }
-
-            //    //                Console.WriteLine("Total lines: {0}", x.ToString());
-            //}
 
             Console.WriteLine("Done!");
             Console.ReadKey();

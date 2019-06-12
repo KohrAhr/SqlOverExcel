@@ -10,11 +10,6 @@ namespace ExcelWorkbookSplitter.Functions
     public class ExcelCore : ExcelFile, IDisposable
     {
         /// <summary>
-        ///     Class with information about current Excel file/object
-        /// </summary>
-//        protected internal ExcelFile excelFile = null;
-
-        /// <summary>
         ///     Default constructor
         /// </summary>
         public ExcelCore()
@@ -40,6 +35,12 @@ namespace ExcelWorkbookSplitter.Functions
             CloseFile();
         }
 
+        /// <summary>
+        ///     Open existing Excel file
+        /// </summary>
+        /// <param name="file">
+        ///     Excel file name and optional path
+        /// </param>
         public void OpenFile(string file)
         {
             FileName = file;
@@ -50,6 +51,11 @@ namespace ExcelWorkbookSplitter.Functions
                 ExcelApp.Visible = false;
                 Books = ExcelApp.Workbooks;
                 Sheet = Books.Open(file);
+
+                if (Sheet == null)
+                {
+                    CloseFile();
+                }
             }
             catch
             {
@@ -57,6 +63,9 @@ namespace ExcelWorkbookSplitter.Functions
             }
         }
 
+        /// <summary>
+        ///     Close Excel file and release all Excel objects
+        /// </summary>
         public void CloseFile()
         {
             if (Worksheet != null)
@@ -72,11 +81,13 @@ namespace ExcelWorkbookSplitter.Functions
             if (Books != null)
             {
                 System.Runtime.InteropServices.Marshal.ReleaseComObject(Books);
+                Books = null;
             }
             ExcelApp?.Quit();
             if (ExcelApp != null)
             {
                 System.Runtime.InteropServices.Marshal.ReleaseComObject(ExcelApp);
+                ExcelApp = null;
             }
 
             GC.Collect();
