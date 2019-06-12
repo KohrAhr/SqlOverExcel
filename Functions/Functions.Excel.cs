@@ -198,23 +198,54 @@ namespace ExcelWorkbookSplitter.Functions
         }
 
         /// <summary>
-        /// 
+        ///     Get maximum allowed count of rows in Worksheet
         /// </summary>
-        /// <param name="excelWorksheet"></param>
-        /// <returns></returns>
-        public int GetCountOfRows(ExcelObject.Worksheet excelWorksheet)
+        /// <param name="excelWorksheet">
+        ///     Worksheet to check
+        /// </param>
+        /// <returns>
+        ///     Numeric value -- maximum allowed count of rows in specific Worksheet
+        /// </returns>
+        public int GetMaxCountOfRows(ExcelObject.Worksheet excelWorksheet)
         {
             return excelWorksheet.Rows.Count;
         }
 
+
         /// <summary>
-        ///     
+        ///     Get count of actually filled rows in Worksheet
+        /// </summary>
+        /// <param name="excelWorksheet">
+        ///     Worksheet to check
+        /// </param>
+        /// <returns></returns>
+        public int GetCountOfRows(ExcelObject.Worksheet excelWorksheet)
+        {
+            return excelWorksheet.Cells[excelWorksheet.Rows.Count, 1].End(ExcelObject.XlDirection.xlUp).Row;
+        }
+
+        /// <summary>
+        ///     Get maximum allowed count of columns in Worksheet
+        /// </summary>
+        /// <param name="excelWorksheet">
+        ///     Worksheet to check
+        /// </param>
+        /// <returns>
+        ///     Numeric value -- maximum allowed count of columns in specific Worksheet
+        /// </returns>
+        public int GetMaxCountOfCols(ExcelObject.Worksheet excelWorksheet)
+        {
+            return excelWorksheet.Columns.Count;
+        }
+
+        /// <summary>
+        ///     Get count of maximum actually filled columns in Worksheet
         /// </summary>
         /// <param name="excelWorksheet"></param>
         /// <returns></returns>
         public int GetCountOfCols(ExcelObject.Worksheet excelWorksheet)
         {
-            return excelWorksheet.Columns.Count;
+            return excelWorksheet.Cells[1, excelWorksheet.Columns.Count].End(ExcelObject.XlDirection.xlToLeft).Column;
         }
     }
 }

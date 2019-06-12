@@ -21,7 +21,12 @@ namespace ExcelWorkbookSplitter
                     Console.WriteLine("List of available worksheets:");
                     foreach (String name in worksheets)
                     {
-                        Console.WriteLine("\t{0}", name);
+                        Console.WriteLine("\t\"{0}\"", name);
+
+                        ExcelObject.Worksheet worksheet = excelCore.GetWorksheet(name);
+
+                        Console.WriteLine("\tMax rows: {0}; Max cols: {1}", excelCore.GetMaxCountOfRows(worksheet), excelCore.GetMaxCountOfCols(worksheet));
+                        Console.WriteLine("\tActual rows: {0}; Actual cols: {1}", excelCore.GetCountOfRows(worksheet), excelCore.GetCountOfCols(worksheet));
                     }
                 }
                 else
