@@ -40,35 +40,48 @@ namespace ExcelWorkbookSplitter
                     DataTable dataTables = new DataTable();
                     DataTable dataTable = new DataTable();
 
-                    if (excelCore.GetTables(ref dataTables))
+                    //if (excelCore.GetTables(ref dataTables))
+                    //{
+                    //    Console.WriteLine("Count of available tables (worksheet): {0}", dataTables.Rows.Count);
+
+                    // ... from first worksheet (index = 0)
+                    // name == actual name + $
+//                        if (excelCore.GetListData("dAtA$", ref dataTable))
+//                      {
+                    //
+                            
+                    DataTable testData = new DataTable();
+                    //if (excelCore.RunSql("select count(Field1) as E1 from [dAtA$]", ref testData))
+                    //{
+                    //    // Show result from DataTable
+                    //    DisplayResult(testData);
+                    //}
+                    //else
+                    //{
+                    //    Console.WriteLine("Error occured during executing SQL query");
+                    //}
+
+                    testData.Clear();
+                    if (excelCore.RunSql("select TOP 10 Field1 from [dAtA$]", ref testData))
                     {
-                        Console.WriteLine("Count of available tables (worksheet): {0}", dataTables.Rows.Count);
-
-                        // ... from first worksheet (index = 0)
-                        // name == actual name + $
-                        if (excelCore.GetListData("dAtA$", ref dataTable))
-                        {
-                            // 
-                            DataTable testData = new DataTable();
-                            if (excelCore.RunSql("select count(Field1) as E1 from [dAtA$]", ref testData))
-                            {
-
-
-                            }
-                            else
-                            {
-                                Console.WriteLine("Error occured during executing SQL query");
-                            }
-                        }
-                        else
-                        {
-                            Console.WriteLine("Error occured during obtaining data from Table");
-                        }
+                        // Show result from DataTable
+                        DisplayResult(testData);
                     }
                     else
                     {
-                        Console.WriteLine("Error occured during obtaining list of tables");
+                        Console.WriteLine("Error occured during executing SQL query");
                     }
+
+                    //}
+                    //else
+                    //{
+                    //    Console.WriteLine("Error occured during obtaining data from Table");
+                    //}
+                    //}
+                    //else
+                    //{
+                    //    Console.WriteLine("Error occured during obtaining list of tables");
+                    //}
                 }
                 else
                 {
@@ -78,6 +91,18 @@ namespace ExcelWorkbookSplitter
 
             Console.WriteLine("Done!");
             Console.ReadKey();
+        }
+
+        private static void DisplayResult(DataTable dataTable)
+        {
+            foreach (DataRow dataRow in dataTable.Rows)
+            {
+                foreach (var item in dataRow.ItemArray)
+                {
+                    Console.Write(item + "\t");
+                }
+                Console.WriteLine();
+            }
         }
     }
 }
