@@ -10,6 +10,16 @@ namespace ExcelWorkbookSplitter.Functions
     public class ExcelCore : ExcelFile, IDisposable
     {
         /// <summary>
+        ///     Id of value with ROW count
+        /// </summary>
+        private const int CONST_ROWS_ID = 0;
+
+        /// <summary>
+        ///     Id of value with COLS count
+        /// </summary>
+        private const int CONST_COLS_ID = 1;
+
+        /// <summary>
         ///     Default constructor
         /// </summary>
         public ExcelCore()
@@ -211,25 +221,6 @@ namespace ExcelWorkbookSplitter.Functions
             return excelWorksheet.Rows.Count;
         }
 
-
-        /// <summary>
-        ///     Get count of actually filled rows in Worksheet
-        /// </summary>
-        /// <param name="excelWorksheet">
-        ///     Worksheet to check
-        /// </param>
-        /// <returns></returns>
-        public int GetCountOfRows(ExcelObject.Worksheet excelWorksheet)
-        {
-            return excelWorksheet.Cells[excelWorksheet.Rows.Count, 1].End(ExcelObject.XlDirection.xlUp).Row;
-        }
-
-        public int GetFirstRow(ExcelObject.Worksheet excelWorksheet)
-        {
-            int z = excelWorksheet.Cells[1, 1].End(ExcelObject.XlDirection.xlDown).Row;
-            return z;
-        }
-
         /// <summary>
         ///     Get maximum allowed count of columns in Worksheet
         /// </summary>
@@ -244,6 +235,33 @@ namespace ExcelWorkbookSplitter.Functions
             return excelWorksheet.Columns.Count;
         }
 
+        private dynamic GetCount(ExcelObject.Worksheet excelWorksheet, ExcelObject.XlSearchOrder searchOrder)
+        {
+            return excelWorksheet.Cells.Find(
+                "*",
+                System.Reflection.Missing.Value,
+                System.Reflection.Missing.Value,
+                System.Reflection.Missing.Value,
+                searchOrder,
+                ExcelObject.XlSearchDirection.xlPrevious,
+                false,
+                System.Reflection.Missing.Value,
+                System.Reflection.Missing.Value
+            );
+        }
+
+        /// <summary>
+        ///     Get count of actually filled rows in Worksheet
+        /// </summary>
+        /// <param name="excelWorksheet">
+        ///     Worksheet to check
+        /// </param>
+        /// <returns></returns>
+        public int GetCountOfRows(ExcelObject.Worksheet excelWorksheet)
+        {
+            return GetCount(excelWorksheet, ExcelObject.XlSearchOrder.xlByRows).Row;
+        }
+
         /// <summary>
         ///     Get count of maximum actually filled columns in Worksheet
         /// </summary>
@@ -251,7 +269,32 @@ namespace ExcelWorkbookSplitter.Functions
         /// <returns></returns>
         public int GetCountOfCols(ExcelObject.Worksheet excelWorksheet)
         {
-            return excelWorksheet.Cells[GetCountOfRows(excelWorksheet), excelWorksheet.Columns.Count].End(ExcelObject.XlDirection.xlToLeft).Column;
+            return GetCount(excelWorksheet, ExcelObject.XlSearchOrder.xlByColumns).Column;
         }
+
+        /// <summary>
+        ///     Get Excel Worksheet dimension
+        /// </summary>
+        /// <param name="excelWorksheet">
+        /// </param>
+        /// <param name="id">
+        ///     CONST_ROWS_ID or CONST_COLS_ID
+        /// </param>
+        /// <returns>
+        ///     Count of rows or columns
+        /// </returns>
+        //private int GetDimension(ExcelObject.Worksheet excelWorksheet, int id)
+        //{
+        //    int result = 1;
+        //    ExcelObject.Range excelCells = excelWorksheet.UsedRange;
+
+        //    if (excelCells.Value is Object[,])
+        //    {
+        //        Object[,] sheetValues = (Object[,])excelCells.Value;
+        //        result = sheetValues.GetLength(id);
+        //    }
+            
+        //    return result;
+        //}
     }
 }

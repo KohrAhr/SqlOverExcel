@@ -18,20 +18,15 @@ namespace ExcelWorkbookSplitter
                 {
                     List<string> worksheets = excelCore.GetWorksheets();
 
-                    Console.WriteLine("List of available worksheets:");
+                    Console.WriteLine("List of available worksheets in file \"{0}\":", excelCore.FileName);
                     foreach (String name in worksheets)
                     {
                         Console.WriteLine("\t\"{0}\"", name);
 
                         ExcelObject.Worksheet worksheet = excelCore.GetWorksheet(name);
 
-                        Console.WriteLine("\tMax rows: {0}; Max cols: {1}", excelCore.GetMaxCountOfRows(worksheet), excelCore.GetMaxCountOfCols(worksheet));
-
-                        int firstRowWithData = excelCore.GetFirstRow(worksheet);
-                        Console.WriteLine("\tFirst row with data: {0}", firstRowWithData);
-
-                        Console.WriteLine("\tTotal rows with data: {0}; Actual cols: {1}", 
-                            excelCore.GetCountOfRows(worksheet) + firstRowWithData, 
+                        Console.WriteLine("\tLast row with data: {0}; Last column with data: {1}\n", 
+                            excelCore.GetCountOfRows(worksheet), 
                             excelCore.GetCountOfCols(worksheet)
                         );
                     }
