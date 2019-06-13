@@ -297,7 +297,79 @@ namespace ExcelWorkbookSplitter.Functions
             }
         }
 
-        private string BuildConnectionString()
+        public bool GetListData(string listName, ref DataTable dt)
+        {
+            OleDbConnection oConn = null;
+            OleDbCommand oComm = null;
+            OleDbDataReader oRdr = null;
+            try
+            {
+                String sConnString = BuildConnectionString();
+
+                oConn = new OleDbConnection(sConnString);
+                oConn.Open();
+
+                String sCommand = @"SELECT * FROM [" + listName + "]";
+                oComm = new OleDbCommand(sCommand, oConn);
+                oRdr = oComm.ExecuteReader();
+
+                dt.Load(oRdr);
+
+                return dt.Rows.Count > 0;
+            }
+#pragma warning disable 168
+            catch (Exception ex)
+#pragma warning restore 168
+            {
+                return false;
+            }
+            finally
+            {
+                oRdr?.Close();
+                oRdr = null;
+                oComm?.Dispose();
+                oConn.Close();
+                oConn.Dispose();
+            }
+        }
+
+        public bool RunSql(string sql, ref DataTable dataTable)
+        {
+            OleDbConnection oConn = null;
+            OleDbCommand oComm = null;
+            OleDbDataReader oRdr = null;
+            try
+            {
+                String sConnString = BuildConnectionString();
+
+                oConn = new OleDbConnection(sConnString);
+                oConn.Open();
+
+                String sCommand = sql;
+                oComm = new OleDbCommand(sCommand, oConn);
+                oRdr = oComm.ExecuteReader();
+
+                dataTable.Load(oRdr);
+
+                return dataTable.Rows.Count > 0;
+            }
+#pragma warning disable 168
+            catch (Exception ex)
+#pragma warning restore 168
+            {
+                return false;
+            }
+            finally
+            {
+                oRdr?.Close();
+                oRdr = null;
+                oComm?.Dispose();
+                oConn.Close();
+                oConn.Dispose();
+            }
+        }
+
+        public string BuildConnectionString()
         {
             const string connectionStringTemplate = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0};Extended Properties='Excel 12.0 Xml;HDR={1}';";
 

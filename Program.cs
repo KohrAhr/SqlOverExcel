@@ -38,18 +38,37 @@ namespace ExcelWorkbookSplitter
                     // Get worksheet
 
                     DataTable dataTables = new DataTable();
+                    DataTable dataTable = new DataTable();
 
                     if (excelCore.GetTables(ref dataTables))
                     {
                         Console.WriteLine("Count of available tables (worksheet): {0}", dataTables.Rows.Count);
 
-                        // Get data from "Table 1" aka "Worksheet 1"
+                        // ... from first worksheet (index = 0)
+                        // name == actual name + $
+                        if (excelCore.GetListData("dAtA$", ref dataTable))
+                        {
+                            // 
+                            DataTable testData = new DataTable();
+                            if (excelCore.RunSql("select count(Field1) as E1 from [dAtA$]", ref testData))
+                            {
+
+
+                            }
+                            else
+                            {
+                                Console.WriteLine("Error occured during executing SQL query");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Error occured during obtaining data from Table");
+                        }
                     }
                     else
                     {
                         Console.WriteLine("Error occured during obtaining list of tables");
                     }
-
                 }
                 else
                 {
@@ -60,6 +79,5 @@ namespace ExcelWorkbookSplitter
             Console.WriteLine("Done!");
             Console.ReadKey();
         }
-
     }
 }
