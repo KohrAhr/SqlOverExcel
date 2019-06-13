@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.OleDb;
 using ExcelObject = Microsoft.Office.Interop.Excel;
 
 namespace ExcelWorkbookSplitter.Functions
@@ -9,16 +11,6 @@ namespace ExcelWorkbookSplitter.Functions
     /// </summary>
     public class ExcelCore : ExcelFile, IDisposable
     {
-        /// <summary>
-        ///     Id of value with ROW count
-        /// </summary>
-        private const int CONST_ROWS_ID = 0;
-
-        /// <summary>
-        ///     Id of value with COLS count
-        /// </summary>
-        private const int CONST_COLS_ID = 1;
-
         /// <summary>
         ///     Default constructor
         /// </summary>
@@ -273,28 +265,43 @@ namespace ExcelWorkbookSplitter.Functions
         }
 
         /// <summary>
-        ///     Get Excel Worksheet dimension
+        ///     Get worksheet as Table
         /// </summary>
-        /// <param name="excelWorksheet">
-        /// </param>
-        /// <param name="id">
-        ///     CONST_ROWS_ID or CONST_COLS_ID
-        /// </param>
-        /// <returns>
-        ///     Count of rows or columns
-        /// </returns>
-        //private int GetDimension(ExcelObject.Worksheet excelWorksheet, int id)
-        //{
-        //    int result = 1;
-        //    ExcelObject.Range excelCells = excelWorksheet.UsedRange;
+        /// <param name="excelFileName"></param>
+        /// <param name="dt"></param>
+        /// <returns></returns>
+        public bool GetTables(ref DataTable dt)
+        {
+            OleDbConnection oConn = null;
+            try
+            {
+                String sConnString = BuildConnectionString();
 
-        //    if (excelCells.Value is Object[,])
-        //    {
-        //        Object[,] sheetValues = (Object[,])excelCells.Value;
-        //        result = sheetValues.GetLength(id);
-        //    }
-            
-        //    return result;
-        //}
+                oConn = new OleDbConnection(sConnString);
+                oConn.Open();
+
+                dt = oConn.GetSchema("Tables");
+
+                return dt.Rows.Count > 0;
+            }
+#pragma warning disable 168
+            catch (Exception ex)
+#pragma warning restore 168
+            {
+                return false;
+            }
+            finally
+            {
+                oConn.Close();
+                oConn.Dispose();
+            }
+        }
+
+        private string BuildConnectionString()
+        {
+            const string connectionStringTemplate = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0};Extended Properties='Excel 12.0 Xml;HDR={1}';";
+
+            return String.Format(connectionStringTemplate, FileName, "Yes");
+        }
     }
 }

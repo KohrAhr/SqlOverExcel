@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.OleDb;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +18,8 @@ namespace ExcelWorkbookSplitter
             {
                 if (excelCore.IsInitialized())
                 {
+                    // Display common information about Excel worksheets
+
                     List<string> worksheets = excelCore.GetWorksheets();
 
                     Console.WriteLine("List of available worksheets in file \"{0}\":", excelCore.FileName);
@@ -30,6 +34,22 @@ namespace ExcelWorkbookSplitter
                             excelCore.GetCountOfCols(worksheet)
                         );
                     }
+
+                    // Get worksheet
+
+                    DataTable dataTables = new DataTable();
+
+                    if (excelCore.GetTables(ref dataTables))
+                    {
+                        Console.WriteLine("Count of available tables (worksheet): {0}", dataTables.Rows.Count);
+
+                        // Get data from "Table 1" aka "Worksheet 1"
+                    }
+                    else
+                    {
+                        Console.WriteLine("Error occured during obtaining list of tables");
+                    }
+
                 }
                 else
                 {
@@ -40,5 +60,6 @@ namespace ExcelWorkbookSplitter
             Console.WriteLine("Done!");
             Console.ReadKey();
         }
+
     }
 }
