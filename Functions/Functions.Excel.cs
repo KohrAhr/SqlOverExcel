@@ -297,9 +297,15 @@ namespace ExcelWorkbookSplitter.Functions
             }
         }
 
+        /// <summary>
+        ///     
+        /// </summary>
+        /// <param name="listName"></param>
+        /// <param name="dt"></param>
+        /// <returns></returns>
         public bool GetListData(string listName, ref DataTable dt)
         {
-            return RunSql(listName, ref dt);
+            return RunSql("SELECT * FROM [" + listName + "]", ref dt);
         }
 
         public bool RunSql(string sql, ref DataTable dataTable)
