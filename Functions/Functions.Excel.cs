@@ -38,6 +38,22 @@ namespace ExcelWorkbookSplitter.Functions
         }
 
         /// <summary>
+        ///     Create instance on Excel Application.
+        ///     Instance Not visible and Does Not display alerts
+        /// </summary>
+        /// <returns>
+        ///     Excel instance
+        /// </returns>
+        private ExcelObject.Application CreateExcelInstance()
+        {
+            ExcelObject.Application excelInstance = new ExcelObject.Application();
+            excelInstance.Visible = false;
+            excelInstance.DisplayAlerts = false;
+
+            return excelInstance;
+        }
+
+        /// <summary>
         ///     Open existing Excel file
         /// </summary>
         /// <param name="file">
@@ -49,8 +65,7 @@ namespace ExcelWorkbookSplitter.Functions
 
             try
             {
-                ExcelApp = new ExcelObject.Application();
-                ExcelApp.Visible = false;
+                ExcelApp = CreateExcelInstance();
                 Books = ExcelApp.Workbooks;
                 Sheet = Books.Open(file);
 
@@ -63,6 +78,89 @@ namespace ExcelWorkbookSplitter.Functions
             {
                 CloseFile();
             }
+        }
+
+        /// <summary>
+        ///     Create new Excel file
+        /// </summary>
+        /// <param name="file">
+        ///     Excel file name and optional path
+        /// </param>
+        public void NewFile(string file)
+        {
+            FileName = file;
+
+            try
+            {
+                ExcelApp = CreateExcelInstance();
+                Books = ExcelApp.Workbooks;
+                Sheet = Books.Add();
+            }
+            catch
+            {
+                CloseFile();
+            }
+        }
+
+        public bool NewSheet(string sheetName)
+        {
+//            try
+//            {
+//                ExcelObject.Sheets xlSheets = Sheet as ExcelObject.Sheets;
+//                ExcelObject.Worksheet xlNewSheet = xlSheets.Add(xlSheets[1], Type.Missing, Type.Missing, Type.Missing);
+//                xlNewSheet.Name = sheetName;
+
+
+//                //ExcelObject.Worksheet sheet = new ExcelObject.Worksheet();
+//                //sheet.Name = sheetName;
+//                //Sheet = Books.Add(sheet);
+
+//                //if (Sheet == null)
+//                //{
+//                //    CloseFile();
+//                //}
+//            }
+//#pragma warning disable 168
+//            catch (Exception ex)
+//#pragma warning restore 168
+//            {
+//                CloseFile();
+//            }
+
+            return Sheet != null;
+        }
+
+        /// <summary>
+        ///     Save Excel file
+        /// </summary>
+        /// <param name="file">
+        ///     Excel file name and optional path
+        /// </param>
+        /// <returts>
+        ///     True if operation completed successfully
+        /// </returts>
+        public bool SaveFile(string file)
+        {
+            bool result = true;
+
+            try
+            {
+                Sheet?.SaveAs(file,
+                    Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, ExcelObject.XlSaveAsAccessMode.xlNoChange,
+                    Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing
+                );
+            }
+            catch
+            {
+                result = false;
+            }
+
+            return result;
+        }
+
+        public void SaveFile()
+        {
+            SaveFile(FileName);
         }
 
         /// <summary>
@@ -140,23 +238,6 @@ namespace ExcelWorkbookSplitter.Functions
             return result;
         }
 
-        public static string GetString(ExcelObject.Worksheet worksheet, int row, int col)
-        {
-            string result = "";
-
-            ExcelObject.Range range = worksheet.Cells[row, col];
-            try
-            {
-                result = range.Value2?.ToString();
-            }
-            finally
-            {
-                System.Runtime.InteropServices.Marshal.ReleaseComObject(range);
-            }
-
-            return result;
-        }
-
         //public IEnumerable<string> GetHeaderFromWorksheet(ExcelObject.Worksheet excelWorksheet, int headerEnd)
         //{
         //    for (int intPosition = 0; intPosition < headerEnd; intPosition++)
@@ -179,6 +260,23 @@ namespace ExcelWorkbookSplitter.Functions
         //
         //
 
+        //public static string GetCellValue(ExcelObject.Worksheet worksheet, int row, int col)
+        //{
+        //    string result = "";
+
+        //    ExcelObject.Range range = worksheet.Cells[row, col];
+        //    try
+        //    {
+        //        result = range.Value2?.ToString();
+        //    }
+        //    finally
+        //    {
+        //        System.Runtime.InteropServices.Marshal.ReleaseComObject(range);
+        //    }
+
+        //    return result;
+        //}
+
         /// <summary>
         ///     Get cell value from specific Worksheet
         /// </summary>
@@ -196,7 +294,7 @@ namespace ExcelWorkbookSplitter.Functions
         /// </returns>
         public String GetCellValue(ExcelObject.Worksheet excelWorksheet, int row, int col)
         {
-            return excelWorksheet.Cells[row, col].Value.ToString();
+            return excelWorksheet.Cells[row, col].Value2?.ToString();
         }
 
         /// <summary>
@@ -353,6 +451,13 @@ namespace ExcelWorkbookSplitter.Functions
             const string connectionStringTemplate = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0};Extended Properties='Excel 12.0 Xml;HDR={1}';";
 
             return String.Format(connectionStringTemplate, FileName, "Yes");
+        }
+
+        public bool SaveDataSetAsNewExcelFile(string fileName, DataTable dataTable)
+        {
+            //
+
+            return true;
         }
     }
 }

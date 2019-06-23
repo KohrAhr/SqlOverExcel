@@ -40,7 +40,17 @@ namespace ExcelWorkbookSplitter.Functions
         /// <returns></returns>
         public bool IsInitialized()
         {
-            return ExcelApp != null && Books != null && Sheet != null;
+            return IsBookInitialized() && IsSheetInitialized();
+        }
+
+        private bool IsBookInitialized()
+        {
+            return ExcelApp != null && Books != null;
+        }
+
+        private bool IsSheetInitialized()
+        {
+            return Sheet != null;
         }
     }
 }

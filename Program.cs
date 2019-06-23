@@ -14,26 +14,40 @@ namespace ExcelWorkbookSplitter
     {
         static void Main(string[] args)
         {
+            using (ExcelCore excelCore = new ExcelCore())
+            {
+                excelCore.NewFile(@"C:\Temp\Excel\NewExcelFile.xlsx");
+                if (excelCore.IsInitialized())
+                {
+                //    if (excelCore.NewSheet("TEST1"))
+                    {
+                        excelCore.SaveFile(@"C:\Temp\Excel\NewExcelFile.xlsx");
+                    }
+                }
+            }
+
+            return;
+
             using (ExcelCore excelCore = new ExcelCore(@"C:\Temp\Excel\test.xlsx"))
             {
                 if (excelCore.IsInitialized())
                 {
                     // Display common information about Excel worksheets
 
-                    List<string> worksheets = excelCore.GetWorksheets();
+                    //List<string> worksheets = excelCore.GetWorksheets();
 
-                    Console.WriteLine("List of available worksheets in file \"{0}\":", excelCore.FileName);
-                    foreach (String name in worksheets)
-                    {
-                        Console.WriteLine("\t\"{0}\"", name);
+                    //Console.WriteLine("List of available worksheets in file \"{0}\":", excelCore.FileName);
+                    //foreach (String name in worksheets)
+                    //{
+                    //    Console.WriteLine("\t\"{0}\"", name);
 
-                        ExcelObject.Worksheet worksheet = excelCore.GetWorksheet(name);
+                    //    ExcelObject.Worksheet worksheet = excelCore.GetWorksheet(name);
 
-                        Console.WriteLine("\tLast row with data: {0}; Last column with data: {1}\n", 
-                            excelCore.GetCountOfRows(worksheet), 
-                            excelCore.GetCountOfCols(worksheet)
-                        );
-                    }
+                    //    Console.WriteLine("\tLast row with data: {0}; Last column with data: {1}\n", 
+                    //        excelCore.GetCountOfRows(worksheet), 
+                    //        excelCore.GetCountOfCols(worksheet)
+                    //    );
+                    //}
 
                     // Get worksheet
 
@@ -61,8 +75,12 @@ namespace ExcelWorkbookSplitter
                     //    Console.WriteLine("Error occured during executing SQL query");
                     //}
 
+
+                    // select (Field1 + Field2) AS E1, (Field2 - Field1) from [dAtA$]
+                    // 
+
                     testData.Clear();
-                    if (excelCore.RunSql("select TOP 10 Field1 from [dAtA$]", ref testData))
+                    if (excelCore.RunSql("select MAX(Field1) AS E1, MIN(Field1), SUM(Field1) from [dAtA$]", ref testData))
                     {
                         // Show result from DataTable
                         DisplayResult(testData);
