@@ -150,20 +150,18 @@ namespace ExcelWorkbookSplitter.Functions
         {
             int result = -1;
 
-            for (int x = 1;x < ExcelApp.Sheets.Count - 1;x++)
+            ExcelObject.Worksheet worksheet = Sheet.Worksheets[worksheetName];
+
+            if (worksheet != null)
             {
-                if (ExcelApp.Sheets[1].Name.ToString() == worksheetName)
-                {
-                    result = x;
-                    break;
-                }
+                result = worksheet.Index;
             }
 
             return result;
         }
 
         /// <summary>
-        ///     Delete worksheet
+        ///     Delete worksheet by Worksheet Id
         ///     <para>You cannot delete last worksheet</para>
         /// </summary>
         /// <param name="sheetIndex">
@@ -189,6 +187,21 @@ namespace ExcelWorkbookSplitter.Functions
         }
 
         /// <summary>
+        ///     Delete worksheet by Worksheet name
+        ///     <para>You cannot delete last worksheet</para>
+        /// </summary>
+        /// <param name="sheetIndex">
+        ///     Worksheet Id. Index starting from 1
+        /// </param>
+        /// <returns>
+        ///     True if operation completed successfully
+        /// </returns>
+        public bool DeleteSheet(string sheetName)
+        {
+            return DeleteSheet(FindWorksheet(sheetName));
+        }
+
+        /// <summary>
         ///     Save Excel file
         /// </summary>
         /// <param name="file">
@@ -204,7 +217,8 @@ namespace ExcelWorkbookSplitter.Functions
             try
             {
                 Sheet?.SaveAs(file,
-                    Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, ExcelObject.XlSaveAsAccessMode.xlNoChange,
+                    Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, 
+                    ExcelObject.XlSaveAsAccessMode.xlNoChange,
                     Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing
                 );
             }
