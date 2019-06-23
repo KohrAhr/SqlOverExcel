@@ -2,6 +2,19 @@
 
 namespace ExcelWorkbookSplitter.Functions
 {
+    public enum WorksheerOrder
+    {
+        /// <summary>
+        ///     First
+        /// </summary>
+        woFirst = 0,
+
+        /// <summary>
+        ///     Last
+        /// </summary>
+        woLast = 1
+    }
+
     /// <summary>
     ///     Structure contain different kind of Excel objects 
     ///     and 
@@ -43,12 +56,12 @@ namespace ExcelWorkbookSplitter.Functions
             return IsBookInitialized() && IsSheetInitialized();
         }
 
-        private bool IsBookInitialized()
+        public bool IsBookInitialized()
         {
             return ExcelApp != null && Books != null;
         }
 
-        private bool IsSheetInitialized()
+        public bool IsSheetInitialized()
         {
             return Sheet != null;
         }

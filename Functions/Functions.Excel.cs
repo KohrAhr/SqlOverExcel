@@ -102,32 +102,65 @@ namespace ExcelWorkbookSplitter.Functions
             }
         }
 
-        public bool NewSheet(string sheetName)
+        /// <summary>
+        ///     Create new worksheet 
+        /// </summary>
+        /// <param name="sheetName">
+        ///     Worksheet name (optional)
+        /// </param>
+        /// <returns>
+        ///     True if operation completed successfully
+        /// </returns>
+        public bool NewSheet(string sheetName = "", WorksheerOrder workSheetOrder = WorksheerOrder.woFirst)
         {
-//            try
-//            {
-//                ExcelObject.Sheets xlSheets = Sheet as ExcelObject.Sheets;
-//                ExcelObject.Worksheet xlNewSheet = xlSheets.Add(xlSheets[1], Type.Missing, Type.Missing, Type.Missing);
-//                xlNewSheet.Name = sheetName;
+            try
+            {
+                ExcelObject.Sheets xlSheets = ExcelApp.Worksheets;
 
+                int position = 1;
 
-//                //ExcelObject.Worksheet sheet = new ExcelObject.Worksheet();
-//                //sheet.Name = sheetName;
-//                //Sheet = Books.Add(sheet);
+                if (workSheetOrder == WorksheerOrder.woLast)
+                {
+                    position = xlSheets.Count;
+                }
 
-//                //if (Sheet == null)
-//                //{
-//                //    CloseFile();
-//                //}
-//            }
-//#pragma warning disable 168
-//            catch (Exception ex)
-//#pragma warning restore 168
-//            {
-//                CloseFile();
-//            }
+                ExcelObject.Worksheet xlNewSheet = xlSheets.Add(xlSheets[position]);
+                xlNewSheet.Name = sheetName;
+            }
+#pragma warning disable 168
+            catch (Exception ex)
+#pragma warning restore 168
+            {
+                Sheet = null;
+            }
 
             return Sheet != null;
+        }
+
+        /// <summary>
+        ///     Delete worksheet
+        ///     <para>You cannot delete last worksheet</para>
+        /// </summary>
+        /// <param name="sheetIndex">
+        ///     Worksheet Id. Index starting from 1
+        /// </param>
+        /// <returns>
+        ///     True if operation completed successfully
+        /// </returns>
+        public bool DeleteSheet(int sheetIndex)
+        {
+            bool result = true;
+
+            try
+            {
+                ExcelApp.Sheets[sheetIndex].Delete();
+            }
+            catch
+            {
+                result = false;
+            }
+            
+            return result;
         }
 
         /// <summary>
@@ -406,6 +439,18 @@ namespace ExcelWorkbookSplitter.Functions
             return RunSql("SELECT * FROM [" + listName + "]", ref dt);
         }
 
+        /// <summary>
+        ///     Run SQL Query over Excel file
+        /// </summary>
+        /// <param name="sql">
+        ///     SQL Query to run
+        /// </param>
+        /// <param name="dataTable">
+        ///     DataSet with result
+        /// </param>
+        /// <returns>
+        ///     True if operation completed successfully
+        /// </returns>
         public bool RunSql(string sql, ref DataTable dataTable)
         {
             OleDbConnection oConn = null;

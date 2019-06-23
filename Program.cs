@@ -19,9 +19,14 @@ namespace ExcelWorkbookSplitter
                 excelCore.NewFile(@"C:\Temp\Excel\NewExcelFile.xlsx");
                 if (excelCore.IsInitialized())
                 {
-                //    if (excelCore.NewSheet("TEST1"))
+                    if (excelCore.NewSheet("TEST1", WorksheerOrder.woLast))
                     {
-                        excelCore.SaveFile(@"C:\Temp\Excel\NewExcelFile.xlsx");
+                        if (excelCore.NewSheet("TEST2", WorksheerOrder.woLast))
+                        {
+                            excelCore.DeleteSheet(3);
+
+                            excelCore.SaveFile(@"C:\Temp\Excel\NewExcelFile.xlsx");
+                        }
                     }
                 }
             }
