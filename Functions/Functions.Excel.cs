@@ -138,6 +138,31 @@ namespace ExcelWorkbookSplitter.Functions
         }
 
         /// <summary>
+        ///     Find Workshhed Id by Worksheet Name
+        /// </summary>
+        /// <param name="worksheetName">
+        ///     Worksheet name
+        /// </param>
+        /// <returns>
+        ///     -1 -- Worksheet not found
+        /// </returns>
+        public int FindWorksheet(string worksheetName)
+        {
+            int result = -1;
+
+            for (int x = 1;x < ExcelApp.Sheets.Count - 1;x++)
+            {
+                if (ExcelApp.Sheets[1].Name.ToString() == worksheetName)
+                {
+                    result = x;
+                    break;
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
         ///     Delete worksheet
         ///     <para>You cannot delete last worksheet</para>
         /// </summary>
