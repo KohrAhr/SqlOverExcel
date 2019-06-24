@@ -315,45 +315,6 @@ namespace ExcelWorkbookSplitter.Functions
             return result;
         }
 
-        //public IEnumerable<string> GetHeaderFromWorksheet(ExcelObject.Worksheet excelWorksheet, int headerEnd)
-        //{
-        //    for (int intPosition = 0; intPosition < headerEnd; intPosition++)
-        //    {
-        //        yield return GetLineFromWorksheet(excelWorksheet, intPosition);
-        //    }
-        //}
-
-        ////
-        ////
-
-        //private IEnumerable<string> GetLineFromWorksheet(ExcelObject.Worksheet excelWorksheet, int row)
-        //{
-        //    for (int col = 0; col < GetCountOfCols(excelWorksheet);col++)
-        //    {
-        //        yield return GetCellValue(excelWorksheet, row, col);
-        //    }
-        //}
-
-        //
-        //
-
-        //public static string GetCellValue(ExcelObject.Worksheet worksheet, int row, int col)
-        //{
-        //    string result = "";
-
-        //    ExcelObject.Range range = worksheet.Cells[row, col];
-        //    try
-        //    {
-        //        result = range.Value2?.ToString();
-        //    }
-        //    finally
-        //    {
-        //        System.Runtime.InteropServices.Marshal.ReleaseComObject(range);
-        //    }
-
-        //    return result;
-        //}
-
         /// <summary>
         ///     Get cell value from specific Worksheet
         /// </summary>
