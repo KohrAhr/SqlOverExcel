@@ -113,6 +113,7 @@ namespace ExcelWorkbookSplitter.Functions
         /// </returns>
         public bool NewSheet(string sheetName = "", WorksheerOrder workSheetOrder = WorksheerOrder.woFirst)
         {
+            ExcelObject.Worksheet worksheet = null;
             try
             {
                 ExcelObject.Sheets xlSheets = ExcelApp.Worksheets;
@@ -124,31 +125,32 @@ namespace ExcelWorkbookSplitter.Functions
                     position = xlSheets.Count;
                 }
 
-                ExcelObject.Worksheet xlNewSheet = xlSheets.Add(xlSheets[position]);
-                xlNewSheet.Name = sheetName;
+                worksheet = xlSheets.Add(xlSheets[position]);
+                worksheet.Name = sheetName;
             }
 #pragma warning disable 168
             catch (Exception ex)
 #pragma warning restore 168
             {
-                Sheet = null;
+                worksheet = null;
             }
 
-            return Sheet != null;
+            return worksheet != null;
         }
 
         /// <summary>
-        ///     Find Workshhed Id by Worksheet Name
+        ///     Find Worksheet Id by Worksheet Name
+        ///     <para>Worksheet Id starting from 1</para>
         /// </summary>
         /// <param name="worksheetName">
         ///     Worksheet name
         /// </param>
         /// <returns>
-        ///     -1 -- Worksheet not found
+        ///     0 -- Worksheet not found
         /// </returns>
         public int FindWorksheet(string worksheetName)
         {
-            int result = -1;
+            int result = 0;
 
             ExcelObject.Worksheet worksheet = Sheet.Worksheets[worksheetName];
 
@@ -162,7 +164,7 @@ namespace ExcelWorkbookSplitter.Functions
 
         /// <summary>
         ///     Delete worksheet by Worksheet Id
-        ///     <para>You cannot delete last worksheet</para>
+        ///     <para>You cannot delete the last one worksheet</para>
         /// </summary>
         /// <param name="sheetIndex">
         ///     Worksheet Id. Index starting from 1
@@ -202,7 +204,7 @@ namespace ExcelWorkbookSplitter.Functions
         }
 
         /// <summary>
-        ///     Save Excel file
+        ///     Save Excel file As
         /// </summary>
         /// <param name="file">
         ///     Excel file name and optional path
@@ -230,6 +232,9 @@ namespace ExcelWorkbookSplitter.Functions
             return result;
         }
 
+        /// <summary>
+        ///     Save Excel file    
+        /// </summary>
         public void SaveFile()
         {
             SaveFile(FileName);

@@ -25,6 +25,8 @@ namespace ExcelWorkbookSplitter
                         {
                             excelCore.DeleteSheet(excelCore.FindWorksheet("Sheet1"));
 
+                            excelCore.DeleteSheet(excelCore.FindWorksheet("TEST1"));
+
                             excelCore.SaveFile(@"C:\Temp\Excel\NewExcelFile.xlsx");
                         }
                     }
