@@ -363,6 +363,18 @@ namespace ExcelWorkbookSplitter.Functions
             return excelWorksheet.Columns.Count;
         }
 
+        /// <summary>
+        ///     Find last row or column in worksheet
+        /// </summary>
+        /// <param name="excelWorksheet">
+        ///     Worksheet for analuze
+        /// </param>
+        /// <param name="searchOrder">
+        ///     By Row or by Column
+        /// </param>
+        /// <returns>
+        ///     Cell
+        /// </returns>
         private dynamic GetCount(ExcelObject.Worksheet excelWorksheet, ExcelObject.XlSearchOrder searchOrder)
         {
             return excelWorksheet.Cells.Find(
@@ -434,14 +446,20 @@ namespace ExcelWorkbookSplitter.Functions
         }
 
         /// <summary>
-        ///     
+        ///     Get Worksheet as DataSet        
         /// </summary>
-        /// <param name="listName"></param>
-        /// <param name="dt"></param>
-        /// <returns></returns>
-        public bool GetListData(string listName, ref DataTable dt)
+        /// <param name="worksheetName">
+        ///     Worksheet name
+        /// </param>
+        /// <param name="dataTable">
+        ///     [OUT] DataTable
+        /// </param>
+        /// <returns>
+        ///     True of operation completed successfully
+        /// </returns>
+        public bool GetListData(string worksheetName, ref DataTable dataTable)
         {
-            return RunSql("SELECT * FROM [" + listName + "]", ref dt);
+            return RunSql("SELECT * FROM [" + worksheetName + "]", ref dataTable);
         }
 
         /// <summary>
