@@ -14,108 +14,90 @@ namespace ExcelWorkbookSplitter
     {
         static void Main(string[] args)
         {
-            using (ExcelCore excelCore = new ExcelCore())
+
+            // Parse command line params
+            string inFile = @"C:\Temp\Excel\test.xlsx";
+            string outFile = "";
+            outFile = @"C:\Temp\Excel\NewExcelFile.xlsx";
+            string query = "";
+            query = "select count(field1) as e1 from [data$]";
+
+            bool info = !String.IsNullOrEmpty(query);
+            bool resultToFile = !String.IsNullOrEmpty(outFile);
+
+            // Open file and ...
+            using (ExcelCore excelIn = new ExcelCore(inFile))
             {
-                excelCore.NewFile(@"C:\Temp\Excel\NewExcelFile.xlsx");
-                if (excelCore.IsInitialized())
+                if (excelIn.IsInitialized())
                 {
-                    if (excelCore.NewSheet("TEST1", WorksheerOrder.woFirst))
+                    if (info)
                     {
-                        if (excelCore.NewSheet("TEST2", WorksheerOrder.woLast))
+                        // Display common information about Excel worksheets
+
+                        List<string> worksheets = excelIn.GetWorksheets();
+
+                        Console.WriteLine("List of available worksheets in file \"{0}\":", excelIn.FileName);
+                        foreach (String name in worksheets)
                         {
-                            excelCore.DeleteSheet(excelCore.FindWorksheet("Sheet1"));
+                            Console.WriteLine("\t\"{0}\"", name);
 
-                            excelCore.DeleteSheet(excelCore.FindWorksheet("TEST1"));
+                            ExcelObject.Worksheet worksheet = excelIn.GetWorksheet(name);
 
-                            excelCore.SaveFile(@"C:\Temp\Excel\NewExcelFile.xlsx");
+                            Console.WriteLine("\tLast row with data: {0}; Last column with data: {1}\n",
+                                excelIn.GetCountOfRows(worksheet),
+                                excelIn.GetCountOfCols(worksheet)
+                            );
+                        }
+                    }
+                    else
+                    {
+                        DataTable queryResult = new DataTable();
+                        if (excelIn.RunSql(query, ref queryResult))
+                        {
+                            if (resultToFile)
+                            {
+                                // Option 1
+
+                                // Save result to new file
+                                using (ExcelCore excelOut = new ExcelCore())
+                                {
+                                    excelOut.NewFile(outFile);
+                                    if (excelOut.IsInitialized())
+                                    {
+                                        if (excelOut.NewSheet("RESULT", WorksheerOrder.woFirst))
+                                        {
+                                            excelOut.DeleteSheet("Sheet1");
+
+                                            //                       excelOut.PopulateData("RESULT", queryResult);
+
+                                            excelOut.SaveFile();
+                                        }
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                // Option 2
+
+                                // Verbose output -- show result from datatable
+                                DisplayResult(queryResult);
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("The an error has been occured during executing the sql query");
                         }
                     }
                 }
+                else
+                {
+                    Console.WriteLine("The an error has been occured during accessing Excel file");
+                }
+
+                Console.ReadKey();
+
+                return;
             }
-
-            return;
-
-            //            using (ExcelCore excelCore = new ExcelCore(@"C:\Temp\Excel\test.xlsx"))
-            //            {
-            //                if (excelCore.IsInitialized())
-            //                {
-            //                    // Display common information about Excel worksheets
-
-            //                    //List<string> worksheets = excelCore.GetWorksheets();
-
-            //                    //Console.WriteLine("List of available worksheets in file \"{0}\":", excelCore.FileName);
-            //                    //foreach (String name in worksheets)
-            //                    //{
-            //                    //    Console.WriteLine("\t\"{0}\"", name);
-
-            //                    //    ExcelObject.Worksheet worksheet = excelCore.GetWorksheet(name);
-
-            //                    //    Console.WriteLine("\tLast row with data: {0}; Last column with data: {1}\n", 
-            //                    //        excelCore.GetCountOfRows(worksheet), 
-            //                    //        excelCore.GetCountOfCols(worksheet)
-            //                    //    );
-            //                    //}
-
-            //                    // Get worksheet
-
-            //                    DataTable dataTables = new DataTable();
-            //                    DataTable dataTable = new DataTable();
-
-            //                    //if (excelCore.GetTables(ref dataTables))
-            //                    //{
-            //                    //    Console.WriteLine("Count of available tables (worksheet): {0}", dataTables.Rows.Count);
-
-            //                    // ... from first worksheet (index = 0)
-            //                    // name == actual name + $
-            ////                        if (excelCore.GetListData("dAtA$", ref dataTable))
-            ////                      {
-            //                    //
-
-            //                    DataTable testData = new DataTable();
-            //                    //if (excelCore.RunSql("select count(Field1) as E1 from [dAtA$]", ref testData))
-            //                    //{
-            //                    //    // Show result from DataTable
-            //                    //    DisplayResult(testData);
-            //                    //}
-            //                    //else
-            //                    //{
-            //                    //    Console.WriteLine("Error occured during executing SQL query");
-            //                    //}
-
-
-            //                    // select (Field1 + Field2) AS E1, (Field2 - Field1) from [dAtA$]
-            //                    // 
-
-            //                    testData.Clear();
-            //                    if (excelCore.RunSql("select MAX(Field1) AS E1, MIN(Field1), SUM(Field1) from [dAtA$]", ref testData))
-            //                    {
-            //                        // Show result from DataTable
-            //                        DisplayResult(testData);
-            //                    }
-            //                    else
-            //                    {
-            //                        Console.WriteLine("Error occured during executing SQL query");
-            //                    }
-
-            //                    //}
-            //                    //else
-            //                    //{
-            //                    //    Console.WriteLine("Error occured during obtaining data from Table");
-            //                    //}
-            //                    //}
-            //                    //else
-            //                    //{
-            //                    //    Console.WriteLine("Error occured during obtaining list of tables");
-            //                    //}
-            //                }
-            //                else
-            //                {
-            //                    Console.WriteLine("Requested file cannot be opened");
-            //                }
-            //            }
-
-            //            Console.WriteLine("Done!");
-            //            Console.ReadKey();
         }
 
         private static void DisplayResult(DataTable dataTable)
