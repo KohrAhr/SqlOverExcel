@@ -1,3 +1,10 @@
 /obj
 /.vs
 /bin
+/Lib.Strings/bin
+/Lib.Strings/obj
+/Lib.System/bin
+/Lib.System/obj
+/Tests.Lib.Strings/bin
+/Tests.Lib.Strings/obj
+/Tests.Lib.Strings/packages
