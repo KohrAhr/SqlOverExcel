@@ -14,11 +14,18 @@ namespace ExcelWorkbookSplitter
     {
         static void Main(string[] args)
         {
+            // Command line usage sample:
+            // APP.EXE in="EXCEL FILE NAME" [out="EXCEL FILE NAME"] [query="SQL Query"]
 
             // Parse command line params
+
+
+            //
+
+
             string inFile = @"C:\Temp\Excel\test.xlsx";
             string outFile = "";
-            outFile = @"C:\Temp\Excel\NewExcelFile.xlsx";
+//            outFile = @"C:\Temp\Excel\NewExcelFile.xlsx";
             string query = "";
 //            query = "select count(field1) as e1 from [data$]";
             query = "select * from [data$]";
@@ -81,7 +88,17 @@ namespace ExcelWorkbookSplitter
                                 // Option 2
 
                                 // Verbose output -- show result from datatable
-                                DisplayResult(queryResult);
+                                //DisplayResult(queryResult);
+                                excelIn.IterateOverData(queryResult, 
+                                    delegate (string value, int x, int y) 
+                                    {
+                                        if (x == 1)
+                                        {
+                                            Console.WriteLine();
+                                        }
+                                        Console.Write(value + "\t");
+                                    }
+                                );
                             }
                         }
                         else
@@ -101,16 +118,16 @@ namespace ExcelWorkbookSplitter
             }
         }
 
-        private static void DisplayResult(DataTable dataTable)
-        {
-            foreach (DataRow dataRow in dataTable.Rows)
-            {
-                foreach (object item in dataRow.ItemArray)
-                {
-                    Console.Write(item.ToString() + "\t");
-                }
-                Console.WriteLine();
-            }
-        }
+        //private static void DisplayResult(DataTable dataTable)
+        //{
+        //    foreach (DataRow dataRow in dataTable.Rows)
+        //    {
+        //        foreach (object item in dataRow.ItemArray)
+        //        {
+        //            Console.Write(item.ToString() + "\t");
+        //        }
+        //        Console.WriteLine();
+        //    }
+        //}
     }
 }

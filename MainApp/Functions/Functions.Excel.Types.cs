@@ -2,6 +2,8 @@
 
 namespace ExcelWorkbookSplitter.Functions
 {
+    public delegate void IteratorEvent(string value, int x, int y);
+
     public enum WorksheerOrder
     {
         /// <summary>

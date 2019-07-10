@@ -546,6 +546,25 @@ namespace ExcelWorkbookSplitter.Functions
             }
         }
 
+        public Action<string, int, int> TIterateAction;
+        public class IterateAction
+        {
+            public Action<string, int, int> action;
+        }
+
+        public void IterateOverData(DataTable dataTable, IteratorEvent action)
+        {
+            int y = 1;
+            foreach (DataRow dataRow in dataTable.Rows)
+            {
+                int x = 1;
+                foreach (object item in dataRow.ItemArray)
+                {
+                    action?.Invoke(item.ToString(), x++, y++);
+                }
+            }
+        }
+
         /// <summary>
         ///     Build connection string for current Excel file
         /// </summary>
