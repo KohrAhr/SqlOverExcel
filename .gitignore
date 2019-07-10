@@ -8,3 +8,7 @@
 /Tests.Lib.Strings/bin
 /Tests.Lib.Strings/obj
 /Tests.Lib.Strings/packages
+/MainApp/.vs
+/MainApp/bin
+/MainApp/packages
+/MainApp/obj
