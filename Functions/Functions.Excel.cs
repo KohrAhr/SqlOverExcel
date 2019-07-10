@@ -203,6 +203,41 @@ namespace ExcelWorkbookSplitter.Functions
             return DeleteSheet(FindWorksheet(sheetName));
         }
 
+        public bool PopulateData(string sheetName, DataTable data)
+        {
+            bool result = true;
+
+            int sheetIndex = FindWorksheet(sheetName);
+
+            if (sheetIndex > 0)
+            {
+                try
+                {
+                    //                    ExcelApp.Sheets[sheetIndex].Cells
+                    int y = 1;
+                    foreach (DataRow dataRow in data.Rows)
+                    {
+                        int x = 1;
+                        foreach (object item in dataRow.ItemArray)
+                        {
+                            ExcelApp.Sheets[sheetIndex].Cells[y, x++] = item.ToString();
+                        }
+                        y++;
+                    }
+                }
+                catch
+                {
+                    result = false;
+                }
+            }
+            else
+            {
+                result = false;
+            }
+
+            return result;
+        }
+
         /// <summary>
         ///     Save Excel file As
         /// </summary>
@@ -519,13 +554,6 @@ namespace ExcelWorkbookSplitter.Functions
             const string connectionStringTemplate = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0};Extended Properties='Excel 12.0 Xml;HDR={1}';";
 
             return String.Format(connectionStringTemplate, FileName, "Yes");
-        }
-
-        public bool SaveDataSetAsNewExcelFile(string fileName, DataTable dataTable)
-        {
-            //
-
-            return true;
         }
     }
 }

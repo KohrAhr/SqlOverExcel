@@ -20,9 +20,10 @@ namespace ExcelWorkbookSplitter
             string outFile = "";
             outFile = @"C:\Temp\Excel\NewExcelFile.xlsx";
             string query = "";
-            query = "select count(field1) as e1 from [data$]";
+//            query = "select count(field1) as e1 from [data$]";
+            query = "select * from [data$]";
 
-            bool info = !String.IsNullOrEmpty(query);
+            bool info = String.IsNullOrEmpty(query);
             bool resultToFile = !String.IsNullOrEmpty(outFile);
 
             // Open file and ...
@@ -68,7 +69,7 @@ namespace ExcelWorkbookSplitter
                                         {
                                             excelOut.DeleteSheet("Sheet1");
 
-                                            //                       excelOut.PopulateData("RESULT", queryResult);
+                                            excelOut.PopulateData("RESULT", queryResult);
 
                                             excelOut.SaveFile();
                                         }
@@ -104,9 +105,9 @@ namespace ExcelWorkbookSplitter
         {
             foreach (DataRow dataRow in dataTable.Rows)
             {
-                foreach (var item in dataRow.ItemArray)
+                foreach (object item in dataRow.ItemArray)
                 {
-                    Console.Write(item + "\t");
+                    Console.Write(item.ToString() + "\t");
                 }
                 Console.WriteLine();
             }
