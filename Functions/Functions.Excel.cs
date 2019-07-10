@@ -213,7 +213,6 @@ namespace ExcelWorkbookSplitter.Functions
             {
                 try
                 {
-                    //                    ExcelApp.Sheets[sheetIndex].Cells
                     int y = 1;
                     foreach (DataRow dataRow in data.Rows)
                     {
@@ -225,9 +224,11 @@ namespace ExcelWorkbookSplitter.Functions
                         y++;
                     }
                 }
-                catch
+                catch (Exception ex)
                 {
                     result = false;
+
+                    throw new Exception(ex.Message);
                 }
             }
             else
