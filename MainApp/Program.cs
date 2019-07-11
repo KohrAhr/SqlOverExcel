@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Data.OleDb;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ExcelWorkbookSplitter.Functions;
-using ExcelObject = Microsoft.Office.Interop.Excel;
-using Lib.Strings;
-using Lib.System;
+using ExcelWorkbookSplitter.Core;
 
 namespace ExcelWorkbookSplitter
 {
@@ -16,83 +9,49 @@ namespace ExcelWorkbookSplitter
     {
         static void Main(string[] args)
         {
-            // Command line usage sample:
-            // APP.EXE in="EXCEL FILE NAME" [out="EXCEL FILE NAME"] [query="SQL Query"]
+            CoreFunctions coreFunctions = new CoreFunctions();
 
             // Parse command line params
-
-
-            //
-
-
-            string inFile = @"C:\Temp\Excel\test.xlsx";
-            string outFile = "";
-//            outFile = @"C:\Temp\Excel\NewExcelFile.xlsx";
-            string query = "";
-//            query = "select count(field1) as e1 from [data$]";
-            query = "select count(field1) as e1 from [data$]";
-
-            bool info = String.IsNullOrEmpty(query);
-            bool resultToFile = !String.IsNullOrEmpty(outFile);
+            AppData appData = coreFunctions.ParseCommandLineParams(args);
+            appData = coreFunctions.ValidateCommandLineParams(appData);
 
             // Open file and ...
-            using (ExcelCore excelIn = new ExcelCore(inFile))
+            using (ExcelCore excelIn = new ExcelCore(appData.inFile))
             {
                 if (excelIn.IsInitialized())
                 {
-                    if (info)
+                    if (appData.showInfo)
                     {
-                        new CoreFunctions().DisplayWorksheetInfo(excelIn);
+                        coreFunctions.DisplayWorksheetInfo(excelIn);
                     }
                     else
                     {
                         DataTable queryResult = new DataTable();
-                        if (excelIn.RunSql(query, ref queryResult))
+                        if (excelIn.RunSql(appData.query, ref queryResult))
                         {
-                            if (resultToFile)
+                            if (appData.resultToFile)
                             {
-                                // Option 1
-
-                                // Save result to new file
-                                using (ExcelCore excelOut = new ExcelCore())
-                                {
-                                    excelOut.NewFile(outFile);
-                                    if (excelOut.IsInitialized())
-                                    {
-                                        if (excelOut.NewSheet("RESULT", WorksheerOrder.woFirst))
-                                        {
-                                            // Delete default worksheet
-                                            excelOut.DeleteSheet("Sheet1");
-
-                                            excelOut.PopulateData("RESULT", queryResult);
-
-                                            excelOut.SaveFile();
-                                        }
-                                    }
-                                }
+                                coreFunctions.SaveResultToExcelFile(appData.outFile, queryResult);
                             }
                             else
                             {
-                                // Option 2
-
-                                new CoreFunctions().DisplayResult(queryResult);
+                                coreFunctions.DisplayResult(queryResult);
                             }
                         }
                         else
                         {
-                            Console.WriteLine("The an error has been occured during executing the sql query");
+                            Console.WriteLine("The an error has been occured during executing the SQL query");
                         }
                     }
                 }
                 else
                 {
-                    Console.WriteLine("The an error has been occured during accessing Excel file");
+                    Console.WriteLine("The an error has been occured during accessing Excel file \"{0}\"", appData.inFile);
                 }
-
-                Console.ReadKey();
-
-                return;
             }
+
+            Console.ReadKey();
+            return;
         }
     }
 }

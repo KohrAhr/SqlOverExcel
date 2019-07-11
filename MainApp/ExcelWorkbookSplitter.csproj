@@ -48,7 +48,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\AppData.cs" />
+    <Compile Include="Core\AppData.Types.cs" />
     <Compile Include="Functions\Functions.Core.cs" />
     <Compile Include="Functions\Functions.Excel.cs" />
     <Compile Include="Functions\Functions.Excel.Types.cs" />

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ExcelWorkbookSplitter.Core;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -48,6 +49,27 @@ namespace ExcelWorkbookSplitter.Functions
             }
         }
 
+        public void SaveResultToExcelFile(string toFile, DataTable data)
+        {
+            // Save result to new file
+            using (ExcelCore excelOut = new ExcelCore())
+            {
+                excelOut.NewFile(toFile);
+                if (excelOut.IsInitialized())
+                {
+                    if (excelOut.NewSheet("RESULT", WorksheerOrder.woFirst))
+                    {
+                        // Delete default worksheet
+                        excelOut.DeleteSheet("Sheet1");
+
+                        excelOut.PopulateData("RESULT", data);
+
+                        excelOut.SaveFile();
+                    }
+                }
+            }
+        }
+
         /// <summary>
         ///     Display common information about Excel worksheets
         /// </summary>
@@ -68,6 +90,61 @@ namespace ExcelWorkbookSplitter.Functions
                     excel.GetCountOfCols(worksheet)
                 );
             }
+        }
+
+        public AppData ParseCommandLineParams(string[] arguments)
+        {
+            AppData result = new AppData();
+
+            foreach(string s in arguments)
+            {
+                // Get key and value
+                string[] input = s.Split(new Char[] { '=' });
+
+                // Is key=value pair?
+                if (input.Length != 2)
+                {
+                    continue;
+                }
+
+                // Key in uppercase
+                string key = input[0].ToLower();
+
+                if (key == "-in")
+                {
+                    result.inFile = input[1];
+                }
+                else
+                if (key == "-out")
+                {
+                    result.outFile = input[1];
+                }
+                else
+                if (input[1] == "-query")
+                {
+                    result.query = input[1];
+                }
+            }
+            
+            return result;
+        }
+
+        /// <summary>
+        ///     Simple validation of command line params
+        /// </summary>
+        /// <param name="appData"></param>
+        /// <returns></returns>
+        public AppData ValidateCommandLineParams(AppData appData)
+        {
+            AppData result = appData;
+
+            if (!String.IsNullOrEmpty(result.outFile) && String.IsNullOrEmpty(result.query))
+            {
+                Console.WriteLine("You didn't provide SQL query to run. Output fill will be not created");
+                result.outFile = "";
+            }
+
+            return result;
         }
     }
 }
