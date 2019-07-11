@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using ExcelWorkbookSplitter.Functions;
 using ExcelObject = Microsoft.Office.Interop.Excel;
+using Lib.Strings;
+using Lib.System;
 
 namespace ExcelWorkbookSplitter
 {
@@ -28,7 +30,7 @@ namespace ExcelWorkbookSplitter
 //            outFile = @"C:\Temp\Excel\NewExcelFile.xlsx";
             string query = "";
 //            query = "select count(field1) as e1 from [data$]";
-            query = "select * from [data$]";
+            query = "select count(field1) as e1 from [data$]";
 
             bool info = String.IsNullOrEmpty(query);
             bool resultToFile = !String.IsNullOrEmpty(outFile);
@@ -40,22 +42,7 @@ namespace ExcelWorkbookSplitter
                 {
                     if (info)
                     {
-                        // Display common information about Excel worksheets
-
-                        List<string> worksheets = excelIn.GetWorksheets();
-
-                        Console.WriteLine("List of available worksheets in file \"{0}\":", excelIn.FileName);
-                        foreach (String name in worksheets)
-                        {
-                            Console.WriteLine("\t\"{0}\"", name);
-
-                            ExcelObject.Worksheet worksheet = excelIn.GetWorksheet(name);
-
-                            Console.WriteLine("\tLast row with data: {0}; Last column with data: {1}\n",
-                                excelIn.GetCountOfRows(worksheet),
-                                excelIn.GetCountOfCols(worksheet)
-                            );
-                        }
+                        new CoreFunctions().DisplayWorksheetInfo(excelIn);
                     }
                     else
                     {
@@ -74,6 +61,7 @@ namespace ExcelWorkbookSplitter
                                     {
                                         if (excelOut.NewSheet("RESULT", WorksheerOrder.woFirst))
                                         {
+                                            // Delete default worksheet
                                             excelOut.DeleteSheet("Sheet1");
 
                                             excelOut.PopulateData("RESULT", queryResult);
@@ -87,18 +75,7 @@ namespace ExcelWorkbookSplitter
                             {
                                 // Option 2
 
-                                // Verbose output -- show result from datatable
-                                //DisplayResult(queryResult);
-                                excelIn.IterateOverData(queryResult, 
-                                    delegate (string value, int x, int y) 
-                                    {
-                                        if (x == 1)
-                                        {
-                                            Console.WriteLine();
-                                        }
-                                        Console.Write(value + "\t");
-                                    }
-                                );
+                                new CoreFunctions().DisplayResult(queryResult);
                             }
                         }
                         else
@@ -117,17 +94,5 @@ namespace ExcelWorkbookSplitter
                 return;
             }
         }
-
-        //private static void DisplayResult(DataTable dataTable)
-        //{
-        //    foreach (DataRow dataRow in dataTable.Rows)
-        //    {
-        //        foreach (object item in dataRow.ItemArray)
-        //        {
-        //            Console.Write(item.ToString() + "\t");
-        //        }
-        //        Console.WriteLine();
-        //    }
-        //}
     }
 }
