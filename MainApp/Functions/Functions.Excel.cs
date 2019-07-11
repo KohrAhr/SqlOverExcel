@@ -59,8 +59,9 @@ namespace ExcelWorkbookSplitter.Functions
         /// <param name="file">
         ///     Excel file name and optional path
         /// </param>
-        public void OpenFile(string file)
+        public string OpenFile(string file)
         {
+            string result = "";
             FileName = file;
 
             try
@@ -74,10 +75,15 @@ namespace ExcelWorkbookSplitter.Functions
                     CloseFile();
                 }
             }
-            catch
+#pragma warning disable 168
+            catch (Exception ex)
+#pragma warning restore 168
             {
+                result = ex.Message.ToString();
                 CloseFile();
             }
+
+            return result;
         }
 
         /// <summary>
