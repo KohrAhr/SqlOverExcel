@@ -29,7 +29,13 @@ namespace ExcelWorkbookSplitter.Core
         /// <summary>
         ///     Display common information about worksheets in Excel file
         /// </summary>
-        public bool showInfo = false;
+        public bool showInfo
+        {
+            get
+            {
+                return String.IsNullOrEmpty(query);
+            }
+        }
 
         /// <summary>
         ///     Save Query result to file
