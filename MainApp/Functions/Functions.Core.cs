@@ -13,9 +13,9 @@ namespace ExcelWorkbookSplitter.Functions
     {
         public void ShowHelp()
         {
-            Console.WriteLine("\n\n======================================");
+            Console.WriteLine("======================================");
             Console.WriteLine("SqlOverExcel. Version 0.1 from 11/Jul/2019");
-            Console.WriteLine("======================================\n");
+            Console.WriteLine("======================================");
             Console.WriteLine("Run SQL query over Excel file\n");
             Console.WriteLine("Usage: SqlOverQuery.exe -in=\"EXCEL FILE NAME\" [-out=\"EXCEL FILE NAME\"] -query=\"SQL Query\"]");
             Console.WriteLine("\nOptions:");

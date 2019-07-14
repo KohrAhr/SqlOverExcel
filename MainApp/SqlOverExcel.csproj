@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{F6B9A6AB-A46C-46B8-907E-4FB2835F8991}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>ExcelWorkbookSplitter</RootNamespace>
-    <AssemblyName>ExcelWorkbookSplitter</AssemblyName>
+    <RootNamespace>SqlOverExcel</RootNamespace>
+    <AssemblyName>SqlOverExcel</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
