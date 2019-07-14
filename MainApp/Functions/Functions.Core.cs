@@ -13,6 +13,7 @@ namespace ExcelWorkbookSplitter.Functions
     {
         public void ShowHelp()
         {
+            Console.WriteLine("FREEWARE");
             Console.WriteLine("======================================");
             Console.WriteLine("SqlOverExcel. Version 0.1 from 11/Jul/2019");
             Console.WriteLine("======================================");
@@ -34,7 +35,7 @@ namespace ExcelWorkbookSplitter.Functions
 
         public void ByeMessage()
         {
-            Console.WriteLine("Press any key for conitnue...");
+            Console.WriteLine("\nPress any key for continue...");
             Console.ReadKey();
             return;
         }
