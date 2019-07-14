@@ -61,8 +61,7 @@ namespace ExcelWorkbookSplitter
                 }
             }
 
-            Console.ReadKey();
-            return;
+            coreFunctions.ByeMessage();
         }
     }
 }

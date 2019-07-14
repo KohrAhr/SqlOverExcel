@@ -22,12 +22,23 @@ namespace ExcelWorkbookSplitter.Functions
             Console.WriteLine("\t-in        \tSource Excel file");
             Console.WriteLine("\t-out       \tOutput file. If not provided, than result of query execution will be displayed in console");
             Console.WriteLine("\t-query     \tSQL Query to run. SQL query compactible with MS Access");
+            Console.WriteLine("\nSQL Query samples:");
+            Console.WriteLine("\tselect count(field1) as e1 from [Worksheet1]");
+            Console.WriteLine("\tselect count(field1) as e1, max(field2) as e2, min(field3) as e3 from [Worksheet1]");
             Console.WriteLine("\nAllowed file types:");
             Console.WriteLine("\tXLSX -- Excel Workbook (..Office 2016)");
             Console.WriteLine("\tXLSM -- Excel Macro-Enabled Workbook");
             Console.WriteLine("\tXLSB -- Excel Binary Workbook");
             Console.WriteLine("\tXLS  -- Excel 97-2003 Workbook");
         }
+
+        public void ByeMessage()
+        {
+            Console.WriteLine("Press any key for conitnue...");
+            Console.ReadKey();
+            return;
+        }
+
 
         /// <summary>
         ///     Verbose output -- show result from datatable

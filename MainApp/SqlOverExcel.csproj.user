@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-    <StartArguments>-in="C:\Temp\Excel\TEST.xlsx" -out="C:\Temp\Excel\Result.xlsx" -query="select count%28field1%29 as E1 from data%24"</StartArguments>
+    <StartArguments>-in="C:\Temp\Excel\TEST.xlsx" -query="select count%28field1%29 as e1, max%28field2%29 as e2, min%28field3%29 as E3 from [data%24]"</StartArguments>
   </PropertyGroup>
 </Project>
