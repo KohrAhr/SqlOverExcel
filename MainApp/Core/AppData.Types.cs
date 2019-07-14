@@ -27,6 +27,17 @@ namespace ExcelWorkbookSplitter.Core
         public string query = "";
 
         /// <summary>
+        /// 
+        /// </summary>
+        public bool showHelp
+        {
+            get
+            {
+                return String.IsNullOrEmpty(inFile);
+            }
+        }
+
+        /// <summary>
         ///     Display common information about worksheets in Excel file
         /// </summary>
         public bool showInfo

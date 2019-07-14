@@ -59,16 +59,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Lib.Strings\Lib.Strings.csproj">
-      <Project>{aec79c91-7bb6-4f43-a689-319a01ca8bbf}</Project>
-      <Name>Lib.Strings</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Lib.System\Lib.System.csproj">
-      <Project>{b88b8be9-c60f-41b5-902e-3a8e39205d36}</Project>
-      <Name>Lib.System</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <COMReference Include="Microsoft.Office.Core">
       <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
       <VersionMajor>2</VersionMajor>

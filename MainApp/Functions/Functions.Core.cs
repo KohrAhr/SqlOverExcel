@@ -14,18 +14,19 @@ namespace ExcelWorkbookSplitter.Functions
         public void ShowHelp()
         {
             Console.WriteLine("\n\n======================================");
-            Console.WriteLine("SqlOverQuery. Version 0.1 from 11/Jul/2019");
+            Console.WriteLine("SqlOverExcel. Version 0.1 from 11/Jul/2019");
             Console.WriteLine("======================================\n");
+            Console.WriteLine("Run SQL query over Excel file\n");
             Console.WriteLine("Usage: SqlOverQuery.exe -in=\"EXCEL FILE NAME\" [-out=\"EXCEL FILE NAME\"] -query=\"SQL Query\"]");
             Console.WriteLine("\nOptions:");
             Console.WriteLine("\t-in        \tSource Excel file");
             Console.WriteLine("\t-out       \tOutput file. If not provided, than result of query execution will be displayed in console");
             Console.WriteLine("\t-query     \tSQL Query to run. SQL query compactible with MS Access");
             Console.WriteLine("\nAllowed file types:");
-            Console.WriteLine("\n\tXLSX -- Excel Workbook (..Office 2016)");
-            Console.WriteLine("\n\tXLSM -- Excel Macro-Enabled Workbook");
-            Console.WriteLine("\n\tXLSB -- Excel Binary Workbook");
-            Console.WriteLine("\n\tXLS  -- Excel 97-2003 Workbook");
+            Console.WriteLine("\tXLSX -- Excel Workbook (..Office 2016)");
+            Console.WriteLine("\tXLSM -- Excel Macro-Enabled Workbook");
+            Console.WriteLine("\tXLSB -- Excel Binary Workbook");
+            Console.WriteLine("\tXLS  -- Excel 97-2003 Workbook");
         }
 
         /// <summary>

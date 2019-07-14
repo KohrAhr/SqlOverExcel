@@ -15,38 +15,45 @@ namespace ExcelWorkbookSplitter
             AppData appData = coreFunctions.ParseCommandLineParams(args);
             appData = coreFunctions.ValidateCommandLineParams(appData);
 
-            // Open file and ...
-            using (ExcelCore excelIn = new ExcelCore(appData.inFile))
+            if (appData.showHelp)
             {
-                if (excelIn.IsInitialized())
+                coreFunctions.ShowHelp();
+            }
+            else
+            {
+                // Open file and ...
+                using (ExcelCore excelIn = new ExcelCore(appData.inFile))
                 {
-                    if (appData.showInfo)
+                    if (excelIn.IsInitialized())
                     {
-                        coreFunctions.DisplayWorksheetInfo(excelIn);
-                    }
-                    else
-                    {
-                        DataTable queryResult = new DataTable();
-                        if (excelIn.RunSql(appData.query, ref queryResult))
+                        if (appData.showInfo)
                         {
-                            if (appData.resultToFile)
-                            {
-                                coreFunctions.SaveResultToExcelFile(appData.outFile, queryResult);
-                            }
-                            else
-                            {
-                                coreFunctions.DisplayResult(queryResult);
-                            }
+                            coreFunctions.DisplayWorksheetInfo(excelIn);
                         }
                         else
                         {
-                            Console.WriteLine("The an error has been occured during executing the SQL query");
+                            DataTable queryResult = new DataTable();
+                            if (excelIn.RunSql(appData.query, ref queryResult))
+                            {
+                                if (appData.resultToFile)
+                                {
+                                    coreFunctions.SaveResultToExcelFile(appData.outFile, queryResult);
+                                }
+                                else
+                                {
+                                    coreFunctions.DisplayResult(queryResult);
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("The an error has been occured during executing the SQL query");
+                            }
                         }
                     }
-                }
-                else
-                {
-                    Console.WriteLine("The an error has been occured during accessing Excel file \"{0}\"", appData.inFile);
+                    else
+                    {
+                        Console.WriteLine("The an error has been occured during accessing Excel file \"{0}\"", appData.inFile);
+                    }
                 }
             }
 
