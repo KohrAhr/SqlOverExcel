@@ -46,7 +46,11 @@ namespace ExcelWorkbookSplitter
                             }
                             else
                             {
-                                Console.WriteLine("The an error has been occured during executing the SQL query");
+                                Console.WriteLine(
+                                    "The an error has been occured during executing the SQL query: \nSQL Query: \"{0}\"\nFile: \"{1}\"", 
+                                    appData.query,
+                                    appData.inFile
+                                );
                             }
                         }
                     }

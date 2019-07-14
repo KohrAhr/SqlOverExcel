@@ -121,7 +121,7 @@ namespace ExcelWorkbookSplitter.Functions
                     result.outFile = input[1];
                 }
                 else
-                if (input[1] == "-query")
+                if (key == "-query")
                 {
                     result.query = input[1];
                 }
