@@ -488,23 +488,6 @@ namespace ExcelWorkbookSplitter.Functions
         }
 
         /// <summary>
-        ///     Get Worksheet as DataSet        
-        /// </summary>
-        /// <param name="worksheetName">
-        ///     Worksheet name
-        /// </param>
-        /// <param name="dataTable">
-        ///     [OUT] DataTable
-        /// </param>
-        /// <returns>
-        ///     True of operation completed successfully
-        /// </returns>
-        public bool GetListData(string worksheetName, ref DataTable dataTable)
-        {
-            return RunSql("SELECT * FROM [" + worksheetName + "]", ref dataTable);
-        }
-
-        /// <summary>
         ///     Run SQL Query over Excel file
         /// </summary>
         /// <param name="sql">
@@ -516,39 +499,39 @@ namespace ExcelWorkbookSplitter.Functions
         /// <returns>
         ///     True if operation completed successfully
         /// </returns>
-        public bool RunSql(string sql, ref DataTable dataTable)
+        public void RunSql(string sql, ref DataTable dataTable)
         {
             OleDbConnection oConn = null;
             OleDbCommand oComm = null;
             OleDbDataReader oRdr = null;
             try
             {
-                String sConnString = BuildConnectionString();
+                try
+                {
+                    String sConnString = BuildConnectionString();
 
-                oConn = new OleDbConnection(sConnString);
-                oConn.Open();
+                    oConn = new OleDbConnection(sConnString);
+                    oConn.Open();
 
-                String sCommand = sql;
-                oComm = new OleDbCommand(sCommand, oConn);
-                oRdr = oComm.ExecuteReader();
+                    String sCommand = sql;
+                    oComm = new OleDbCommand(sCommand, oConn);
+                    oRdr = oComm.ExecuteReader();
 
-                dataTable.Load(oRdr);
-
-                return dataTable.Rows.Count > 0;
+                    dataTable.Load(oRdr);
+                }
+                finally
+                {
+                    oRdr?.Close();
+                    oRdr = null;
+                    oComm?.Dispose();
+                    oConn.Close();
+                    oConn.Dispose();
+                }
             }
-#pragma warning disable 168
             catch (Exception ex)
-#pragma warning restore 168
             {
-                return false;
-            }
-            finally
-            {
-                oRdr?.Close();
-                oRdr = null;
-                oComm?.Dispose();
-                oConn.Close();
-                oConn.Dispose();
+                throw new Exception(ex.Message);
+                //                Console.WriteLine(ex.Message);
             }
         }
 

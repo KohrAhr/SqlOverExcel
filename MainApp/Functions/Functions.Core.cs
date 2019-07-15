@@ -24,8 +24,14 @@ namespace ExcelWorkbookSplitter.Functions
             Console.WriteLine("\t-out       \tOutput file. If not provided, than result of query execution will be displayed in console");
             Console.WriteLine("\t-query     \tSQL Query to run. SQL query compactible with MS Access");
             Console.WriteLine("\nSQL Query samples:");
-            Console.WriteLine("\tselect count(field1) as e1 from [Worksheet1]");
-            Console.WriteLine("\tselect count(field1) as e1, max(field2) as e2, min(field3) as e3 from [Worksheet1]");
+            Console.WriteLine("\tselect count(field1) as e1 from [Worksheet1$]");
+            Console.WriteLine("\tselect count(field1) as e1, max(field2) as e2, min(field3) as e3 from [Worksheet1$]");
+            Console.WriteLine("\tSELECT[Table1$].[ID], [Table2$].[ValueAddon], [Table1$].[TextValue] FROM[Table1$] LEFT JOIN[Table2$] ON[Table1$].[IKeyID] = [Table2$].[ID]");
+            Console.WriteLine("\tSELECT[Table1$].ID, [Table2$].ValueAddon, [Table1$].TextValue FROM[Table1$] LEFT JOIN[Table2$] ON[Table1$].IKeyID = [Table2$].ID");
+            Console.WriteLine("\nMain rule for SQL Query:");
+            Console.WriteLine("\tTable name must be in square brasket []");
+            Console.WriteLine("\tTable name must end with sign $");
+            Console.WriteLine("\nTable name sample: [Table1$]");
             Console.WriteLine("\nAllowed file types:");
             Console.WriteLine("\tXLSX -- Excel Workbook (..Office 2016)");
             Console.WriteLine("\tXLSM -- Excel Macro-Enabled Workbook");
@@ -112,7 +118,7 @@ namespace ExcelWorkbookSplitter.Functions
             foreach(string s in arguments)
             {
                 // Get key and value
-                string[] input = s.Split(new Char[] { '=' });
+                string[] input = s.Split(new Char[] { '=' }, 2);
 
                 // Is key=value pair?
                 if (input.Length != 2)

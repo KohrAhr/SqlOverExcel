@@ -33,8 +33,10 @@ namespace ExcelWorkbookSplitter
                         else
                         {
                             DataTable queryResult = new DataTable();
-                            if (excelIn.RunSql(appData.query, ref queryResult))
+                            try
                             {
+                                excelIn.RunSql(appData.query, ref queryResult);
+
                                 if (appData.resultToFile)
                                 {
                                     coreFunctions.SaveResultToExcelFile(appData.outFile, queryResult);
@@ -44,12 +46,13 @@ namespace ExcelWorkbookSplitter
                                     coreFunctions.DisplayResult(queryResult);
                                 }
                             }
-                            else
+                            catch (Exception ex)
                             {
                                 Console.WriteLine(
-                                    "The an error has been occured during executing the SQL query: \nSQL Query: \"{0}\"\nFile: \"{1}\"", 
+                                    "The an error has been occured during executing the SQL query: \nSQL Query: \"{0}\"\nFile: \"{1}\"\nError message: {2}",
                                     appData.query,
-                                    appData.inFile
+                                    appData.inFile,
+                                    ex.Message
                                 );
                             }
                         }
