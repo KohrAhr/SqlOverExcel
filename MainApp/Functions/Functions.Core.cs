@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,12 +12,21 @@ namespace ExcelWorkbookSplitter.Functions
 {
     public class CoreFunctions
     {
+        public string GetAceOleDbConnectionString()
+        {
+            string result = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0};Extended Properties='Excel 12.0 Xml;HDR=Yes';";
+
+            string connectionString = ConfigurationManager.AppSettings["AceOleDbConnectionString"].ToString();
+
+            return String.IsNullOrEmpty(connectionString) ? result : connectionString;
+        }
+
         public void ShowHelp()
         {
             Console.WriteLine("FREEWARE");
-            Console.WriteLine("======================================");
-            Console.WriteLine("SqlOverExcel. Version 0.1 from 11/Jul/2019");
-            Console.WriteLine("======================================");
+            Console.WriteLine("====================================================");
+            Console.WriteLine("SqlOverExcel. Version 0.2019.07.16. from 16/Jul/2019");
+            Console.WriteLine("====================================================");
             Console.WriteLine("Run SQL query over Excel file\n");
             Console.WriteLine("Usage: SqlOverQuery.exe -in=\"EXCEL FILE NAME\" [-out=\"EXCEL FILE NAME\"] -query=\"SQL Query\"]");
             Console.WriteLine("\nOptions:");

@@ -560,9 +560,9 @@ namespace ExcelWorkbookSplitter.Functions
         /// <returns></returns>
         public string BuildConnectionString()
         {
-            const string connectionStringTemplate = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0};Extended Properties='Excel 12.0 Xml;HDR={1}';";
+            const string connectionStringTemplate = @"Provider=Microsoft.ACE.OLEDB.16.0;Data Source={0};Extended Properties='Excel 12.0 Xml;HDR=Yes';";
 
-            return String.Format(connectionStringTemplate, FileName, "Yes");
+            return String.Format(connectionStringTemplate, FileName);
         }
     }
 }
