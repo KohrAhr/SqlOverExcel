@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ExcelObject = Microsoft.Office.Interop.Excel;
+using ExcelWorkbookSplitter.Functions;
 
 namespace ExcelWorkbookSplitter.Functions
 {
@@ -14,11 +15,9 @@ namespace ExcelWorkbookSplitter.Functions
     {
         public string GetAceOleDbConnectionString()
         {
-            string result = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0};Extended Properties='Excel 12.0 Xml;HDR=Yes';";
-
             string connectionString = ConfigurationManager.AppSettings["AceOleDbConnectionString"].ToString();
 
-            return String.IsNullOrEmpty(connectionString) ? result : connectionString;
+            return String.IsNullOrEmpty(connectionString) ? ExcelCore.CONST_CONNECTION_STRING_TEMPLATE : connectionString;
         }
 
         public void ShowHelp()
@@ -28,11 +27,12 @@ namespace ExcelWorkbookSplitter.Functions
             Console.WriteLine("SqlOverExcel. Version 0.2019.07.16. from 16/Jul/2019");
             Console.WriteLine("====================================================");
             Console.WriteLine("Run SQL query over Excel file\n");
-            Console.WriteLine("Usage: SqlOverQuery.exe -in=\"EXCEL FILE NAME\" [-out=\"EXCEL FILE NAME\"] -query=\"SQL Query\"]");
+            Console.WriteLine("Usage: SqlOverQuery.exe -in=\"EXCEL FILE NAME\" [-out=\"EXCEL FILE NAME\"] -query=\"SQL Query\"] [-oleinfo=true]");
             Console.WriteLine("\nOptions:");
             Console.WriteLine("\t-in        \tSource Excel file");
             Console.WriteLine("\t-out       \tOutput file. If not provided, than result of query execution will be displayed in console");
             Console.WriteLine("\t-query     \tSQL Query to run. SQL query compactible with MS Access");
+            Console.WriteLine("\t-oleinfo   \tDisplay information about available ACE.OLEDB installed components. Accept only of type of parameter: true");
             Console.WriteLine("\nSQL Query samples:");
             Console.WriteLine("\tselect count(field1) as e1 from [Worksheet1$]");
             Console.WriteLine("\tselect count(field1) as e1, max(field2) as e2, min(field3) as e3 from [Worksheet1$]");
