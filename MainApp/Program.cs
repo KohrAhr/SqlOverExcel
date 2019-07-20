@@ -22,7 +22,7 @@ namespace ExcelWorkbookSplitter
             else
             {
                 // Open file and ...
-                using (ExcelCore excelIn = new ExcelCore(appData.inFile))
+                using (ExcelCore excelIn = new ExcelCore(appData.inFile, appData.acever))
                 {
                     if (excelIn.IsInitialized())
                     {

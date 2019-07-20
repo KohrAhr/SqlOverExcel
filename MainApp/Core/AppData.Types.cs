@@ -27,6 +27,11 @@ namespace ExcelWorkbookSplitter.Core
         public string query = "";
 
         /// <summary>
+        ///     ACE.OLEDB version
+        /// </summary>
+        public string acever = "16.0";
+
+        /// <summary>
         /// 
         /// </summary>
         public bool showHelp

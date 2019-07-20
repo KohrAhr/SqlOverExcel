@@ -14,7 +14,9 @@ namespace ExcelWorkbookSplitter.Functions
         /// <summary>
         ///     Default connection string
         /// </summary>
-        public const string CONST_CONNECTION_STRING_TEMPLATE = @"Provider=Microsoft.ACE.OLEDB.16.0;Data Source={0};Extended Properties='Excel 12.0 Xml;HDR=Yes';";
+        public const string CONST_CONNECTION_STRING_TEMPLATE = @"Provider=Microsoft.ACE.OLEDB.{0};Data Source={1};Extended Properties='Excel 12.0 Xml;HDR=Yes';";
+
+        private string ACEOLEDB_VERSION = "";
 
         /// <summary>
         ///     Default constructor
@@ -29,8 +31,9 @@ namespace ExcelWorkbookSplitter.Functions
         /// <param name="FileName">
         ///     Excel file name
         /// </param>
-        public ExcelCore(String FileName) : this()
+        public ExcelCore(String FileName, String AceOledbVersion) : this()
         {
+            ACEOLEDB_VERSION = AceOledbVersion;
             OpenFile(FileName);
         }
 
@@ -565,7 +568,7 @@ namespace ExcelWorkbookSplitter.Functions
         /// <returns></returns>
         public string BuildConnectionString()
         {
-            return String.Format(CONST_CONNECTION_STRING_TEMPLATE, FileName);
+            return String.Format(CONST_CONNECTION_STRING_TEMPLATE, ACEOLEDB_VERSION, FileName);
         }
     }
 }

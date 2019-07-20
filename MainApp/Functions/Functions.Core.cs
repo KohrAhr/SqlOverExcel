@@ -13,26 +13,20 @@ namespace ExcelWorkbookSplitter.Functions
 {
     public class CoreFunctions
     {
-        public string GetAceOleDbConnectionString()
-        {
-            string connectionString = ConfigurationManager.AppSettings["AceOleDbConnectionString"].ToString();
-
-            return String.IsNullOrEmpty(connectionString) ? ExcelCore.CONST_CONNECTION_STRING_TEMPLATE : connectionString;
-        }
-
         public void ShowHelp()
         {
-            Console.WriteLine("FREEWARE");
+            Console.WriteLine("FREEWARE. FREE FOR COMMERICAL USAGE");
             Console.WriteLine("====================================================");
-            Console.WriteLine("SqlOverExcel. Version 0.2019.07.16. from 16/Jul/2019");
+            Console.WriteLine("SqlOverExcel. Version 0.2019.07.20. from 20/Jul/2019");
             Console.WriteLine("====================================================");
             Console.WriteLine("Run SQL query over Excel file\n");
-            Console.WriteLine("Usage: SqlOverQuery.exe -in=\"EXCEL FILE NAME\" [-out=\"EXCEL FILE NAME\"] -query=\"SQL Query\"] [-oleinfo=true]");
+            Console.WriteLine("Usage: SqlOverQuery.exe -in=\"EXCEL FILE NAME\" [-out=\"EXCEL FILE NAME\"] -query=\"SQL Query\"] [-oleinfo=true] [-acever=XX]");
             Console.WriteLine("\nOptions:");
             Console.WriteLine("\t-in        \tSource Excel file");
             Console.WriteLine("\t-out       \tOutput file. If not provided, than result of query execution will be displayed in console");
             Console.WriteLine("\t-query     \tSQL Query to run. SQL query compactible with MS Access");
-            Console.WriteLine("\t-oleinfo   \tDisplay information about available ACE.OLEDB installed components. Accept only of type of parameter: true");
+            Console.WriteLine("\t-oleinfo   \tDisplay information about available ACE.OLEDB installed components. Accept only one type of parameter: true");
+            Console.WriteLine("\t-acever    \tACE.OLEDB version. E.g.: 12.0, 16.0 (Office 365). Default is 16.0");
             Console.WriteLine("\nSQL Query samples:");
             Console.WriteLine("\tselect count(field1) as e1 from [Worksheet1$]");
             Console.WriteLine("\tselect count(field1) as e1, max(field2) as e2, min(field3) as e3 from [Worksheet1$]");
@@ -154,8 +148,13 @@ namespace ExcelWorkbookSplitter.Functions
                 {
                     result.query = input[1];
                 }
+                else
+                if (key == "-acever")
+                {
+                    result.acever = input[1];
+                }
             }
-            
+
             return result;
         }
 
