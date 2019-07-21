@@ -60,7 +60,7 @@ namespace ExcelWorkbookSplitter
 
                                             if (ct.IsCancellationRequested)
                                             {
-                                                Console.Write("\r ");
+                                                Console.Write("\r \r");
                                                 ct.ThrowIfCancellationRequested();
                                             }
                                         }
