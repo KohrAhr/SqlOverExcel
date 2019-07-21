@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Data;
-using ExcelWorkbookSplitter.Functions;
-using ExcelWorkbookSplitter.Core;
+using SqlOverExcel.Functions;
+using SqlOverExcel.Core;
 using System.Threading.Tasks;
 using System.Threading;
 
-namespace ExcelWorkbookSplitter
+namespace SqlOverExcel
 {
     class Program
     {

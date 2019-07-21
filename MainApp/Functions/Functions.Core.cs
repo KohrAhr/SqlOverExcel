@@ -1,4 +1,4 @@
-﻿using ExcelWorkbookSplitter.Core;
+﻿using SqlOverExcel.Core;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -7,10 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ExcelObject = Microsoft.Office.Interop.Excel;
-using ExcelWorkbookSplitter.Functions;
+using SqlOverExcel.Functions;
 using System.Threading;
 
-namespace ExcelWorkbookSplitter.Functions
+namespace SqlOverExcel.Functions
 {
     public class CoreFunctions
     {
@@ -74,18 +74,15 @@ namespace ExcelWorkbookSplitter.Functions
             {
                 while (true)
                 {
-                    //                                        coreFunctions.ShowProgressInConsole();
-
                     foreach (string s in values)
                     {
-                        Console.Write("\r{0}", s);
-                        Thread.Sleep(CONST_DELAY);
-
                         if (ct.IsCancellationRequested)
                         {
-                            Console.Write("\r \r");
-                            ct.ThrowIfCancellationRequested();
+                            break;
                         }
+
+                        Console.Write("\r{0}", s);
+                        Thread.Sleep(CONST_DELAY);
                     }
                 }
             }, token);

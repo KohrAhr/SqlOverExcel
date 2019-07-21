@@ -1,6 +1,6 @@
 ﻿using ExcelObject = Microsoft.Office.Interop.Excel;
 
-namespace ExcelWorkbookSplitter.Functions
+namespace SqlOverExcel.Functions
 {
     public delegate void IteratorEvent(string value, int x, int y);
 

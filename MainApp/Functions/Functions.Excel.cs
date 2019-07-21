@@ -4,7 +4,7 @@ using System.Data;
 using System.Data.OleDb;
 using ExcelObject = Microsoft.Office.Interop.Excel;
 
-namespace ExcelWorkbookSplitter.Functions
+namespace SqlOverExcel.Functions
 {
     /// <summary>
     ///     Main class

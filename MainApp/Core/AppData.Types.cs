@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ExcelWorkbookSplitter.Core
+namespace SqlOverExcel.Core
 {
     /// <summary>
     ///     Class with major settings
