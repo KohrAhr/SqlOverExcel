@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ExcelObject = Microsoft.Office.Interop.Excel;
 using ExcelWorkbookSplitter.Functions;
+using System.Threading;
 
 namespace ExcelWorkbookSplitter.Functions
 {
@@ -17,15 +18,14 @@ namespace ExcelWorkbookSplitter.Functions
         {
             Console.WriteLine("FREEWARE. FREE FOR COMMERICAL USAGE");
             Console.WriteLine("====================================================");
-            Console.WriteLine("SqlOverExcel. Version 0.2019.07.20. from 20/Jul/2019");
+            Console.WriteLine("SqlOverExcel. Version 0.2019.07.21. from 21/Jul/2019");
             Console.WriteLine("====================================================");
             Console.WriteLine("Run SQL query over Excel file\n");
-            Console.WriteLine("Usage: SqlOverQuery.exe -in=\"EXCEL FILE NAME\" [-out=\"EXCEL FILE NAME\"] -query=\"SQL Query\"] [-oleinfo=true] [-acever=XX]");
+            Console.WriteLine("Usage: SqlOverQuery.exe -in=\"EXCEL FILE NAME\" [-out=\"EXCEL FILE NAME\"] -query=\"SQL Query\"] [-acever=XX]");
             Console.WriteLine("\nOptions:");
             Console.WriteLine("\t-in        \tSource Excel file");
             Console.WriteLine("\t-out       \tOutput file. If not provided, than result of query execution will be displayed in console");
             Console.WriteLine("\t-query     \tSQL Query to run. SQL query compactible with MS Access");
-            Console.WriteLine("\t-oleinfo   \tDisplay information about available ACE.OLEDB installed components. Accept only one type of parameter: true");
             Console.WriteLine("\t-acever    \tACE.OLEDB version. E.g.: 12.0, 16.0 (Office 365). Default is 16.0");
             Console.WriteLine("\nSQL Query samples:");
             Console.WriteLine("\tselect count(field1) as e1 from [Worksheet1$]");
@@ -51,6 +51,10 @@ namespace ExcelWorkbookSplitter.Functions
             return;
         }
 
+
+        public void ShowProgressInConsole()
+        {
+        }
 
         /// <summary>
         ///     Verbose output -- show result from datatable

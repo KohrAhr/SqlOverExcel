@@ -2,6 +2,8 @@
 using System.Data;
 using ExcelWorkbookSplitter.Functions;
 using ExcelWorkbookSplitter.Core;
+using System.Threading.Tasks;
+using System.Threading;
 
 namespace ExcelWorkbookSplitter
 {
@@ -35,7 +37,55 @@ namespace ExcelWorkbookSplitter
                             DataTable queryResult = new DataTable();
                             try
                             {
-                                excelIn.RunSql(appData.query, ref queryResult);
+                                Console.WriteLine("SQL Query execution running at: {0}", DateTime.Now.ToLongTimeString());
+
+                                // Start progress...
+                                CancellationTokenSource tokenSource = new CancellationTokenSource();
+                                CancellationToken ct = tokenSource.Token;
+
+                                const int CONST_DELAY = 500;
+                                string[] values = { "|", "/", "-", "\\" };
+
+                                Task progress = Task.Run(() =>
+                                {
+                                    while (true)
+                                    {
+//                                        coreFunctions.ShowProgressInConsole();
+
+                                        foreach (string s in values)
+                                        {
+                                            Console.Write("\r{0}", s);
+                                            Thread.Sleep(CONST_DELAY);
+
+                                            if (ct.IsCancellationRequested)
+                                            {
+                                                Console.Write("\r ");
+                                                ct.ThrowIfCancellationRequested();
+                                            }
+                                        }
+                                    }
+                                }, tokenSource.Token);
+
+                                // Start query
+                                Task sql = new Task(() =>
+                                {
+                                    excelIn.RunSql(appData.query, ref queryResult);
+                                });
+
+                                sql.Start();
+                                sql.Wait();
+
+                                Console.WriteLine("\rSQL Query execution completed at: {0}", DateTime.Now.ToLongTimeString());
+
+                                // Cancel progress
+                                try
+                                {
+                                    tokenSource.Cancel();
+                                }
+                                finally
+                                {
+                                    tokenSource.Dispose();
+                                }
 
                                 if (appData.resultToFile)
                                 {
