@@ -63,8 +63,32 @@ namespace ExcelWorkbookSplitter.Functions
             }
         }
 
-        public void ShowProgressInConsole()
+        public void ShowProgressInConsole(CancellationToken token)
         {
+            CancellationToken ct = token;
+
+            const int CONST_DELAY = 500;
+            string[] values = { "|", "/", "-", "\\" };
+
+            Task progress = Task.Run(() =>
+            {
+                while (true)
+                {
+                    //                                        coreFunctions.ShowProgressInConsole();
+
+                    foreach (string s in values)
+                    {
+                        Console.Write("\r{0}", s);
+                        Thread.Sleep(CONST_DELAY);
+
+                        if (ct.IsCancellationRequested)
+                        {
+                            Console.Write("\r \r");
+                            ct.ThrowIfCancellationRequested();
+                        }
+                    }
+                }
+            }, token);
         }
 
         /// <summary>
@@ -96,15 +120,14 @@ namespace ExcelWorkbookSplitter.Functions
                 excelOut.NewFile(toFile);
                 if (excelOut.IsInitialized())
                 {
-                    if (excelOut.NewSheet("RESULT", WorksheerOrder.woFirst))
-                    {
-                        // Delete default worksheet
-                        excelOut.DeleteSheet("Sheet1");
+                    excelOut.NewSheet("RESULT", WorksheerOrder.woFirst);
 
-                        excelOut.PopulateData("RESULT", data);
+                    // Delete default worksheet
+                    excelOut.DeleteSheet("Sheet1");
 
-                        excelOut.SaveFile();
-                    }
+                    excelOut.PopulateData("RESULT", data);
+
+                    excelOut.SaveFile();
                 }
             }
         }

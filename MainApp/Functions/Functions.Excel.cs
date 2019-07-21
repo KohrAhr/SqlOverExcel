@@ -16,6 +16,9 @@ namespace ExcelWorkbookSplitter.Functions
         /// </summary>
         public const string CONST_CONNECTION_STRING_TEMPLATE = @"Provider=Microsoft.ACE.OLEDB.{0};Data Source={1};Extended Properties='Excel 12.0 Xml;HDR=Yes';";
 
+        /// <summary>
+        ///     Ace OLE DB version we are going to use
+        /// </summary>
         private string ACEOLEDB_VERSION = "";
 
         /// <summary>
@@ -67,9 +70,8 @@ namespace ExcelWorkbookSplitter.Functions
         /// <param name="file">
         ///     Excel file name and optional path
         /// </param>
-        public string OpenFile(string file)
+        public void OpenFile(string file)
         {
-            string result = "";
             FileName = file;
 
             try
@@ -83,15 +85,12 @@ namespace ExcelWorkbookSplitter.Functions
                     CloseFile();
                 }
             }
-#pragma warning disable 168
             catch (Exception ex)
-#pragma warning restore 168
             {
-                result = ex.Message.ToString();
                 CloseFile();
-            }
 
-            return result;
+                throw new Exception(ex.Message);
+            }
         }
 
         /// <summary>
@@ -110,9 +109,11 @@ namespace ExcelWorkbookSplitter.Functions
                 Books = ExcelApp.Workbooks;
                 Sheet = Books.Add();
             }
-            catch
+            catch (Exception ex)
             {
                 CloseFile();
+
+                throw new Exception(ex.Message);
             }
         }
 
@@ -122,10 +123,7 @@ namespace ExcelWorkbookSplitter.Functions
         /// <param name="sheetName">
         ///     Worksheet name (optional)
         /// </param>
-        /// <returns>
-        ///     True if operation completed successfully
-        /// </returns>
-        public bool NewSheet(string sheetName = "", WorksheerOrder workSheetOrder = WorksheerOrder.woFirst)
+        public void NewSheet(string sheetName = "", WorksheerOrder workSheetOrder = WorksheerOrder.woFirst)
         {
             ExcelObject.Worksheet worksheet = null;
             try
@@ -142,14 +140,12 @@ namespace ExcelWorkbookSplitter.Functions
                 worksheet = xlSheets.Add(xlSheets[position]);
                 worksheet.Name = sheetName;
             }
-#pragma warning disable 168
             catch (Exception ex)
-#pragma warning restore 168
             {
                 worksheet = null;
-            }
 
-            return worksheet != null;
+                throw new Exception(ex.Message);
+            }
         }
 
         /// <summary>
@@ -186,20 +182,16 @@ namespace ExcelWorkbookSplitter.Functions
         /// <returns>
         ///     True if operation completed successfully
         /// </returns>
-        public bool DeleteSheet(int sheetIndex)
+        public void DeleteSheet(int sheetIndex)
         {
-            bool result = true;
-
             try
             {
                 ExcelApp.Sheets[sheetIndex].Delete();
             }
-            catch
+            catch (Exception ex)
             {
-                result = false;
+                throw new Exception(ex.Message);
             }
-            
-            return result;
         }
 
         /// <summary>
@@ -212,14 +204,14 @@ namespace ExcelWorkbookSplitter.Functions
         /// <returns>
         ///     True if operation completed successfully
         /// </returns>
-        public bool DeleteSheet(string sheetName)
+        public void DeleteSheet(string sheetName)
         {
-            return DeleteSheet(FindWorksheet(sheetName));
+            DeleteSheet(FindWorksheet(sheetName));
         }
 
         public bool PopulateData(string sheetName, DataTable data)
         {
-            bool result = true;
+            bool result = false;
 
             int sheetIndex = FindWorksheet(sheetName);
 
@@ -237,6 +229,8 @@ namespace ExcelWorkbookSplitter.Functions
                         }
                         y++;
                     }
+
+                    result = true;
                 }
                 catch (Exception ex)
                 {
@@ -244,10 +238,6 @@ namespace ExcelWorkbookSplitter.Functions
 
                     throw new Exception(ex.Message);
                 }
-            }
-            else
-            {
-                result = false;
             }
 
             return result;
@@ -259,13 +249,8 @@ namespace ExcelWorkbookSplitter.Functions
         /// <param name="file">
         ///     Excel file name and optional path
         /// </param>
-        /// <returts>
-        ///     True if operation completed successfully
-        /// </returts>
-        public bool SaveFile(string file)
+        public void SaveFile(string file)
         {
-            bool result = true;
-
             try
             {
                 Sheet?.SaveAs(file,
@@ -274,12 +259,10 @@ namespace ExcelWorkbookSplitter.Functions
                     Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing
                 );
             }
-            catch
+            catch (Exception ex)
             {
-                result = false;
+                throw new Exception(ex.Message);
             }
-
-            return result;
         }
 
         /// <summary>
@@ -295,26 +278,32 @@ namespace ExcelWorkbookSplitter.Functions
         /// </summary>
         public void CloseFile()
         {
-            if (Worksheet != null)
+            try
             {
-                System.Runtime.InteropServices.Marshal.ReleaseComObject(Worksheet);
+                if (Worksheet != null)
+                {
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(Worksheet);
+                }
+                Sheet?.Close(false);
+                Books?.Close();
+                if (Sheet != null)
+                {
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(Sheet);
+                }
+                if (Books != null)
+                {
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(Books);
+                    Books = null;
+                }
             }
-            Sheet?.Close(false);
-            Books?.Close();
-            if (Sheet != null)
+            finally
             {
-                System.Runtime.InteropServices.Marshal.ReleaseComObject(Sheet);
-            }
-            if (Books != null)
-            {
-                System.Runtime.InteropServices.Marshal.ReleaseComObject(Books);
-                Books = null;
-            }
-            ExcelApp?.Quit();
-            if (ExcelApp != null)
-            {
-                System.Runtime.InteropServices.Marshal.ReleaseComObject(ExcelApp);
-                ExcelApp = null;
+                ExcelApp?.Quit();
+                if (ExcelApp != null)
+                {
+                    System.Runtime.InteropServices.Marshal.ReleaseComObject(ExcelApp);
+                    ExcelApp = null;
+                }
             }
 
             GC.Collect();
@@ -468,7 +457,7 @@ namespace ExcelWorkbookSplitter.Functions
         /// <param name="excelFileName"></param>
         /// <param name="dt"></param>
         /// <returns></returns>
-        public bool GetTables(ref DataTable dt)
+        public void GetTables(ref DataTable dt)
         {
             OleDbConnection oConn = null;
             try
@@ -479,14 +468,10 @@ namespace ExcelWorkbookSplitter.Functions
                 oConn.Open();
 
                 dt = oConn.GetSchema("Tables");
-
-                return dt.Rows.Count > 0;
             }
-#pragma warning disable 168
             catch (Exception ex)
-#pragma warning restore 168
             {
-                return false;
+                throw new Exception(ex.Message);
             }
             finally
             {
@@ -514,32 +499,28 @@ namespace ExcelWorkbookSplitter.Functions
             OleDbDataReader oRdr = null;
             try
             {
-                try
-                {
-                    String sConnString = BuildConnectionString();
+                String sConnString = BuildConnectionString();
 
-                    oConn = new OleDbConnection(sConnString);
-                    oConn.Open();
+                oConn = new OleDbConnection(sConnString);
+                oConn.Open();
 
-                    String sCommand = sql;
-                    oComm = new OleDbCommand(sCommand, oConn);
-                    oRdr = oComm.ExecuteReader();
+                String sCommand = sql;
+                oComm = new OleDbCommand(sCommand, oConn);
+                oRdr = oComm.ExecuteReader();
 
-                    dataTable.Load(oRdr);
-                }
-                finally
-                {
-                    oRdr?.Close();
-                    oRdr = null;
-                    oComm?.Dispose();
-                    oConn.Close();
-                    oConn.Dispose();
-                }
+                dataTable.Load(oRdr);
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
-                //                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                oRdr?.Close();
+                oRdr = null;
+                oComm?.Dispose();
+                oConn.Close();
+                oConn.Dispose();
             }
         }
 
