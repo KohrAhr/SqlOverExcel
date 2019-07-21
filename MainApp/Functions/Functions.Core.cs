@@ -51,6 +51,17 @@ namespace ExcelWorkbookSplitter.Functions
             return;
         }
 
+        public void StopProgress(CancellationTokenSource tokenSource)
+        {
+            try
+            {
+                tokenSource.Cancel();
+            }
+            finally
+            {
+                tokenSource.Dispose();
+            }
+        }
 
         public void ShowProgressInConsole()
         {

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-    <StartArguments>-in="C:\Temp\Excel\TwoWorksheets.xlsx" -query="SELECT [Table1%24].[ID], [Table2%24].[ValueAddon], [Table1%24].[TextValue] FROM [Table1%24] LEFT JOIN [Table2%24] ON [Table1%24].[IKeyID] = [Table2%24].[ID]" -acever=12.0</StartArguments>
+    <StartArguments>-in="C:\Temp\Excel\TwoWorksheets.xlsx" -query="SELECT [Table1%24].[ID], [Table2%24].[ValueAddon], [Table1%24].[TextValue] FROM [Table1%24] LEFT JOIN [Table2%24] ON [Table1%24].[IKeyID] = [Table2%24].[ID]"</StartArguments>
   </PropertyGroup>
 </Project>

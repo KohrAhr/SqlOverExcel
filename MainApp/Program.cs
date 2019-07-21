@@ -35,12 +35,13 @@ namespace ExcelWorkbookSplitter
                         else
                         {
                             DataTable queryResult = new DataTable();
+                            CancellationTokenSource tokenSource = new CancellationTokenSource();
+
                             try
                             {
-                                Console.WriteLine("SQL Query execution running at: {0}", DateTime.Now.ToLongTimeString());
+                                Console.WriteLine("\nSQL Query execution running at: {0}", DateTime.Now.ToLongTimeString());
 
                                 // Start progress...
-                                CancellationTokenSource tokenSource = new CancellationTokenSource();
                                 CancellationToken ct = tokenSource.Token;
 
                                 const int CONST_DELAY = 500;
@@ -50,7 +51,7 @@ namespace ExcelWorkbookSplitter
                                 {
                                     while (true)
                                     {
-//                                        coreFunctions.ShowProgressInConsole();
+                                        //                                        coreFunctions.ShowProgressInConsole();
 
                                         foreach (string s in values)
                                         {
@@ -67,26 +68,10 @@ namespace ExcelWorkbookSplitter
                                 }, tokenSource.Token);
 
                                 // Start query
-                                Task sql = new Task(() =>
-                                {
-                                    excelIn.RunSql(appData.query, ref queryResult);
-                                });
+                                excelIn.RunSql(appData.query, ref queryResult);
 
-                                sql.Start();
-                                sql.Wait();
-
-                                Console.WriteLine("\rSQL Query execution completed at: {0}", DateTime.Now.ToLongTimeString());
-
-                                // Cancel progress
-                                try
-                                {
-                                    tokenSource.Cancel();
-                                }
-                                finally
-                                {
-                                    tokenSource.Dispose();
-                                }
-
+                                Console.WriteLine("\nSQL Query execution completed at: {0}", DateTime.Now.ToLongTimeString());
+                         
                                 if (appData.resultToFile)
                                 {
                                     coreFunctions.SaveResultToExcelFile(appData.outFile, queryResult);
@@ -98,8 +83,11 @@ namespace ExcelWorkbookSplitter
                             }
                             catch (Exception ex)
                             {
+                                // Cancel progress
+                                coreFunctions.StopProgress(tokenSource);
+
                                 Console.WriteLine(
-                                    "The an error has been occured during executing the SQL query: \nSQL Query: \"{0}\"\nFile: \"{1}\"\nError message: {2}",
+                                    "\nThe an error has been occured during executing the SQL query: \nSQL Query: \"{0}\"\nFile: \"{1}\"\nError message: {2}",
                                     appData.query,
                                     appData.inFile,
                                     ex.Message
@@ -109,7 +97,7 @@ namespace ExcelWorkbookSplitter
                     }
                     else
                     {
-                        Console.WriteLine("The an error has been occured during accessing Excel file \"{0}\"", appData.inFile);
+                        Console.WriteLine("\nThe an error has been occured during accessing Excel file \"{0}\"", appData.inFile);
                     }
                 }
             }
