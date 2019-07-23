@@ -8,32 +8,4 @@
     <system:String x:Key="resSelectExcelFile">Выбрать файл</system:String>
 
 
-
-
-
-    <system:String x:Key="resDelete">Удалить</system:String>
-    <system:String x:Key="resModify">Изменить</system:String>
-    <system:String x:Key="resTextForHighlight">Текст для подсветки</system:String>
-    <system:String x:Key="resResetSearch">Сбросить</system:String>
-    <system:String x:Key="resName">Имя</system:String>
-    <system:String x:Key="resSurname">Фамилия</system:String>
-    <system:String x:Key="resDecryptedCardNumber">Номер кредитной карты</system:String>
-    <system:String x:Key="resEncryptedCardNumber">Зашифрованный номер Кредитной карты</system:String>
-    <system:String x:Key="resAmount">Сумма</system:String>
-    <system:String x:Key="resCardNumber">Номер кредитной карты</system:String>
-    <system:String x:Key="resAddNewItem">Добавить новую запись</system:String>
-    <system:String x:Key="resModifyItem">Изменить запись</system:String>
-    <system:String x:Key="resAddItem">Добавить</system:String>
-    <system:String x:Key="resCancel">Отменить</system:String>
-    <system:String x:Key="resDeleteConfirmation">Вы действительно хотите удалить запись о '{0} {1}'?</system:String>
-    <system:String x:Key="resConfirmationRequired">Требуется подтверждение</system:String>
-    <system:String x:Key="resInformation">Информация</system:String>
-    <system:String x:Key="resItemValidationGeneral">Пожалуйста make sure you have entered 'Имя', 'Фамилия', 'Номер кредитной карты' и 'Сумма' before submit this form</system:String>
-    <system:String x:Key="resLoginWindow">Вход в систему</system:String>
-    <system:String x:Key="resLogin">Вход</system:String>
-    <system:String x:Key="resDomain">Домен</system:String>
-    <system:String x:Key="resUsername">Имя пользователя</system:String>
-    <system:String x:Key="resPassword">Пароль</system:String>
-    <system:String x:Key="resError">Ошибка</system:String>
-    <system:String x:Key="resLoginFailed">Вход в систему не удалось осуществить</system:String>
 </ResourceDictionary>

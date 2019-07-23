@@ -2,16 +2,34 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
+    <Style x:Key="LabelRegular" TargetType="Label">
+        <Setter Property="Width" Value="150"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+    </Style>
+
+    <Style x:Key="TextBoxBase" TargetType="TextBox">
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="Height" Value="23"/>
+    </Style>
+
+    <Style x:Key="TextBoxRegular" TargetType="TextBox" BasedOn="{StaticResource ResourceKey=TextBoxBase}">
+        <Setter Property="TextWrapping" Value="NoWrap"/>
+    </Style>
+
+    <Style x:Key="RegularButton" TargetType="Button">
+        <Setter Property="Width" Value="150"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="Height" Value="23"/>
+    </Style>
+
+
     
     
     
     
     
     
-    
-    
-    <system:Double x:Key="stlItemWindowWidth">467</system:Double>
-    <system:Double x:Key="stlItemWindowHeight">210</system:Double>
+
 
     <Style TargetType="TextBlock">
         <Setter Property="TextOptions.TextFormattingMode" Value="Display"/>
@@ -47,28 +65,6 @@
     <DataTemplate x:Key="HeaderStyleCenteredTwoLine">
         <TextBlock Text="{Binding}" TextWrapping="Wrap" TextAlignment="Center" ToolTip="{Binding}"/>
     </DataTemplate>
-
-    <system:String x:Key="MoneyFormat">{0:c}</system:String>
-
-    <Style x:Key="RegularButton" TargetType="Button">
-        <Setter Property="Width" Value="150"/>
-        <Setter Property="VerticalAlignment" Value="Top"/>
-        <Setter Property="Height" Value="23"/>
-    </Style>
-
-    <Style x:Key="LabelRegular" TargetType="Label">
-        <Setter Property="Width" Value="150"/>
-        <Setter Property="VerticalAlignment" Value="Top"/>
-    </Style>
-
-    <Style x:Key="TextBoxBase" TargetType="TextBox">
-        <Setter Property="VerticalAlignment" Value="Top"/>
-        <Setter Property="Height" Value="23"/>
-    </Style>
-
-    <Style x:Key="TextBoxRegular" TargetType="TextBox" BasedOn="{StaticResource ResourceKey=TextBoxBase}">
-        <Setter Property="TextWrapping" Value="NoWrap"/>
-    </Style>
 
     <Style x:Key="PasswordBoxRegular" TargetType="PasswordBox">
         <!--<Setter Property="PasswordChar" Value="*"/>-->
