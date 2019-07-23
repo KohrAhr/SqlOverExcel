@@ -5,8 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SqlOverExcelUI"
         mc:Ignorable="d"
-        Title="SqlOverExcel -- Run SQL query over MS Excel file" Height="450" Width="800">
+        WindowStartupLocation="CenterScreen" 
+        Title="{StaticResource ResourceKey=resMainWindow}" Height="450" Width="800">
     <Grid>
-        
+        <Label Style="{StaticResource ResourceKey=LabelRegular}" Content="{StaticResource ResourceKey=resExcelFile}" HorizontalAlignment="Left" Margin="10,7,0,0" VerticalAlignment="Top" TextOptions.TextFormattingMode="Display"/>
+        <TextBox x:Name="txtExcelFile" Margin="170,10,165,0" Style="{StaticResource ResourceKey=TextBoxRegular}" />
+        <Button x:Name="btnResetSearch" IsEnabled="{Binding ElementName=txtExcelFile,Path=Text.Length}" Content="{StaticResource ResourceKey=resSelectExcelFile}" Margin="0,10,10,0" Style="{StaticResource ResourceKey=RegularButton}" HorizontalAlignment="Right"/>
+
     </Grid>
 </Window>
