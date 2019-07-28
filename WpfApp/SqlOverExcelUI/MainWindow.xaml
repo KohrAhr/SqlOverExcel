@@ -6,11 +6,26 @@
         xmlns:local="clr-namespace:SqlOverExcelUI"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen" 
-        Title="{StaticResource ResourceKey=resMainWindow}" Height="450" Width="800">
+        Title="{StaticResource ResourceKey=resMainWindow}" Height="450" Width="800" MinWidth="640" MinHeight="400">
     <Grid>
-        <Label Style="{StaticResource ResourceKey=LabelRegular}" Content="{StaticResource ResourceKey=resExcelFile}" HorizontalAlignment="Left" Margin="10,7,0,0" VerticalAlignment="Top" TextOptions.TextFormattingMode="Display"/>
-        <TextBox x:Name="txtExcelFile" Margin="170,10,165,0" Style="{StaticResource ResourceKey=TextBoxRegular}" />
-        <Button x:Name="btnResetSearch" IsEnabled="{Binding ElementName=txtExcelFile,Path=Text.Length}" Content="{StaticResource ResourceKey=resSelectExcelFile}" Margin="0,10,10,0" Style="{StaticResource ResourceKey=RegularButton}" HorizontalAlignment="Right"/>
+        <Label Style="{StaticResource ResourceKey=LabelRegular}" Content="{StaticResource ResourceKey=resExcelFile}" HorizontalAlignment="Left" Margin="10,7,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtExcelFile" Margin="170,10,317,0" Style="{StaticResource ResourceKey=TextBoxRegular}" />
+        <Button x:Name="btnSelectFile" Content="{StaticResource ResourceKey=resSelectExcelFile}" Margin="0,10,162,0" Style="{StaticResource ResourceKey=RegularButton}" HorizontalAlignment="Right"/>
+        <Button x:Name="btnOpenFile" IsEnabled="{Binding ElementName=txtExcelFile,Path=Text.Length}" Content="{StaticResource ResourceKey=resOpenExcelFile}" Margin="0,10,7,0" Style="{StaticResource ResourceKey=RegularButton}" HorizontalAlignment="Right"/>
+
+        <Label Style="{StaticResource ResourceKey=LabelRegular}" Background="AntiqueWhite" Content="{StaticResource ResourceKey=resWorksheetInfo}" Margin="10,38,10,0" Width="Auto"/>
+
+        <DataGrid x:Name="dgMain" Margin="10,69,10,0" Style="{StaticResource ResourceKey=DataGridMain}" ItemsSource="{Binding Path=TestItems.Items}" Height="150" VerticalAlignment="Top">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="{StaticResource ResourceKey=resWorksheetName}" ElementStyle="{StaticResource ResourceKey=TextBlockTrimmed}" Binding="{Binding Path=WorksheetName}" MinWidth="75" Width="5*"/>
+
+                <DataGridTextColumn Header="{StaticResource ResourceKey=resMaxRows}" ElementStyle="{StaticResource ResourceKey=TextBlockTrimmedCentered}" HeaderStyle="{StaticResource ResourceKey=HeaderStyleCentered}" Binding="{Binding Path=MaxRows}" MinWidth="75" Width="1*"/>
+
+                <DataGridTextColumn Header="{StaticResource ResourceKey=resMaxCols}" ElementStyle="{StaticResource ResourceKey=TextBlockTrimmedCentered}" HeaderStyle="{StaticResource ResourceKey=HeaderStyleCentered}" Binding="{Binding Path=MaxCols}" MinWidth="75" Width="1*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Label Style="{StaticResource ResourceKey=LabelRegular}" Background="AntiqueWhite" Content="{StaticResource ResourceKey=resSqlQueryToRun}" Margin="10,224,10,0" Width="Auto" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

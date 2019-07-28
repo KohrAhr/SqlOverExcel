@@ -4,8 +4,14 @@
                     xmlns:local="clr-namespace:SqlOverExcelUI">
 
     <system:String x:Key="resMainWindow">SqlOverExcel -- Run SQL query over MS Excel file</system:String>
-    <system:String x:Key="resExcelFile">MS Excel file</system:String>
+    <system:String x:Key="resExcelFile">Файл MS Excel</system:String>
     <system:String x:Key="resSelectExcelFile">Выбрать файл</system:String>
+    <system:String x:Key="resOpenExcelFile">Открыть файл</system:String>
+    <system:String x:Key="resWorksheetInfo">Информация об Excel файле</system:String>
 
+    <system:String x:Key="resWorksheetName">Название листа</system:String>
+    <system:String x:Key="resMaxRows">Кол-во строк</system:String>
+    <system:String x:Key="resMaxCols">Кол-во колонок</system:String>
 
+    <system:String x:Key="resSqlQueryToRun">SQL запрос</system:String>
 </ResourceDictionary>
