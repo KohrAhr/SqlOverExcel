@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Lib.MVVM;
+using Microsoft.Win32;
 using SqlOverExcelUI.Models;
 
 namespace SqlOverExcelUI.ViewModels
@@ -48,7 +49,13 @@ namespace SqlOverExcelUI.ViewModels
 
         private void SelectFileProc(object o)
         {
-
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Excel Workbook (*.xlsx)|*.xlsx|Excel Macro-Enabled Workbook (*.xlsm)|*.xlsm|Excel Binary Workbook|(*.xlsb)|Excel 97-2003 Workbook|(*.xls)|All files (*.*)|*.*";
+            openFileDialog.InitialDirectory = Environment.CurrentDirectory;
+            if (openFileDialog.ShowDialog() == true)
+            {
+                Model.ExcelFileName = openFileDialog.FileName;
+            }
         }
         #endregion Commands implementation
     }
