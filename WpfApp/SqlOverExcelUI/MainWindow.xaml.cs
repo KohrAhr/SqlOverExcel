@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SqlOverExcelUI.Models;
+using SqlOverExcelUI.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,8 @@ namespace SqlOverExcelUI
         public MainWindow()
         {
             InitializeComponent();
+
+            DataContext = new MainWindowVM();
         }
     }
 }
