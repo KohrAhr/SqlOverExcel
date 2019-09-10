@@ -11,7 +11,7 @@
         <Label Style="{StaticResource ResourceKey=LabelRegular}" Content="{StaticResource ResourceKey=resExcelFile}" HorizontalAlignment="Left" Margin="10,7,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtExcelFile" Margin="170,10,317,0" Style="{StaticResource ResourceKey=TextBoxRegular}" Text="{Binding Path=Model.ExcelFileName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MaxLength="255"/>
         <Button x:Name="btnSelectFile" Content="{StaticResource ResourceKey=resSelectExcelFile}" Margin="0,10,162,0" Style="{StaticResource ResourceKey=RegularButton}" HorizontalAlignment="Right" Command="{Binding Path=SelectFileCommand}" />
-        <Button x:Name="btnOpenFile" IsEnabled="{Binding ElementName=txtExcelFile,Path=Text.Length}" Content="{StaticResource ResourceKey=resOpenExcelFile}" Margin="0,10,7,0" Style="{StaticResource ResourceKey=RegularButton}" HorizontalAlignment="Right" Command="{Binding Path=RunCommand}" />
+        <Button x:Name="btnOpenFile" IsEnabled="{Binding ElementName=txtExcelFile,Path=Text.Length}" Content="{StaticResource ResourceKey=resOpenExcelFile}" Margin="0,10,7,0" Style="{StaticResource ResourceKey=RegularButton}" HorizontalAlignment="Right" Command="{Binding Path=RunAnalyticsCommand}" />
 
         <Label Style="{StaticResource ResourceKey=LabelRegular}" Background="AntiqueWhite" Content="{StaticResource ResourceKey=resWorksheetInfo}" Margin="10,38,10,0" Width="Auto"/>
 
