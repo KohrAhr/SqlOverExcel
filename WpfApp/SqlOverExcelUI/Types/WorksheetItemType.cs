@@ -38,7 +38,9 @@ namespace SqlOverExcelUI.Types
         {
             return new WorksheetItemType()
             {
-
+                WorksheetName = this.WorksheetName,
+                RowCount = this.RowCount,
+                ColCount = this.ColCount
             };
         }
     }

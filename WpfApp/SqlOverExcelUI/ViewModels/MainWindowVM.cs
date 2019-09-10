@@ -49,26 +49,19 @@ namespace SqlOverExcelUI.ViewModels
         {
             using (ExcelCore excelIn = new ExcelCore(Model.ExcelFileName, "16.0"))
             {
-                WorksheetItemType worksheetItemType = new WorksheetItemType();
-
                 List<string> worksheets = excelIn.GetWorksheets();
 
                 foreach (String name in worksheets)
                 {
-                    worksheetItemType.WorksheetName = name;
+                    WorksheetItemType worksheetItem = new WorksheetItemType();
+
+                    worksheetItem.WorksheetName = name;
 
                     ExcelObject.Worksheet worksheet = excelIn.GetWorksheet(name);
-                    worksheetItemType.RowCount = excelIn.GetCountOfRows(worksheet);
-                    worksheetItemType.ColCount = excelIn.GetCountOfCols(worksheet);
+                    worksheetItem.RowCount = excelIn.GetCountOfRows(worksheet);
+                    worksheetItem.ColCount = excelIn.GetCountOfCols(worksheet);
 
-                    //    Console.WriteLine("\t\"{0}\"", name);
-
-                    //    ExcelObject.Worksheet worksheet = excel.GetWorksheet(name);
-
-                    //    Console.WriteLine("\tLast row with data: {0}; Last column with data: {1}\n",
-                    //        excel.GetCountOfRows(worksheet),
-                    //        excel.GetCountOfCols(worksheet)
-                    //    );
+                    Model.WorksheetItems.Add(worksheetItem);
                 }
             }
         }

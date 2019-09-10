@@ -15,17 +15,18 @@
 
         <Label Style="{StaticResource ResourceKey=LabelRegular}" Background="AntiqueWhite" Content="{StaticResource ResourceKey=resWorksheetInfo}" Margin="10,38,10,0" Width="Auto"/>
 
-        <DataGrid x:Name="dgMain" Margin="10,69,10,0" Style="{StaticResource ResourceKey=DataGridMain}" ItemsSource="{Binding Path=TestItems.Items}" Height="150" VerticalAlignment="Top">
+        <DataGrid x:Name="dgMain" Margin="10,69,10,0" Style="{StaticResource ResourceKey=DataGridMain}" ItemsSource="{Binding Path=Model.WorksheetItems}" Height="150" VerticalAlignment="Top">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="{StaticResource ResourceKey=resWorksheetName}" ElementStyle="{StaticResource ResourceKey=TextBlockTrimmed}" Binding="{Binding Path=WorksheetName}" MinWidth="75" Width="5*"/>
 
-                <DataGridTextColumn Header="{StaticResource ResourceKey=resMaxRows}" ElementStyle="{StaticResource ResourceKey=TextBlockTrimmedCentered}" HeaderStyle="{StaticResource ResourceKey=HeaderStyleCentered}" Binding="{Binding Path=MaxRows}" MinWidth="75" Width="1*"/>
+                <DataGridTextColumn Header="{StaticResource ResourceKey=resMaxRows}" ElementStyle="{StaticResource ResourceKey=TextBlockTrimmedCentered}" HeaderStyle="{StaticResource ResourceKey=HeaderStyleCentered}" Binding="{Binding Path=RowCount}" MinWidth="75" Width="1*"/>
 
-                <DataGridTextColumn Header="{StaticResource ResourceKey=resMaxCols}" ElementStyle="{StaticResource ResourceKey=TextBlockTrimmedCentered}" HeaderStyle="{StaticResource ResourceKey=HeaderStyleCentered}" Binding="{Binding Path=MaxCols}" MinWidth="75" Width="1*"/>
+                <DataGridTextColumn Header="{StaticResource ResourceKey=resMaxCols}" ElementStyle="{StaticResource ResourceKey=TextBlockTrimmedCentered}" HeaderStyle="{StaticResource ResourceKey=HeaderStyleCentered}" Binding="{Binding Path=ColCount}" MinWidth="75" Width="1*"/>
             </DataGrid.Columns>
         </DataGrid>
 
         <Label Style="{StaticResource ResourceKey=LabelRegular}" Background="AntiqueWhite" Content="{StaticResource ResourceKey=resSqlQueryToRun}" Margin="10,224,10,0" Width="Auto" VerticalAlignment="Top"/>
+        <TextBox VerticalScrollBarVisibility="Visible" Height="81" Margin="10,255,10,0" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Path=Model.SqlQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsEnabled_RootFolder}" VerticalAlignment="Top" MaxLines="255"/>
 
     </Grid>
 </Window>

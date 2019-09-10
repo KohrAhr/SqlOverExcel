@@ -12,3 +12,11 @@
 /MainApp/bin
 /MainApp/packages
 /MainApp/obj
+/WpfApp/SqlOverExcelUI/obj
+/WpfApp/SqlOverExcelUI/.vs
+/WpfApp/SqlOverExcelUI/bin/Debug/*.pdb
+/WpfApp/Lib.MVVM/bin/Debug
+/WpfApp/Lib.MVVM/bin/Release
+/WpfApp/Lib.MVVM/obj/Debug
+/WpfApp/Lib.MVVM/obj/Release
+/WpfApp/SqlOverExcelUI/bin/Debug
