@@ -1,6 +1,6 @@
 ﻿using Lib.MVVM;
+using SqlOverExcelUI.Types;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +13,12 @@ namespace SqlOverExcelUI.Models
         {
             get => GetValue(() => ExcelFileName);
             set => SetValue(() => ExcelFileName, value);
+        }
+
+        public WorksheetItemsType WorksheetItems
+        {
+            get { return GetValue(() => WorksheetItems); }
+            set { SetValue(() => WorksheetItems, value); }
         }
     }
 }

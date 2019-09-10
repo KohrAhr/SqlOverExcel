@@ -60,6 +60,8 @@
     </ApplicationDefinition>
     <Compile Include="Functions\Functions.Excel.cs" />
     <Compile Include="Functions\Functions.Excel.Types.cs" />
+    <Compile Include="Types\WorksheetItemsType.cs" />
+    <Compile Include="Types\WorksheetItemType.cs" />
     <Compile Include="ViewModels\MainWindowVM.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

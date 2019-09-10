@@ -8,6 +8,8 @@ using Lib.MVVM;
 using Microsoft.Win32;
 using SqlOverExcelUI.Functions;
 using SqlOverExcelUI.Models;
+using SqlOverExcelUI.Types;
+using ExcelObject = Microsoft.Office.Interop.Excel;
 
 namespace SqlOverExcelUI.ViewModels
 {
@@ -17,6 +19,7 @@ namespace SqlOverExcelUI.ViewModels
         public ICommand RunAnalyticsCommand { get; set; }
         public ICommand SelectFileCommand { get; set; }
         #endregion Commands definition
+
 
         public MainWindowModel Model
         {
@@ -46,19 +49,27 @@ namespace SqlOverExcelUI.ViewModels
         {
             using (ExcelCore excelIn = new ExcelCore(Model.ExcelFileName, "16.0"))
             {
+                WorksheetItemType worksheetItemType = new WorksheetItemType();
+
                 List<string> worksheets = excelIn.GetWorksheets();
 
-                //foreach (String name in worksheets)
-                //{
-                //    Console.WriteLine("\t\"{0}\"", name);
+                foreach (String name in worksheets)
+                {
+                    worksheetItemType.WorksheetName = name;
 
-                //    ExcelObject.Worksheet worksheet = excel.GetWorksheet(name);
+                    ExcelObject.Worksheet worksheet = excelIn.GetWorksheet(name);
+                    worksheetItemType.RowCount = excelIn.GetCountOfRows(worksheet);
+                    worksheetItemType.ColCount = excelIn.GetCountOfCols(worksheet);
 
-                //    Console.WriteLine("\tLast row with data: {0}; Last column with data: {1}\n",
-                //        excel.GetCountOfRows(worksheet),
-                //        excel.GetCountOfCols(worksheet)
-                //    );
-                //}
+                    //    Console.WriteLine("\t\"{0}\"", name);
+
+                    //    ExcelObject.Worksheet worksheet = excel.GetWorksheet(name);
+
+                    //    Console.WriteLine("\tLast row with data: {0}; Last column with data: {1}\n",
+                    //        excel.GetCountOfRows(worksheet),
+                    //        excel.GetCountOfCols(worksheet)
+                    //    );
+                }
             }
         }
 
