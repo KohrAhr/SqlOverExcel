@@ -28,26 +28,28 @@
         <Label Style="{StaticResource ResourceKey=LabelRegular}" Background="AntiqueWhite" Content="{StaticResource ResourceKey=resSqlQueryToRun}" Margin="10,405,10,0" Width="Auto" VerticalAlignment="Top"/>
         <TextBox Name="txtQuery"  VerticalScrollBarVisibility="Visible" Height="145" Margin="10,436,10,0" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Path=Model.SqlQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsEnabled_RootFolder}" VerticalAlignment="Top" MaxLines="255"/>
 
-        <TextBlock Background="LightYellow" TextWrapping="Wrap" VerticalAlignment="Top" Height="176" Margin="10,224,10,0" >
-            SQL Query samples:
-            <LineBreak/>
-            <LineBreak/>
-            1) select count(field1) as e1 from [Worksheet1$]
-            <LineBreak/>
-            2) select count(field1) as e1, max(field2) as e2, min(field3) as e3 from [Worksheet1$]
-            <LineBreak/>
-            3) SELECT [Table1$].[ID], [Table2$].[ValueAddon], [Table1$].[TextValue] FROM [Table1$] LEFT JOIN[Table2$] ON[Table1$].[IKeyID] = [Table2$].[ID]
-            <LineBreak/>
-            4) SELECT [Table1$].ID, [Table2$].ValueAddon, [Table1$].TextValue FROM [Table1$] LEFT JOIN[Table2$] ON[Table1$].IKeyID = [Table2$].ID
-            <LineBreak/>
-            <LineBreak/>
-            Main tips:
-            <LineBreak/>
-            <LineBreak/>
-            Table name must be in square brasket []
-            <LineBreak/>
-            Table name must end with sign $
-        </TextBlock>
+        <ScrollViewer Margin="10,224,10,0" Height="165" VerticalAlignment="Top">
+            <TextBlock Background="LightYellow" Padding="10" TextWrapping="Wrap">
+                SQL Query samples:
+                <LineBreak/>
+                <LineBreak/>
+                1) select count(field1) as e1 from [Worksheet1$]
+                <LineBreak/>
+                2) select count(field1) as e1, max(field2) as e2, min(field3) as e3 from [Worksheet1$]
+                <LineBreak/>
+                3) SELECT [Table1$].[ID], [Table2$].[ValueAddon], [Table1$].[TextValue] FROM [Table1$] LEFT JOIN[Table2$] ON[Table1$].[IKeyID] = [Table2$].[ID]
+                <LineBreak/>
+                4) SELECT [Table1$].ID, [Table2$].ValueAddon, [Table1$].TextValue FROM [Table1$] LEFT JOIN[Table2$] ON[Table1$].IKeyID = [Table2$].ID
+                <LineBreak/>
+                <LineBreak/>
+                Main tips:
+                <LineBreak/>
+                <LineBreak/>
+                Table name must be in square brasket []
+                <LineBreak/>
+                Table name must end with sign $
+            </TextBlock>
+        </ScrollViewer>
         <Button x:Name="btnRunQuery" IsEnabled="{Binding Text.Length, ElementName=txtQuery}" Content="{StaticResource ResourceKey=resRunSqlQuery}" Margin="10,586,0,0" Style="{StaticResource ResourceKey=RegularButton}" Command="{Binding RunSqlQuery}" HorizontalAlignment="Left" />
 
     </Grid>
