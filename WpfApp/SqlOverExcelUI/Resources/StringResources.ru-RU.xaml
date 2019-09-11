@@ -14,4 +14,5 @@
     <system:String x:Key="resMaxCols">Кол-во колонок</system:String>
 
     <system:String x:Key="resSqlQueryToRun">SQL запрос</system:String>
+    <system:String x:Key="resRunSqlQuery">Выполнить SQL запрос</system:String>
 </ResourceDictionary>
