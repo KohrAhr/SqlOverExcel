@@ -18,6 +18,7 @@ namespace SqlOverExcelUI.ViewModels
         #region Commands definition
         public ICommand RunAnalyticsCommand { get; set; }
         public ICommand SelectFileCommand { get; set; }
+        public ICommand RunSqlQueryCommand { get; set; }
         #endregion Commands definition
 
 
@@ -42,6 +43,7 @@ namespace SqlOverExcelUI.ViewModels
         {
             RunAnalyticsCommand = new RelayCommand(RunAnalyticsProc);
             SelectFileCommand = new RelayCommand(SelectFileProc);
+            RunSqlQueryCommand = new RelayCommand(RunSqlQueryProc);
         }
 
         #region Commands implementation
@@ -75,6 +77,11 @@ namespace SqlOverExcelUI.ViewModels
             {
                 Model.ExcelFileName = openFileDialog.FileName;
             }
+        }
+
+        private void RunSqlQueryProc(object o)
+        {
+            // Execute query
         }
         #endregion Commands implementation
     }
