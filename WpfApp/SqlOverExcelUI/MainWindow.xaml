@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SqlOverExcelUI"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen" 
-        Title="{StaticResource ResourceKey=resMainWindow}" Height="535.9" Width="958" MinWidth="640" MinHeight="600">
+        Title="{StaticResource ResourceKey=resMainWindow}" Height="535" Width="900" MinWidth="640" MinHeight="600">
     <Grid Margin="0,0,0,10">
         <Label Style="{StaticResource ResourceKey=LabelRegular}" Content="{StaticResource ResourceKey=resExcelFile}" HorizontalAlignment="Left" Margin="10,7,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtExcelFile" Margin="170,10,317,0" Style="{StaticResource ResourceKey=TextBoxRegular}" Text="{Binding Path=Model.ExcelFileName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MaxLength="255"/>
@@ -53,8 +53,7 @@
 
         <Button x:Name="btnRunQuery" IsEnabled="{Binding Path=Text.Length, ElementName=txtQuery}" Content="{StaticResource ResourceKey=resRunSqlQuery}" Margin="0,255,162,0" Style="{StaticResource ResourceKey=RegularButton}" Command="{Binding RunSqlQueryCommand}" Width="150" HorizontalAlignment="Right" />
 
-        <DataGrid x:Name="dgResult" Margin="10,360,10,0" Style="{StaticResource ResourceKey=DataGridMain}" ItemsSource="{Binding Path=Model.QueryResult}" AutoGenerateColumns="True">
-        </DataGrid>
+        <DataGrid x:Name="dgResult" Margin="10,360,10,0" Style="{StaticResource ResourceKey=DataGridMain}" ItemsSource="{Binding Path=Model.QueryResult}" AutoGenerateColumns="True"/>
 
     </Grid>
 </Window>

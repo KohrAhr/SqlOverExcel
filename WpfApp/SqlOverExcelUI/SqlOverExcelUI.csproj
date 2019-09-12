@@ -119,6 +119,14 @@
       <Project>{100ed6ae-4c7c-46f4-a03d-0662db106966}</Project>
       <Name>Lib.MVVM</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Lib.Strings\Lib.Strings.csproj">
+      <Project>{aec79c91-7bb6-4f43-a689-319a01ca8bbf}</Project>
+      <Name>Lib.Strings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lib.UI\Lib.UI.csproj">
+      <Project>{44c27894-d3d7-4af5-ab5b-7163bb5e1b13}</Project>
+      <Name>Lib.UI</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

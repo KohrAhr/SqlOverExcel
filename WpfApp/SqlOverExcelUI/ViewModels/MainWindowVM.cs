@@ -12,6 +12,8 @@ using SqlOverExcelUI.Models;
 using SqlOverExcelUI.Types;
 using ExcelObject = Microsoft.Office.Interop.Excel;
 using System.Windows;
+using Lib.UI;
+using Lib.Strings;
 
 namespace SqlOverExcelUI.ViewModels
 {
@@ -75,7 +77,7 @@ namespace SqlOverExcelUI.ViewModels
         private void SelectFileProc(object o)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = (string) Application.Current.FindResource("resFileTypes");
+            openFileDialog.Filter = StringsFunctions.ResourceString("resFileTypes");
             openFileDialog.InitialDirectory = Environment.CurrentDirectory;
             if (openFileDialog.ShowDialog() == true)
             {
@@ -85,18 +87,32 @@ namespace SqlOverExcelUI.ViewModels
 
         private void RunSqlQueryProc(object o)
         {
-            // Execute query
-
-            DataTable queryResult = new DataTable();
-
             using (ExcelCore excelIn = new ExcelCore(Model.ExcelFileName, CONST_ACEOLEDBVERSION))
             {
-                // Start query
-                excelIn.RunSql(Model.SqlQuery, ref queryResult);
+                try
+                {
+                    DataTable queryResult = new DataTable();
 
-                Model.QueryResult = queryResult;
+                    // Run query
+                    excelIn.RunSql(Model.SqlQuery, ref queryResult);
+
+                    // Populate result
+                    Model.QueryResult = queryResult;
+                }
+                catch (Exception ex)
+                {
+                    WindowsUI.RunWindowDialog(() =>
+                    {
+                        MessageBox.Show(
+                            StringsFunctions.ResourceString("resErrorDuringExecution") + 
+                                Environment.NewLine + Environment.NewLine + ex.Message,
+                            StringsFunctions.ResourceString("resError"),
+                            MessageBoxButton.OK, MessageBoxImage.Hand
+                        );
+                    }
+                    );
+                }
             }
-
             
         }
         #endregion Commands implementation
