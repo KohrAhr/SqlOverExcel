@@ -36,8 +36,15 @@ namespace SqlOverExcelUI.Functions
         /// </param>
         public ExcelCore(String FileName, String AceOledbVersion) : this()
         {
-            ACEOLEDB_VERSION = AceOledbVersion;
-            OpenFile(FileName);
+            try
+            {
+                ACEOLEDB_VERSION = AceOledbVersion;
+                OpenFile(FileName);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         /// <summary>

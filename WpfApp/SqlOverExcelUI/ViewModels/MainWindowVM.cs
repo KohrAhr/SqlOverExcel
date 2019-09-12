@@ -55,22 +55,38 @@ namespace SqlOverExcelUI.ViewModels
         #region Commands implementation
         private void RunAnalyticsProc(object o)
         {
-            using (ExcelCore excelIn = new ExcelCore(Model.ExcelFileName, CONST_ACEOLEDBVERSION))
+            try
             {
-                List<string> worksheets = excelIn.GetWorksheets();
-
-                foreach (String name in worksheets)
+                using (ExcelCore excelIn = new ExcelCore(Model.ExcelFileName, CONST_ACEOLEDBVERSION))
                 {
-                    WorksheetItemType worksheetItem = new WorksheetItemType();
+                    List<string> worksheets = excelIn.GetWorksheets();
 
-                    worksheetItem.WorksheetName = name;
+                    foreach (String name in worksheets)
+                    {
+                        WorksheetItemType worksheetItem = new WorksheetItemType();
 
-                    ExcelObject.Worksheet worksheet = excelIn.GetWorksheet(name);
-                    worksheetItem.RowCount = excelIn.GetCountOfRows(worksheet);
-                    worksheetItem.ColCount = excelIn.GetCountOfCols(worksheet);
+                        worksheetItem.WorksheetName = name;
 
-                    Model.WorksheetItems.Add(worksheetItem);
+                        ExcelObject.Worksheet worksheet = excelIn.GetWorksheet(name);
+                        worksheetItem.RowCount = excelIn.GetCountOfRows(worksheet);
+                        worksheetItem.ColCount = excelIn.GetCountOfCols(worksheet);
+
+                        Model.WorksheetItems.Add(worksheetItem);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                WindowsUI.RunWindowDialog(() =>
+                {
+                    MessageBox.Show(
+                        String.Format(StringsFunctions.ResourceString("resErrorDuringOpening"), Model.ExcelFileName) +
+                            Environment.NewLine + Environment.NewLine + ex.Message,
+                        StringsFunctions.ResourceString("resError"),
+                        MessageBoxButton.OK, MessageBoxImage.Hand
+                    );
+                }
+                );
             }
         }
 
@@ -87,9 +103,9 @@ namespace SqlOverExcelUI.ViewModels
 
         private void RunSqlQueryProc(object o)
         {
-            using (ExcelCore excelIn = new ExcelCore(Model.ExcelFileName, CONST_ACEOLEDBVERSION))
+            try
             {
-                try
+                using (ExcelCore excelIn = new ExcelCore(Model.ExcelFileName, CONST_ACEOLEDBVERSION))
                 {
                     DataTable queryResult = new DataTable();
 
@@ -99,21 +115,20 @@ namespace SqlOverExcelUI.ViewModels
                     // Populate result
                     Model.QueryResult = queryResult;
                 }
-                catch (Exception ex)
+            }
+            catch (Exception ex)
+            {
+                WindowsUI.RunWindowDialog(() =>
                 {
-                    WindowsUI.RunWindowDialog(() =>
-                    {
-                        MessageBox.Show(
-                            StringsFunctions.ResourceString("resErrorDuringExecution") + 
-                                Environment.NewLine + Environment.NewLine + ex.Message,
-                            StringsFunctions.ResourceString("resError"),
-                            MessageBoxButton.OK, MessageBoxImage.Hand
-                        );
-                    }
+                    MessageBox.Show(
+                        StringsFunctions.ResourceString("resErrorDuringExecution") + 
+                            Environment.NewLine + Environment.NewLine + ex.Message,
+                        StringsFunctions.ResourceString("resError"),
+                        MessageBoxButton.OK, MessageBoxImage.Hand
                     );
                 }
+                );
             }
-            
         }
         #endregion Commands implementation
     }

@@ -21,3 +21,5 @@
 /WpfApp/Lib.MVVM/obj/Release
 /WpfApp/SqlOverExcelUI/bin/Debug
 /MainApp/!Data/~$TwoWorksheets.xlsx
+obj
+bin
