@@ -13,9 +13,9 @@
         <Button x:Name="btnSelectFile" Content="{StaticResource ResourceKey=resSelectExcelFile}" Margin="0,10,162,0" Style="{StaticResource ResourceKey=RegularButton}" HorizontalAlignment="Right" Command="{Binding Path=SelectFileCommand}" />
         <Button x:Name="btnOpenFile" IsEnabled="{Binding ElementName=txtExcelFile,Path=Text.Length}" Content="{StaticResource ResourceKey=resOpenExcelFile}" Margin="0,10,7,0" Style="{StaticResource ResourceKey=RegularButton}" HorizontalAlignment="Right" Command="{Binding Path=RunAnalyticsCommand}" />
 
-        <Label Style="{StaticResource ResourceKey=LabelRegular}" Background="AntiqueWhite" Content="{StaticResource ResourceKey=resWorksheetInfo}" Margin="10,38,317,0" Width="Auto"/>
+        <Label Style="{StaticResource ResourceKey=LabelRegular}" Background="AntiqueWhite" Content="{StaticResource ResourceKey=resWorksheetInfo}" Margin="10,38,10,0" Width="Auto"/>
 
-        <DataGrid x:Name="dgMain" Margin="10,69,317,0" Style="{StaticResource ResourceKey=DataGridMain}" ItemsSource="{Binding Path=Model.WorksheetItems}" MinHeight="50" Height="150" VerticalAlignment="Top">
+        <DataGrid x:Name="dgMain" Margin="10,69,10,0" Style="{StaticResource ResourceKey=DataGridMain}" ItemsSource="{Binding Path=Model.WorksheetItems}" MinHeight="50" Height="150" VerticalAlignment="Top">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="{StaticResource ResourceKey=resWorksheetName}" ElementStyle="{StaticResource ResourceKey=TextBlockTrimmed}" Binding="{Binding Path=WorksheetName}" MinWidth="75" Width="5*"/>
 
@@ -25,31 +25,31 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <Label Style="{StaticResource ResourceKey=LabelRegular}" Background="AntiqueWhite" Content="{StaticResource ResourceKey=resSqlQueryToRun}" Margin="10,224,10,0" Width="Auto" VerticalAlignment="Top"/>
-        <TextBox Name="txtQuery" VerticalScrollBarVisibility="Visible" Height="100" Margin="10,255,317,0" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Path=Model.SqlQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsEnabled_RootFolder}" VerticalAlignment="Top" MaxLines="255"/>
+        <Label Style="{StaticResource ResourceKey=LabelRegular}" Background="AntiqueWhite" Content="{StaticResource ResourceKey=resSqlQueryToRun}" Margin="10,224,10,0" Width="Auto" VerticalAlignment="Top">
+        </Label>
 
-        <ScrollViewer Margin="0,38,10,0" Height="181" VerticalAlignment="Top" HorizontalAlignment="Right" Width="302">
-            <TextBlock Background="LightYellow" Padding="10" TextWrapping="Wrap">
-                SQL Query samples:
-                <LineBreak/>
-                <LineBreak/>
-                1) select count(field1) as e1 from [Worksheet1$]
-                <LineBreak/>
-                2) select count(field1) as e1, max(field2) as e2, min(field3) as e3 from [Worksheet1$]
-                <LineBreak/>
-                3) SELECT [Table1$].[ID], [Table2$].[ValueAddon], [Table1$].[TextValue] FROM [Table1$] LEFT JOIN[Table2$] ON[Table1$].[IKeyID] = [Table2$].[ID]
-                <LineBreak/>
-                4) SELECT [Table1$].ID, [Table2$].ValueAddon, [Table1$].TextValue FROM [Table1$] LEFT JOIN[Table2$] ON[Table1$].IKeyID = [Table2$].ID
-                <LineBreak/>
-                <LineBreak/>
-                Main tips:
-                <LineBreak/>
-                <LineBreak/>
-                Table name must be in square brasket []
-                <LineBreak/>
-                Table name must end with sign $
-            </TextBlock>
-        </ScrollViewer>
+        <TextBox Name="txtQuery" VerticalScrollBarVisibility="Visible" Height="100" Margin="10,255,317,0" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Path=Model.SqlQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsEnabled_RootFolder}" VerticalAlignment="Top" MaxLines="255">
+            <TextBox.ToolTip>
+                <TextBlock>
+                    SQL Query samples:
+                    <LineBreak/>
+                    1) select count(field1) as e1 from [Worksheet1$]
+                    <LineBreak/>
+                    2) select count(field1) as e1, max(field2) as e2, min(field3) as e3 from [Worksheet1$]
+                    <LineBreak/>
+                    3) SELECT [Table1$].[ID], [Table2$].[ValueAddon], [Table1$].[TextValue] FROM [Table1$] LEFT JOIN[Table2$] ON[Table1$].[IKeyID] = [Table2$].[ID]
+                    <LineBreak/>
+                    4) SELECT [Table1$].ID, [Table2$].ValueAddon, [Table1$].TextValue FROM [Table1$] LEFT JOIN[Table2$] ON[Table1$].IKeyID = [Table2$].ID
+                    <LineBreak/>
+                    <LineBreak/>
+                    Main tips:
+                    <LineBreak/>
+                    Table name must be in square brasket []
+                    <LineBreak/>
+                    Table name must end with sign $
+                </TextBlock>                
+            </TextBox.ToolTip>
+        </TextBox>
 
         <Button x:Name="btnRunQuery" IsEnabled="{Binding Path=Text.Length, ElementName=txtQuery}" Content="{StaticResource ResourceKey=resRunSqlQuery}" Margin="0,255,162,0" Style="{StaticResource ResourceKey=RegularButton}" Command="{Binding RunSqlQueryCommand}" Width="150" HorizontalAlignment="Right" />
 
