@@ -21,4 +21,6 @@
     <system:String x:Key="resErrorDuringOpening">Ошибка при открытии файла "{0}"</system:String>
     <system:String x:Key="resErrorDuringExecution">Ошибка при выполнение SQL запроса</system:String>
     <system:String x:Key="resError">Ошибка</system:String>
+
+    <system:String x:Key="resSaveResult">Сохранить результат</system:String>
 </ResourceDictionary>

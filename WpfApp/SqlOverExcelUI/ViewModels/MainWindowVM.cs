@@ -25,6 +25,7 @@ namespace SqlOverExcelUI.ViewModels
         public ICommand RunAnalyticsCommand { get; set; }
         public ICommand SelectFileCommand { get; set; }
         public ICommand RunSqlQueryCommand { get; set; }
+        public ICommand SaveQueryResultCommand { get; set; }
         #endregion Commands definition
 
 
@@ -50,9 +51,19 @@ namespace SqlOverExcelUI.ViewModels
             RunAnalyticsCommand = new RelayCommand(RunAnalyticsProc);
             SelectFileCommand = new RelayCommand(SelectFileProc);
             RunSqlQueryCommand = new RelayCommand(RunSqlQueryProc);
+            SaveQueryResultCommand = new RelayCommand(SaveQueryResultProc);
         }
 
         #region Commands implementation
+        /// <summary>
+        ///     Save query result to new (prompted) Excel file
+        /// </summary>
+        /// <param name="o"></param>
+        private void SaveQueryResultProc(object o)
+        {
+
+        }
+
         private void RunAnalyticsProc(object o)
         {
             try

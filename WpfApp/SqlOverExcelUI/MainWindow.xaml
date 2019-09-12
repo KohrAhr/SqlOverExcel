@@ -28,7 +28,7 @@
         <Label Style="{StaticResource ResourceKey=LabelRegular}" Background="AntiqueWhite" Content="{StaticResource ResourceKey=resSqlQueryToRun}" Margin="10,224,10,0" Width="Auto" VerticalAlignment="Top">
         </Label>
 
-        <TextBox Name="txtQuery" VerticalScrollBarVisibility="Visible" Height="100" Margin="10,255,317,0" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Path=Model.SqlQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsEnabled_RootFolder}" VerticalAlignment="Top" MaxLines="255">
+        <TextBox Name="txtQuery" VerticalScrollBarVisibility="Visible" Height="100" Margin="10,255,165,0" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Path=Model.SqlQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsEnabled_RootFolder}" VerticalAlignment="Top" MaxLines="255">
             <TextBox.ToolTip>
                 <TextBlock>
                     SQL Query samples:
@@ -51,9 +51,10 @@
             </TextBox.ToolTip>
         </TextBox>
 
-        <Button x:Name="btnRunQuery" IsEnabled="{Binding Path=Text.Length, ElementName=txtQuery}" Content="{StaticResource ResourceKey=resRunSqlQuery}" Margin="0,255,162,0" Style="{StaticResource ResourceKey=RegularButton}" Command="{Binding RunSqlQueryCommand}" Width="150" HorizontalAlignment="Right" />
+        <Button x:Name="btnRunQuery" IsEnabled="{Binding Path=Text.Length, ElementName=txtQuery}" Content="{StaticResource ResourceKey=resRunSqlQuery}" Margin="0,255,10,0" Style="{StaticResource ResourceKey=RegularButton}" Command="{Binding RunSqlQueryCommand}" Width="150" HorizontalAlignment="Right" />
 
         <DataGrid x:Name="dgResult" Margin="10,360,10,0" Style="{StaticResource ResourceKey=DataGridMain}" ItemsSource="{Binding Path=Model.QueryResult}" AutoGenerateColumns="True"/>
+        <Button x:Name="btnSaveResult" Content="{StaticResource ResourceKey=resSaveResult}" Margin="0,332,10,0" Style="{StaticResource ResourceKey=RegularButton}" Command="{Binding SaveQueryResultCommand}" Width="150" HorizontalAlignment="Right" />
 
     </Grid>
 </Window>
