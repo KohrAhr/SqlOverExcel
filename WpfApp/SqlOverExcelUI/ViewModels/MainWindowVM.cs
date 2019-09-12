@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,11 +11,14 @@ using SqlOverExcelUI.Functions;
 using SqlOverExcelUI.Models;
 using SqlOverExcelUI.Types;
 using ExcelObject = Microsoft.Office.Interop.Excel;
+using System.Windows;
 
 namespace SqlOverExcelUI.ViewModels
 {
     public class MainWindowVM
     {
+        private const string CONST_ACEOLEDBVERSION = "16.0";
+
         #region Commands definition
         public ICommand RunAnalyticsCommand { get; set; }
         public ICommand SelectFileCommand { get; set; }
@@ -49,7 +53,7 @@ namespace SqlOverExcelUI.ViewModels
         #region Commands implementation
         private void RunAnalyticsProc(object o)
         {
-            using (ExcelCore excelIn = new ExcelCore(Model.ExcelFileName, "16.0"))
+            using (ExcelCore excelIn = new ExcelCore(Model.ExcelFileName, CONST_ACEOLEDBVERSION))
             {
                 List<string> worksheets = excelIn.GetWorksheets();
 
@@ -71,7 +75,7 @@ namespace SqlOverExcelUI.ViewModels
         private void SelectFileProc(object o)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Excel Workbook (*.xlsx)|*.xlsx|Excel Macro-Enabled Workbook (*.xlsm)|*.xlsm|Excel Binary Workbook|(*.xlsb)|Excel 97-2003 Workbook|(*.xls)|All files (*.*)|*.*";
+            openFileDialog.Filter = (string) Application.Current.FindResource("resFileTypes");
             openFileDialog.InitialDirectory = Environment.CurrentDirectory;
             if (openFileDialog.ShowDialog() == true)
             {
@@ -82,6 +86,15 @@ namespace SqlOverExcelUI.ViewModels
         private void RunSqlQueryProc(object o)
         {
             // Execute query
+
+            DataTable queryResult = new DataTable();
+
+            using (ExcelCore excelIn = new ExcelCore(Model.ExcelFileName, CONST_ACEOLEDBVERSION))
+            {
+                // Start query
+                excelIn.RunSql(Model.SqlQuery, ref queryResult);
+
+            }
         }
         #endregion Commands implementation
     }

@@ -15,4 +15,7 @@
 
     <system:String x:Key="resSqlQueryToRun">SQL запрос</system:String>
     <system:String x:Key="resRunSqlQuery">Выполнить SQL запрос</system:String>
+
+    <system:String x:Key="resFileTypes">Excel Workbook (*.xlsx)|*.xlsx|Excel Macro-Enabled Workbook (*.xlsm)|*.xlsm|Excel Binary Workbook|(*.xlsb)|Excel 97-2003 Workbook|(*.xls)|All files (*.*)|*.*</system:String>
+
 </ResourceDictionary>

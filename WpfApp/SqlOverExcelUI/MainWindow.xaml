@@ -50,7 +50,8 @@
                 Table name must end with sign $
             </TextBlock>
         </ScrollViewer>
-        <Button x:Name="btnRunQuery" IsEnabled="{Binding Path=Text.Length, ElementName=txtQuery}" Content="{StaticResource ResourceKey=resRunSqlQuery}" Margin="10,586,0,0" Style="{StaticResource ResourceKey=RegularButton}" Command="{Binding RunSqlQuery}" HorizontalAlignment="Left" />
+
+        <Button x:Name="btnRunQuery" IsEnabled="{Binding Path=Text.Length, ElementName=txtQuery}" Content="{StaticResource ResourceKey=resRunSqlQuery}" Margin="10,586,0,0" Style="{StaticResource ResourceKey=RegularButton}" Command="{Binding RunSqlQueryCommand}" HorizontalAlignment="Left" />
 
     </Grid>
 </Window>
