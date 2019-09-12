@@ -94,7 +94,10 @@ namespace SqlOverExcelUI.ViewModels
                 // Start query
                 excelIn.RunSql(Model.SqlQuery, ref queryResult);
 
+                Model.QueryResult = queryResult;
             }
+
+            
         }
         #endregion Commands implementation
     }

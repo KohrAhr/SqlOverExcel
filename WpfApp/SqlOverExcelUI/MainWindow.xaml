@@ -53,7 +53,7 @@
 
         <Button x:Name="btnRunQuery" IsEnabled="{Binding Path=Text.Length, ElementName=txtQuery}" Content="{StaticResource ResourceKey=resRunSqlQuery}" Margin="0,255,162,0" Style="{StaticResource ResourceKey=RegularButton}" Command="{Binding RunSqlQueryCommand}" Width="150" HorizontalAlignment="Right" />
 
-        <DataGrid x:Name="dgResult" Margin="10,360,10,0" Style="{StaticResource ResourceKey=DataGridMain}" ItemsSource="{Binding }" AutoGenerateColumns="True">
+        <DataGrid x:Name="dgResult" Margin="10,360,10,0" Style="{StaticResource ResourceKey=DataGridMain}" ItemsSource="{Binding Path=Model.QueryResult}" AutoGenerateColumns="True">
         </DataGrid>
 
     </Grid>
