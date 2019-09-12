@@ -6,16 +6,16 @@
         xmlns:local="clr-namespace:SqlOverExcelUI"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen" 
-        Title="{StaticResource ResourceKey=resMainWindow}" Height="729" Width="958" MinWidth="640" MinHeight="600">
+        Title="{StaticResource ResourceKey=resMainWindow}" Height="535.9" Width="958" MinWidth="640" MinHeight="600">
     <Grid Margin="0,0,0,10">
         <Label Style="{StaticResource ResourceKey=LabelRegular}" Content="{StaticResource ResourceKey=resExcelFile}" HorizontalAlignment="Left" Margin="10,7,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtExcelFile" Margin="170,10,317,0" Style="{StaticResource ResourceKey=TextBoxRegular}" Text="{Binding Path=Model.ExcelFileName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MaxLength="255"/>
         <Button x:Name="btnSelectFile" Content="{StaticResource ResourceKey=resSelectExcelFile}" Margin="0,10,162,0" Style="{StaticResource ResourceKey=RegularButton}" HorizontalAlignment="Right" Command="{Binding Path=SelectFileCommand}" />
         <Button x:Name="btnOpenFile" IsEnabled="{Binding ElementName=txtExcelFile,Path=Text.Length}" Content="{StaticResource ResourceKey=resOpenExcelFile}" Margin="0,10,7,0" Style="{StaticResource ResourceKey=RegularButton}" HorizontalAlignment="Right" Command="{Binding Path=RunAnalyticsCommand}" />
 
-        <Label Style="{StaticResource ResourceKey=LabelRegular}" Background="AntiqueWhite" Content="{StaticResource ResourceKey=resWorksheetInfo}" Margin="10,38,10,0" Width="Auto"/>
+        <Label Style="{StaticResource ResourceKey=LabelRegular}" Background="AntiqueWhite" Content="{StaticResource ResourceKey=resWorksheetInfo}" Margin="10,38,317,0" Width="Auto"/>
 
-        <DataGrid x:Name="dgMain" Margin="10,69,10,0" Style="{StaticResource ResourceKey=DataGridMain}" ItemsSource="{Binding Path=Model.WorksheetItems}" Height="150" VerticalAlignment="Top">
+        <DataGrid x:Name="dgMain" Margin="10,69,317,0" Style="{StaticResource ResourceKey=DataGridMain}" ItemsSource="{Binding Path=Model.WorksheetItems}" MinHeight="50" Height="150" VerticalAlignment="Top">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="{StaticResource ResourceKey=resWorksheetName}" ElementStyle="{StaticResource ResourceKey=TextBlockTrimmed}" Binding="{Binding Path=WorksheetName}" MinWidth="75" Width="5*"/>
 
@@ -25,10 +25,10 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <Label Style="{StaticResource ResourceKey=LabelRegular}" Background="AntiqueWhite" Content="{StaticResource ResourceKey=resSqlQueryToRun}" Margin="10,405,10,0" Width="Auto" VerticalAlignment="Top"/>
-        <TextBox Name="txtQuery" VerticalScrollBarVisibility="Visible" Height="145" Margin="10,436,10,0" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Path=Model.SqlQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsEnabled_RootFolder}" VerticalAlignment="Top" MaxLines="255"/>
+        <Label Style="{StaticResource ResourceKey=LabelRegular}" Background="AntiqueWhite" Content="{StaticResource ResourceKey=resSqlQueryToRun}" Margin="10,224,10,0" Width="Auto" VerticalAlignment="Top"/>
+        <TextBox Name="txtQuery" VerticalScrollBarVisibility="Visible" Height="100" Margin="10,255,317,0" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Path=Model.SqlQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsEnabled_RootFolder}" VerticalAlignment="Top" MaxLines="255"/>
 
-        <ScrollViewer Margin="10,224,10,0" Height="165" VerticalAlignment="Top">
+        <ScrollViewer Margin="0,38,10,0" Height="181" VerticalAlignment="Top" HorizontalAlignment="Right" Width="302">
             <TextBlock Background="LightYellow" Padding="10" TextWrapping="Wrap">
                 SQL Query samples:
                 <LineBreak/>
@@ -51,7 +51,10 @@
             </TextBlock>
         </ScrollViewer>
 
-        <Button x:Name="btnRunQuery" IsEnabled="{Binding Path=Text.Length, ElementName=txtQuery}" Content="{StaticResource ResourceKey=resRunSqlQuery}" Margin="10,586,0,0" Style="{StaticResource ResourceKey=RegularButton}" Command="{Binding RunSqlQueryCommand}" HorizontalAlignment="Left" />
+        <Button x:Name="btnRunQuery" IsEnabled="{Binding Path=Text.Length, ElementName=txtQuery}" Content="{StaticResource ResourceKey=resRunSqlQuery}" Margin="0,255,162,0" Style="{StaticResource ResourceKey=RegularButton}" Command="{Binding RunSqlQueryCommand}" Width="150" HorizontalAlignment="Right" />
+
+        <DataGrid x:Name="dgResult" Margin="10,360,10,0" Style="{StaticResource ResourceKey=DataGridMain}" ItemsSource="{Binding }" AutoGenerateColumns="True">
+        </DataGrid>
 
     </Grid>
 </Window>
