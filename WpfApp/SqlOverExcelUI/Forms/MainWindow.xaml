@@ -51,9 +51,9 @@
                 </TextBlock>                
             </TextBox.ToolTip>
         </TextBox>
-
         <Button x:Name="btnRunQuery" IsEnabled="{Binding Path=Text.Length, ElementName=txtQuery}" Content="{StaticResource ResourceKey=resRunSqlQuery}" Margin="0,289,10,0" Style="{StaticResource ResourceKey=RegularButton}" Command="{Binding RunSqlQueryCommand}" Width="150" HorizontalAlignment="Right" />
 
+        <!-- -->
         <Label Style="{StaticResource ResourceKey=TitleRegular}" Content="{StaticResource ResourceKey=resSqlQueryResult}" Margin="10,394,10,0" />
         <DataGrid x:Name="dgResult" Margin="10,425,165,0" Style="{StaticResource ResourceKey=DataGridMain}" ItemsSource="{Binding Path=Model.QueryResult}" AutoGenerateColumns="True"/>
         <Button x:Name="btnSaveResult" Content="{StaticResource ResourceKey=resSaveResult}" Margin="0,425,10,0" Style="{StaticResource ResourceKey=RegularButton}" Command="{Binding SaveQueryResultCommand}" Width="150" HorizontalAlignment="Right" />

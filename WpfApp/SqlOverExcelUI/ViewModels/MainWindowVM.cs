@@ -61,6 +61,11 @@ namespace SqlOverExcelUI.ViewModels
         /// <param name="o"></param>
         private void SaveQueryResultProc(object o)
         {
+            // Ask for a file name
+
+            // DataTable to CSV ?
+
+            // DataTable to Excel ?
 
         }
 
