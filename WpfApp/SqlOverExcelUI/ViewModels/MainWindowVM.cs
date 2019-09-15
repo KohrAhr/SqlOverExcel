@@ -62,11 +62,20 @@ namespace SqlOverExcelUI.ViewModels
         private void SaveQueryResultProc(object o)
         {
             // Ask for a file name
+            string fileName = "C:\\Temp\\Result.xlsx";
 
-            // DataTable to CSV ?
+            // Save
+            new CoreFunctions().SaveResultToExcelFile(fileName, Model.QueryResult);
 
-            // DataTable to Excel ?
-
+            WindowsUI.RunWindowDialog(() =>
+            {
+                MessageBox.Show(
+                    String.Format(StringsFunctions.ResourceString("resResultSaved"), fileName),
+                    StringsFunctions.ResourceString("resInfo"),
+                    MessageBoxButton.OK, MessageBoxImage.Information
+                );
+            }
+            );
         }
 
         private void RunAnalyticsProc(object o)

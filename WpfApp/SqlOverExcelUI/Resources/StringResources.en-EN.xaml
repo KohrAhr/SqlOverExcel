@@ -25,4 +25,6 @@
 
     <system:String x:Key="resSaveResult">Save result</system:String>
     <system:String x:Key="resSqlQueryResult">Query execution result</system:String>
+    <system:String x:Key="resInfo">Information</system:String>
+    <system:String x:Key="resResultSaved">Result was saved into file \"{0}\"</system:String>
 </ResourceDictionary>

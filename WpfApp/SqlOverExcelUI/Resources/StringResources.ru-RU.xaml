@@ -24,4 +24,6 @@
 
     <system:String x:Key="resSaveResult">Сохранить результат</system:String>
     <system:String x:Key="resSqlQueryResult">Результат выполнения запроса</system:String>
+    <system:String x:Key="resInfo">Информация</system:String>
+    <system:String x:Key="resResultSaved">Результат был сохранён в файл \"{0}\"</system:String>
 </ResourceDictionary>
