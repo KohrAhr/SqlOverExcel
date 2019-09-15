@@ -18,6 +18,18 @@ namespace SqlOverExcelUI.Types
             set => SetValue(() => WorksheetName, value);
         }
 
+        public string WorksheetNameForQuery
+        {
+            get
+            {
+                return String.Format("[{0}$]", WorksheetName);
+            }
+            set
+            {
+
+            }
+        }
+
         public int RowCount
         {
             get => GetValue(() => RowCount);

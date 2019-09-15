@@ -23,4 +23,5 @@
     <system:String x:Key="resError">Ошибка</system:String>
 
     <system:String x:Key="resSaveResult">Сохранить результат</system:String>
+    <system:String x:Key="resSqlQueryResult">Результат выполнения запроса</system:String>
 </ResourceDictionary>

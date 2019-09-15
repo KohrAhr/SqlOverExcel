@@ -6,10 +6,11 @@
     <system:String x:Key="resMainWindow">SqlOverExcel -- Run SQL query over MS Excel file</system:String>
     <system:String x:Key="resExcelFile">MS Excel file</system:String>
     <system:String x:Key="resSelectExcelFile">Select file</system:String>
-    <system:String x:Key="resOpenExcelFile">Open file</system:String>
+    <system:String x:Key="resOpenExcelFile">Analyze file</system:String>
     <system:String x:Key="resWorksheetInfo">Information about Excel file</system:String>
 
     <system:String x:Key="resWorksheetName">Worksheet name</system:String>
+    <system:String x:Key="resWorksheetNameForQuery">Worksheet name for SQL query</system:String>
     <system:String x:Key="resMaxRows">Rows count</system:String>
     <system:String x:Key="resMaxCols">Cols count</system:String>
 
@@ -23,4 +24,5 @@
     <system:String x:Key="resError">Error</system:String>
 
     <system:String x:Key="resSaveResult">Save result</system:String>
+    <system:String x:Key="resSqlQueryResult">Query execution result</system:String>
 </ResourceDictionary>
