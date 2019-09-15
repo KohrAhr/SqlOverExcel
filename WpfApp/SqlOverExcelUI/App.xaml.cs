@@ -18,7 +18,10 @@ namespace SqlOverExcelUI
         {
             ErrorHandlingCore.Init();
 
-            Current.ShutdownMode = ShutdownMode.OnExplicitShutdown;
+            Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
+
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
         }
     }
 }
