@@ -1,0 +1,26 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib"
+                    xmlns:local="clr-namespace:SqlOverExcelUI">
+
+    <system:String x:Key="resMainWindow">SqlOverExcel -- Run SQL query over MS Excel file</system:String>
+    <system:String x:Key="resExcelFile">MS Excel file</system:String>
+    <system:String x:Key="resSelectExcelFile">Select file</system:String>
+    <system:String x:Key="resOpenExcelFile">Open file</system:String>
+    <system:String x:Key="resWorksheetInfo">Information about Excel file</system:String>
+
+    <system:String x:Key="resWorksheetName">Worksheet name</system:String>
+    <system:String x:Key="resMaxRows">Rows count</system:String>
+    <system:String x:Key="resMaxCols">Cols count</system:String>
+
+    <system:String x:Key="resSqlQueryToRun">SQL query for execution</system:String>
+    <system:String x:Key="resRunSqlQuery">Execute SQL query</system:String>
+
+    <system:String x:Key="resFileTypes">Excel Workbook (*.xlsx)|*.xlsx|Excel Macro-Enabled Workbook (*.xlsm)|*.xlsm|Excel Binary Workbook|(*.xlsb)|Excel 97-2003 Workbook|(*.xls)|All files (*.*)|*.*</system:String>
+
+    <system:String x:Key="resErrorDuringOpening">Error during opening file "{0}"</system:String>
+    <system:String x:Key="resErrorDuringExecution">The error has occured during SQL script execution</system:String>
+    <system:String x:Key="resError">Error</system:String>
+
+    <system:String x:Key="resSaveResult">Save result</system:String>
+</ResourceDictionary>

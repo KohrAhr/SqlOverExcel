@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SqlOverExcelUI.Core;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +14,9 @@ namespace SqlOverExcelUI
     /// </summary>
     public partial class App : Application
     {
+        void AppStartup(Object sender, StartupEventArgs e)
+        {
+            ErrorHandlingCore.Init();
+        }
     }
 }
