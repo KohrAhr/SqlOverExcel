@@ -17,6 +17,8 @@ namespace SqlOverExcelUI
         void AppStartup(Object sender, StartupEventArgs e)
         {
             ErrorHandlingCore.Init();
+
+            Current.ShutdownMode = ShutdownMode.OnExplicitShutdown;
         }
     }
 }
