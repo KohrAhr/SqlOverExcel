@@ -6,5 +6,5 @@ Minor features
 2) Show recent SQL query
 3) Ability to use Worksheetname in Query ("Use Table name")
 4) Progress bar when executing query
-5) Progress bat when saving result
+5) Progress bar when saving result
 
