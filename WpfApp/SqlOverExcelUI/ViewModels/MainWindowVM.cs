@@ -14,6 +14,7 @@ using ExcelObject = Microsoft.Office.Interop.Excel;
 using System.Windows;
 using Lib.UI;
 using Lib.Strings;
+using System.Collections.ObjectModel;
 
 namespace SqlOverExcelUI.ViewModels
 {
@@ -59,7 +60,21 @@ namespace SqlOverExcelUI.ViewModels
         #region Commands implementation
         private void UseTableNameProc(object o)
         {
-            
+            if (o == null)
+            {
+                return;
+            }
+
+            WorksheetItemType selectedItem = (WorksheetItemType)((ObservableCollection<object>)o).FirstOrDefault();
+
+            if (selectedItem == null)
+            {
+                return;
+            }
+
+            string s = selectedItem.WorksheetNameForQuery;
+
+            Model.SqlQuery += s;
         }
 
         /// <summary>

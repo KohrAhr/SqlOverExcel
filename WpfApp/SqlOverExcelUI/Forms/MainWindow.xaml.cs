@@ -29,21 +29,5 @@ namespace SqlOverExcelUI
 
             DataContext = new MainWindowVM();
         }
-
-        private void BtnUseTableName_Click(object sender, RoutedEventArgs e)
-        {
-            //
-
-            WorksheetItemType o = (WorksheetItemType) dgMain.SelectedItem;
-
-            if (o == null)
-            {
-                return;
-            }
-
-            string s = o.WorksheetNameForQuery;
-
-            ((MainWindowVM)DataContext).Model.SqlQuery += s;
-        }
     }
 }
