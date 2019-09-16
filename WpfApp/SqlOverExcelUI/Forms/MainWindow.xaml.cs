@@ -1,4 +1,5 @@
 ﻿using SqlOverExcelUI.Models;
+using SqlOverExcelUI.Types;
 using SqlOverExcelUI.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -27,6 +28,22 @@ namespace SqlOverExcelUI
             InitializeComponent();
 
             DataContext = new MainWindowVM();
+        }
+
+        private void BtnUseTableName_Click(object sender, RoutedEventArgs e)
+        {
+            //
+
+            WorksheetItemType o = (WorksheetItemType) dgMain.SelectedItem;
+
+            if (o == null)
+            {
+                return;
+            }
+
+            string s = o.WorksheetNameForQuery;
+
+            ((MainWindowVM)DataContext).Model.SqlQuery += s;
         }
     }
 }
