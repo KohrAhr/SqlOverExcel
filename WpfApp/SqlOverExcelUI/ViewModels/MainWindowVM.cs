@@ -84,7 +84,19 @@ namespace SqlOverExcelUI.ViewModels
         private void SaveQueryResultProc(object o)
         {
             // Ask for a file name
-            string fileName = "C:\\Temp\\Result.xlsx";
+            string fileName = "";
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = StringsFunctions.ResourceString("resFileTypes");
+            saveFileDialog.InitialDirectory = Environment.CurrentDirectory;
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                fileName = saveFileDialog.FileName;
+            }
+            else
+            {
+                return;
+            }
 
             // Save
             new CoreFunctions().SaveResultToExcelFile(fileName, Model.QueryResult);
