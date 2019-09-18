@@ -4,10 +4,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace Lib.UI
 {
+    public class WaitCursor : IDisposable
+    {
+        private Cursor _previousCursor;
+
+        public WaitCursor()
+        {
+            _previousCursor = Mouse.OverrideCursor;
+
+            Mouse.OverrideCursor = Cursors.Wait;
+        }
+
+        public void Dispose()
+        {
+            Mouse.OverrideCursor = _previousCursor;
+        }
+    }
+
     public static class UIFunctions
     {
         public static T FindControlByTag<T>(FrameworkElement parent, string tag) where T : FrameworkElement

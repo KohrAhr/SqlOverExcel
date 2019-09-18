@@ -86,20 +86,27 @@ namespace SqlOverExcelUI.ViewModels
             // Ask for a file name
             string fileName = "";
 
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = StringsFunctions.ResourceString("resFileTypes");
-            saveFileDialog.InitialDirectory = Environment.CurrentDirectory;
-            if (saveFileDialog.ShowDialog() == true)
+            WindowsUI.RunWindowDialog(() =>
             {
-                fileName = saveFileDialog.FileName;
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = StringsFunctions.ResourceString("resFileTypes");
+                saveFileDialog.InitialDirectory = Environment.CurrentDirectory;
+                if (saveFileDialog.ShowDialog() == true)
+                {
+                    fileName = saveFileDialog.FileName;
+                }
+                else
+                {
+                    return;
+                }
             }
-            else
-            {
-                return;
-            }
+            );
 
             // Save
-            new CoreFunctions().SaveResultToExcelFile(fileName, Model.QueryResult);
+            using (new WaitCursor())
+            {
+                new CoreFunctions().SaveResultToExcelFile(fileName, Model.QueryResult);
+            }
 
             WindowsUI.RunWindowDialog(() =>
             {
@@ -116,21 +123,26 @@ namespace SqlOverExcelUI.ViewModels
         {
             try
             {
-                using (ExcelCore excelIn = new ExcelCore(Model.ExcelFileName, CONST_ACEOLEDBVERSION))
+                using (new WaitCursor())
                 {
-                    List<string> worksheets = excelIn.GetWorksheets();
-
-                    foreach (String name in worksheets)
+                    using (ExcelCore excelIn = new ExcelCore(Model.ExcelFileName, CONST_ACEOLEDBVERSION))
                     {
-                        WorksheetItemType worksheetItem = new WorksheetItemType();
+                        List<string> worksheets = excelIn.GetWorksheets();
 
-                        worksheetItem.WorksheetName = name;
+                        Model.WorksheetItems.Clear();
 
-                        ExcelObject.Worksheet worksheet = excelIn.GetWorksheet(name);
-                        worksheetItem.RowCount = excelIn.GetCountOfRows(worksheet);
-                        worksheetItem.ColCount = excelIn.GetCountOfCols(worksheet);
+                        foreach (String name in worksheets)
+                        {
+                            WorksheetItemType worksheetItem = new WorksheetItemType();
 
-                        Model.WorksheetItems.Add(worksheetItem);
+                            worksheetItem.WorksheetName = name;
+
+                            ExcelObject.Worksheet worksheet = excelIn.GetWorksheet(name);
+                            worksheetItem.RowCount = excelIn.GetCountOfRows(worksheet);
+                            worksheetItem.ColCount = excelIn.GetCountOfCols(worksheet);
+
+                            Model.WorksheetItems.Add(worksheetItem);
+                        }
                     }
                 }
             }
@@ -151,28 +163,35 @@ namespace SqlOverExcelUI.ViewModels
 
         private void SelectFileProc(object o)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = StringsFunctions.ResourceString("resFileTypes");
-            openFileDialog.InitialDirectory = Environment.CurrentDirectory;
-            if (openFileDialog.ShowDialog() == true)
+            WindowsUI.RunWindowDialog(() =>
             {
-                Model.ExcelFileName = openFileDialog.FileName;
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.Filter = StringsFunctions.ResourceString("resFileTypes");
+                openFileDialog.InitialDirectory = Environment.CurrentDirectory;
+                if (openFileDialog.ShowDialog() == true)
+                {
+                    Model.ExcelFileName = openFileDialog.FileName;
+                }
             }
+            );
         }
 
         private void RunSqlQueryProc(object o)
         {
             try
             {
-                using (ExcelCore excelIn = new ExcelCore(Model.ExcelFileName, CONST_ACEOLEDBVERSION))
+                using (new WaitCursor())
                 {
-                    DataTable queryResult = new DataTable();
+                    using (ExcelCore excelIn = new ExcelCore(Model.ExcelFileName, CONST_ACEOLEDBVERSION))
+                    {
+                        DataTable queryResult = new DataTable();
 
-                    // Run query
-                    excelIn.RunSql(Model.SqlQuery, ref queryResult);
+                        // Run query
+                        excelIn.RunSql(Model.SqlQuery, ref queryResult);
 
-                    // Populate result
-                    Model.QueryResult = queryResult;
+                        // Populate result
+                        Model.QueryResult = queryResult;
+                    }
                 }
             }
             catch (Exception ex)
