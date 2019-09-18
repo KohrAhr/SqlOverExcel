@@ -120,7 +120,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <SplashScreen Include="Resources\Bitmaps\splash.jpg" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lib.MVVM\Lib.MVVM.csproj">
       <Project>{100ed6ae-4c7c-46f4-a03d-0662db106966}</Project>
