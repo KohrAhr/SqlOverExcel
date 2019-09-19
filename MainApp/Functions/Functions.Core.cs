@@ -18,15 +18,16 @@ namespace SqlOverExcel.Functions
         {
             Console.WriteLine("FREEWARE. FREE FOR COMMERICAL USAGE");
             Console.WriteLine("====================================================");
-            Console.WriteLine("SqlOverExcel. Version 0.2019.07.21. from 21/Jul/2019");
+            Console.WriteLine("SqlOverExcel. Version 0.2019.09.19. from 19/Sep/2019");
             Console.WriteLine("====================================================");
             Console.WriteLine("Run SQL query over Excel file\n");
-            Console.WriteLine("Usage: SqlOverQuery.exe -in=\"EXCEL FILE NAME\" [-out=\"EXCEL FILE NAME\"] -query=\"SQL Query\"] [-acever=XX]");
+            Console.WriteLine("Usage: SqlOverQuery.exe -in=\"EXCEL FILE NAME\" [-out=\"EXCEL FILE NAME\"] -query=\"SQL Query\"] [-acever=XX] [-hdr=Y|N]");
             Console.WriteLine("\nOptions:");
             Console.WriteLine("\t-in        \tSource Excel file");
             Console.WriteLine("\t-out       \tOutput file. If not provided, than result of query execution will be displayed in console");
             Console.WriteLine("\t-query     \tSQL Query to run. SQL query compactible with MS Access");
             Console.WriteLine("\t-acever    \tACE.OLEDB version. E.g.: 12.0, 16.0 (Office 365). Default is 16.0");
+            Console.WriteLine("\t-hdr       \tFile contain header. Default value is 'Y'");
             Console.WriteLine("\nSQL Query samples:");
             Console.WriteLine("\tselect count(field1) as e1 from [Worksheet1$]");
             Console.WriteLine("\tselect count(field1) as e1, max(field2) as e2, min(field3) as e3 from [Worksheet1$]");
@@ -187,6 +188,11 @@ namespace SqlOverExcel.Functions
                 if (key == "-acever")
                 {
                     result.acever = input[1];
+                }
+                else
+                if (key == "-hdr")
+                {
+                    result.useHdr = input[1].ToUpper();
                 }
             }
 

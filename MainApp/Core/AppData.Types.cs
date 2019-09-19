@@ -31,6 +31,8 @@ namespace SqlOverExcel.Core
         /// </summary>
         public string acever = "16.0";
 
+        public string useHdr = "Y";
+
         /// <summary>
         /// 
         /// </summary>

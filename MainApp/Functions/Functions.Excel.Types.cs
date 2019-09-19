@@ -29,6 +29,20 @@ namespace SqlOverExcel.Functions
         /// </summary>
         public string FileName { get; set; }
 
+
+        public bool HDR { get; set; } = false;
+
+        public string HDRAsString
+        {
+            get
+            {
+                return HDR ? "Yes" : "No";
+            }
+            set
+            {
+            }
+        }
+
         /// <summary>
         ///     Excel application
         /// </summary>

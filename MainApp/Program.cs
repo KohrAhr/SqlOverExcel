@@ -26,7 +26,7 @@ namespace SqlOverExcel
                 // Open file and ...
                 try
                 {
-                    using (ExcelCore excelIn = new ExcelCore(appData.inFile, appData.acever))
+                    using (ExcelCore excelIn = new ExcelCore(appData.inFile, appData.acever, appData.useHdr == "Y" ? true : false))
                     {
                         if (appData.showInfo)
                         {
