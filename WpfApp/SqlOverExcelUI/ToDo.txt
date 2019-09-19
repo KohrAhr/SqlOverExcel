@@ -8,3 +8,10 @@ Minor features
 - 4) [USING DIFFERENT APPROACH] Progress bar when executing query
 - 5) [USING DIFFERENT APPROACH] Progress bar when saving result
 6) Show information about available fields
+
+=======================
+Bugs
+=======================
+
+1) 1st row does not saved
+2) What if no header?! Should be checkbox!
