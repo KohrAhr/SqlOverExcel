@@ -28,4 +28,5 @@
     <system:String x:Key="resInfo">Information</system:String>
     <system:String x:Key="resResultSaved">Query result was saved into file "{0}"</system:String>
     <system:String x:Key="resUseTableName">Use Table name</system:String>
+    <system:String x:Key="resHDR">HDR</system:String>
 </ResourceDictionary>

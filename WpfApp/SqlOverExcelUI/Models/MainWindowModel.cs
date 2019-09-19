@@ -66,5 +66,12 @@ namespace SqlOverExcelUI.Models
             get { return GetValue(() => SqlQuery); }
             set { SetValue(() => SqlQuery, value); }
         }
+
+        public bool HDR
+        {
+            get { return GetValue(() => HDR); }
+            set { SetValue(() => HDR, value); }
+        }
+
     }
 }

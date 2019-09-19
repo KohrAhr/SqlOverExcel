@@ -144,7 +144,7 @@ namespace SqlOverExcelUI.ViewModels
             {
                 using (new WaitCursor())
                 {
-                    using (ExcelCore excelIn = new ExcelCore(Model.ExcelFileName, CONST_ACEOLEDBVERSION))
+                    using (ExcelCore excelIn = new ExcelCore(Model.ExcelFileName, CONST_ACEOLEDBVERSION, Model.HDR))
                     {
                         List<string> worksheets = excelIn.GetWorksheets();
 
@@ -201,7 +201,7 @@ namespace SqlOverExcelUI.ViewModels
             {
                 using (new WaitCursor())
                 {
-                    using (ExcelCore excelIn = new ExcelCore(Model.ExcelFileName, CONST_ACEOLEDBVERSION))
+                    using (ExcelCore excelIn = new ExcelCore(Model.ExcelFileName, CONST_ACEOLEDBVERSION, Model.HDR))
                     {
                         DataTable queryResult = new DataTable();
 

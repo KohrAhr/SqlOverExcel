@@ -27,4 +27,5 @@
     <system:String x:Key="resInfo">Информация</system:String>
     <system:String x:Key="resResultSaved">Результат был сохранён в файл \"{0}\"</system:String>
     <system:String x:Key="resUseTableName">Использовать имя</system:String>
+    <system:String x:Key="resHDR">HDR</system:String>
 </ResourceDictionary>

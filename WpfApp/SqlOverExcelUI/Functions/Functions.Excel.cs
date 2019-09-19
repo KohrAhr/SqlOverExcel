@@ -14,7 +14,7 @@ namespace SqlOverExcelUI.Functions
         /// <summary>
         ///     Default connection string
         /// </summary>
-        public const string CONST_CONNECTION_STRING_TEMPLATE = @"Provider=Microsoft.ACE.OLEDB.{0};Data Source={1};Extended Properties='Excel 12.0 Xml;HDR=Yes';";
+        public const string CONST_CONNECTION_STRING_TEMPLATE = @"Provider=Microsoft.ACE.OLEDB.{0};Data Source={1};Extended Properties='Excel 12.0 Xml;HDR={2}';";
 
         /// <summary>
         ///     Ace OLE DB version we are going to use
@@ -34,11 +34,12 @@ namespace SqlOverExcelUI.Functions
         /// <param name="FileName">
         ///     Excel file name
         /// </param>
-        public ExcelCore(String FileName, String AceOledbVersion) : this()
+        public ExcelCore(String FileName, String AceOledbVersion, bool UseHDR) : this()
         {
             //try
             {
                 ACEOLEDB_VERSION = AceOledbVersion;
+                HDR = UseHDR;
                 OpenFile(FileName);
             }
             //catch (Exception ex)
@@ -556,7 +557,7 @@ namespace SqlOverExcelUI.Functions
         /// <returns></returns>
         public string BuildConnectionString()
         {
-            return String.Format(CONST_CONNECTION_STRING_TEMPLATE, ACEOLEDB_VERSION, FileName);
+            return String.Format(CONST_CONNECTION_STRING_TEMPLATE, ACEOLEDB_VERSION, FileName, HDRAsString);
         }
     }
 }

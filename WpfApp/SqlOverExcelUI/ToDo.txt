@@ -13,5 +13,5 @@ Minor features
 Bugs
 =======================
 
-1) 1st row does not saved
-2) What if no header?! Should be checkbox!
+1) [FIXED] [19/Sep/2019] 1st row does not saved
+2) [FIXED] [19/Sep/2019] What if no header?! Should be checkbox!

@@ -50,10 +50,11 @@
                     Table name must be in square brasket []
                     <LineBreak/>
                     Table name must end with sign $
-                </TextBlock>                
+                </TextBlock>
             </TextBox.ToolTip>
         </TextBox>
         <Button x:Name="btnRunQuery" IsEnabled="{Binding Path=Text.Length, ElementName=txtQuery}" Content="{StaticResource ResourceKey=resRunSqlQuery}" Margin="0,289,10,0" Style="{StaticResource ResourceKey=RegularButton}" Command="{Binding RunSqlQueryCommand}" Width="150" HorizontalAlignment="Right" />
+        <CheckBox Content="{StaticResource ResourceKey=resHDR}" Margin="0,317,10,0" VerticalAlignment="Top" IsChecked="{Binding Path=Model.HDR, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Width="150"/>
 
         <!-- -->
         <Label Style="{StaticResource ResourceKey=TitleRegular}" Content="{StaticResource ResourceKey=resSqlQueryResult}" Margin="10,394,10,0" />
