@@ -53,8 +53,8 @@ namespace SqlOverExcelUI.ViewModels
             RunAnalyticsCommand = new RelayCommand(RunAnalyticsProc);
             SelectFileCommand = new RelayCommand(SelectFileProc);
             RunSqlQueryCommand = new RelayCommand(RunSqlQueryProc);
-            SaveQueryResultCommand = new RelayCommand(SaveQueryResultProc);
-            UseTableNameCommand = new RelayCommand(UseTableNameProc);
+            SaveQueryResultCommand = new RelayCommand(SaveQueryResultProc, SaveQueryResultCommandEnabled);
+            UseTableNameCommand = new RelayCommand(UseTableNameProc, UseTableNameCommandEnabled);
         }
 
         #region Commands implementation
@@ -75,6 +75,20 @@ namespace SqlOverExcelUI.ViewModels
             string s = selectedItem.WorksheetNameForQuery;
 
             Model.SqlQuery += s;
+        }
+
+        private bool UseTableNameCommandEnabled(Object o)
+        {
+            bool result = false;
+
+            if (o != null)
+            {
+                WorksheetItemType selectedItem = (WorksheetItemType)((ObservableCollection<object>)o).FirstOrDefault();
+
+                result = selectedItem != null;
+            }
+
+            return result;
         }
 
         /// <summary>
@@ -117,6 +131,11 @@ namespace SqlOverExcelUI.ViewModels
                 );
             }
             );
+        }
+
+        private bool SaveQueryResultCommandEnabled(Object o)
+        {
+            return Model.QueryResult.Rows.Count > 0;
         }
 
         private void RunAnalyticsProc(object o)
