@@ -5,6 +5,6 @@ Minor features
 1) Show recent Excel files
 2) Show recent SQL query
 3) [DONE] [16/Sep/2019] Ability to use Worksheetname in Query ("Use Table name")
-4) Progress bar when executing query
-5) Progress bar when saving result
+- 4) [USING DIFFERENT APPROACH] Progress bar when executing query
+- 5) [USING DIFFERENT APPROACH] Progress bar when saving result
 6) Show information about available fields
