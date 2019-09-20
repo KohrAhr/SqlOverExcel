@@ -4,7 +4,7 @@ using System.Data;
 using System.Data.OleDb;
 using ExcelObject = Microsoft.Office.Interop.Excel;
 
-namespace SqlOverExcel.Functions
+namespace Lib.Excel
 {
     /// <summary>
     ///     Main class
@@ -70,6 +70,31 @@ namespace SqlOverExcel.Functions
             excelInstance.DisplayAlerts = false;
 
             return excelInstance;
+        }
+
+        /// <summary>
+        ///     Save result to new Excel file. (SLOW METHOD)
+        /// </summary>
+        /// <param name="toFile"></param>
+        /// <param name="data"></param>
+        public void SaveResultToExcelFile(string toFile, DataTable data)
+        {
+            // Save result to new file
+            using (ExcelCore excelOut = new ExcelCore())
+            {
+                excelOut.NewFile(toFile);
+                if (excelOut.IsInitialized())
+                {
+                    excelOut.NewSheet("RESULT", WorksheerOrder.woFirst);
+
+                    // Delete default worksheet
+                    excelOut.DeleteSheet("Sheet1");
+
+                    excelOut.PopulateData("RESULT", data);
+
+                    excelOut.SaveFile();
+                }
+            }
         }
 
         /// <summary>
@@ -262,7 +287,7 @@ namespace SqlOverExcel.Functions
             try
             {
                 Sheet?.SaveAs(file,
-                    Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, 
+                    Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
                     ExcelObject.XlSaveAsAccessMode.xlNoChange,
                     Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing
                 );

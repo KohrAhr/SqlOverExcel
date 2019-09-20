@@ -65,9 +65,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Core\Core.ErrorHandling.cs" />
-    <Compile Include="Functions\Functions.Core.cs" />
-    <Compile Include="Functions\Functions.Excel.cs" />
-    <Compile Include="Functions\Functions.Excel.Types.cs" />
     <Compile Include="Types\WorksheetItemsType.cs" />
     <Compile Include="Types\WorksheetItemType.cs" />
     <Compile Include="ViewModels\MainWindowVM.cs" />
@@ -127,6 +124,10 @@
     <SplashScreen Include="Resources\Bitmaps\splash.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Lib.Excel\Lib.Excel.csproj">
+      <Project>{fc360ef1-0326-439d-9e69-c4bd668dbb39}</Project>
+      <Name>Lib.Excel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lib.MVVM\Lib.MVVM.csproj">
       <Project>{100ed6ae-4c7c-46f4-a03d-0662db106966}</Project>
       <Name>Lib.MVVM</Name>

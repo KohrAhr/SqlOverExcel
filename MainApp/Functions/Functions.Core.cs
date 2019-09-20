@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using ExcelObject = Microsoft.Office.Interop.Excel;
 using SqlOverExcel.Functions;
 using System.Threading;
+using Lib.Excel;
 
 namespace SqlOverExcel.Functions
 {
@@ -107,26 +108,6 @@ namespace SqlOverExcel.Functions
                         Console.Write(value + "\t");
                     }
                 );
-            }
-        }
-
-        public void SaveResultToExcelFile(string toFile, DataTable data)
-        {
-            // Save result to new file
-            using (ExcelCore excelOut = new ExcelCore())
-            {
-                excelOut.NewFile(toFile);
-                if (excelOut.IsInitialized())
-                {
-                    excelOut.NewSheet("RESULT", WorksheerOrder.woFirst);
-
-                    // Delete default worksheet
-                    excelOut.DeleteSheet("Sheet1");
-
-                    excelOut.PopulateData("RESULT", data);
-
-                    excelOut.SaveFile();
-                }
             }
         }
 

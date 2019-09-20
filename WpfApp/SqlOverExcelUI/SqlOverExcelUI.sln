@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lib.UI", "..\Lib.UI\Lib.UI.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lib.Strings", "..\Lib.Strings\Lib.Strings.csproj", "{AEC79C91-7BB6-4F43-A689-319A01CA8BBF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lib.Excel", "..\Lib.Excel\Lib.Excel.csproj", "{FC360EF1-0326-439D-9E69-C4BD668DBB39}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlOverExcel", "..\..\MainApp\SqlOverExcel.csproj", "{F6B9A6AB-A46C-46B8-907E-4FB2835F8991}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{AEC79C91-7BB6-4F43-A689-319A01CA8BBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AEC79C91-7BB6-4F43-A689-319A01CA8BBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AEC79C91-7BB6-4F43-A689-319A01CA8BBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC360EF1-0326-439D-9E69-C4BD668DBB39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC360EF1-0326-439D-9E69-C4BD668DBB39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC360EF1-0326-439D-9E69-C4BD668DBB39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC360EF1-0326-439D-9E69-C4BD668DBB39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6B9A6AB-A46C-46B8-907E-4FB2835F8991}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6B9A6AB-A46C-46B8-907E-4FB2835F8991}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6B9A6AB-A46C-46B8-907E-4FB2835F8991}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6B9A6AB-A46C-46B8-907E-4FB2835F8991}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

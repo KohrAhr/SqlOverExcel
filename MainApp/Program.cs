@@ -4,6 +4,7 @@ using SqlOverExcel.Functions;
 using SqlOverExcel.Core;
 using System.Threading.Tasks;
 using System.Threading;
+using Lib.Excel;
 
 namespace SqlOverExcel
 {
@@ -55,7 +56,7 @@ namespace SqlOverExcel
 
                                 if (appData.resultToFile)
                                 {
-                                    coreFunctions.SaveResultToExcelFile(appData.outFile, queryResult);
+                                    excelIn.SaveResultToExcelFile(appData.outFile, queryResult);
                                 }
                                 else
                                 {

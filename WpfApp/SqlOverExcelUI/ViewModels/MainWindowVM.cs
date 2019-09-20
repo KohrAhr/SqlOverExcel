@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Lib.MVVM;
 using Microsoft.Win32;
-using SqlOverExcelUI.Functions;
+using Lib.Excel;
 using SqlOverExcelUI.Models;
 using SqlOverExcelUI.Types;
 using ExcelObject = Microsoft.Office.Interop.Excel;
@@ -119,7 +119,7 @@ namespace SqlOverExcelUI.ViewModels
             // Save
             using (new WaitCursor())
             {
-                new CoreFunctions().SaveResultToExcelFile(fileName, Model.QueryResult);
+                new ExcelCore().SaveResultToExcelFile(fileName, Model.QueryResult);
             }
 
             WindowsUI.RunWindowDialog(() =>
