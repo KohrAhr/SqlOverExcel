@@ -21,6 +21,7 @@ namespace SqlOverExcelUI.Models
         {
             WorksheetItems = new WorksheetItemsType();
             QueryResult = new DataTable();
+            HDR = true;
         }
 
         /// <summary>
