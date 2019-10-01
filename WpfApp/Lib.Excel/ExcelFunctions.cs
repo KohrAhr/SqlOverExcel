@@ -111,7 +111,8 @@ namespace Lib.Excel
             {
                 ExcelApp = CreateExcelInstance();
                 Books = ExcelApp.Workbooks;
-                Sheet = Books.Open(file);
+
+                Sheet = Books.Open(file, null, true);
 
                 if (Sheet == null)
                 {

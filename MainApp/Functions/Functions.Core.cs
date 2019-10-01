@@ -19,7 +19,7 @@ namespace SqlOverExcel.Functions
         {
             Console.WriteLine("FREEWARE. FREE FOR COMMERICAL USAGE");
             Console.WriteLine("====================================================");
-            Console.WriteLine("SqlOverExcel. Version 0.2019.09.19. from 19/Sep/2019");
+            Console.WriteLine("SqlOverExcel. Version 0.2019.10.01. from 01/Oct/2019");
             Console.WriteLine("====================================================");
             Console.WriteLine("Run SQL query over Excel file\n");
             Console.WriteLine("Usage: SqlOverQuery.exe -in=\"EXCEL FILE NAME\" [-out=\"EXCEL FILE NAME\"] -query=\"SQL Query\"] [-acever=XX] [-hdr=Y|N]");
