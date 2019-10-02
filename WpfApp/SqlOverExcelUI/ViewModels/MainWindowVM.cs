@@ -28,8 +28,8 @@ namespace SqlOverExcelUI.ViewModels
         public ICommand RunSqlQueryCommand { get; set; }
         public ICommand SaveQueryResultCommand { get; set; }
         public ICommand UseTableNameCommand { get; set; }
+        public ICommand AboutCommand { get; set; }
         #endregion Commands definition
-
 
         public MainWindowModel Model
         {
@@ -55,9 +55,23 @@ namespace SqlOverExcelUI.ViewModels
             RunSqlQueryCommand = new RelayCommand(RunSqlQueryProc);
             SaveQueryResultCommand = new RelayCommand(SaveQueryResultProc, SaveQueryResultCommandEnabled);
             UseTableNameCommand = new RelayCommand(UseTableNameProc, UseTableNameCommandEnabled);
+            AboutCommand = new RelayCommand(AboutProc);
         }
 
         #region Commands implementation
+        private void AboutProc(object o)
+        {
+            WindowsUI.RunWindowDialog(() =>
+            {
+                MessageBox.Show(
+                    "SQL OVER EXCEL" + Environment.NewLine + "RIGA, LATVIA",
+                    StringsFunctions.ResourceString("resInfo"),
+                    MessageBoxButton.OK, MessageBoxImage.Information
+                );
+            }
+            );
+        }
+
         private void UseTableNameProc(object o)
         {
             if (o == null)

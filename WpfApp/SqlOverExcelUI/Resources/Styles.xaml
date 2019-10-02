@@ -2,6 +2,10 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
+    <Style x:Key="Window" TargetType="{x:Type Window}">
+        <Setter Property="FontFamily" Value="Consolas" />
+    </Style>
+    
     <Style TargetType="TextBlock">
         <Setter Property="TextOptions.TextFormattingMode" Value="Display"/>
     </Style>
