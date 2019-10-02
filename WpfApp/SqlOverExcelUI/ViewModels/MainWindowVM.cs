@@ -20,7 +20,7 @@ namespace SqlOverExcelUI.ViewModels
 {
     public class MainWindowVM
     {
-        private const string CONST_ACEOLEDBVERSION = "16.0";
+        private const string CONST_ACEOLEDBVERSION = "12.0";
 
         #region Commands definition
         public ICommand RunAnalyticsCommand { get; set; }
@@ -212,6 +212,16 @@ namespace SqlOverExcelUI.ViewModels
                         Model.QueryResult = queryResult;
                     }
                 }
+
+                WindowsUI.RunWindowDialog(() =>
+                {
+                    MessageBox.Show(
+                        StringsFunctions.ResourceString("resQueryCompleted"),
+                        StringsFunctions.ResourceString("resInfo"),
+                        MessageBoxButton.OK, MessageBoxImage.Information
+                    );
+                }
+                );
             }
             catch (Exception ex)
             {

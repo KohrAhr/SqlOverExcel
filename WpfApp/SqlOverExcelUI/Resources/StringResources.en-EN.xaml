@@ -3,7 +3,7 @@
                     xmlns:system="clr-namespace:System;assembly=mscorlib"
                     xmlns:local="clr-namespace:SqlOverExcelUI">
 
-    <system:String x:Key="resMainWindow">SqlOverExcel -- Run SQL query over MS Excel file [01/Oct/2019]</system:String>
+    <system:String x:Key="resMainWindow">SqlOverExcel -- Run SQL query over MS Excel file [02/Oct/2019]</system:String>
     <system:String x:Key="resExcelFile">MS Excel file</system:String>
     <system:String x:Key="resSelectExcelFile">Select file</system:String>
     <system:String x:Key="resOpenExcelFile">Analyze file</system:String>
@@ -29,4 +29,5 @@
     <system:String x:Key="resResultSaved">Query result was saved into file "{0}"</system:String>
     <system:String x:Key="resUseTableName">Use Table name</system:String>
     <system:String x:Key="resHDR">HDR</system:String>
+    <system:String x:Key="resQueryCompleted">SQL Query execution was successfully completed</system:String>
 </ResourceDictionary>
