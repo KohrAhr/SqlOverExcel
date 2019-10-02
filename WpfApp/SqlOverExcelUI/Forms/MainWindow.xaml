@@ -31,7 +31,7 @@
 
         <!-- -->
         <Label Style="{StaticResource ResourceKey=TitleRegular}" Background="AntiqueWhite" Content="{StaticResource ResourceKey=resSqlQueryToRun}" Margin="10,258,10,0" />
-        <TextBox Name="txtQuery" VerticalScrollBarVisibility="Visible" Height="100" Margin="10,289,165,0" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding Path=Model.SqlQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsEnabled_RootFolder}" VerticalAlignment="Top" MaxLines="255">
+        <TextBox Name="txtQuery" VerticalScrollBarVisibility="Visible" Height="100" Margin="10,289,165,0" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True" Text="{Binding Path=Model.SqlQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding IsEnabled_RootFolder}" VerticalAlignment="Top" MaxLines="255">
             <TextBox.ToolTip>
                 <TextBlock>
                     SQL Query samples:
@@ -58,7 +58,7 @@
 
         <!-- -->
         <Label Style="{StaticResource ResourceKey=TitleRegular}" Content="{StaticResource ResourceKey=resSqlQueryResult}" Margin="10,394,10,0" />
-        <DataGrid x:Name="dgResult" Margin="10,425,165,0" Style="{StaticResource ResourceKey=DataGridMain}" ItemsSource="{Binding Path=Model.QueryResult}" AutoGenerateColumns="True"/>
+        <DataGrid x:Name="dgResult" SelectionMode="Extended" Margin="10,425,165,0" Style="{StaticResource ResourceKey=DataGridMain}" ItemsSource="{Binding Path=Model.QueryResult}" AutoGenerateColumns="True"/>
         <Button x:Name="btnSaveResult" Content="{StaticResource ResourceKey=resSaveResult}" Margin="0,425,10,0" Style="{StaticResource ResourceKey=RegularButton}" Command="{Binding Path=SaveQueryResultCommand}" Width="150" HorizontalAlignment="Right" />
 
     </Grid>
