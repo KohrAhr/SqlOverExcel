@@ -201,16 +201,22 @@ namespace SqlOverExcelUI.ViewModels
             {
                 using (new WaitCursor())
                 {
-                    using (ExcelCore excelIn = new ExcelCore(Model.ExcelFileName, CONST_ACEOLEDBVERSION, Model.HDR))
+                    Task runQuery = new Task(() =>
                     {
-                        DataTable queryResult = new DataTable();
+                        using (ExcelCore excelIn = new ExcelCore(Model.ExcelFileName, CONST_ACEOLEDBVERSION, Model.HDR))
+                        {
+                            DataTable queryResult = new DataTable();
 
-                        // Run query
-                        excelIn.RunSql(Model.SqlQuery, ref queryResult);
+                            // Run query
+                            excelIn.RunSql(Model.SqlQuery, ref queryResult);
 
-                        // Populate result
-                        Model.QueryResult = queryResult;
-                    }
+                            // Populate result
+                            Model.QueryResult = queryResult;
+                        }
+                    });
+
+                    runQuery.Start();
+                    runQuery.Wait();
                 }
 
                 WindowsUI.RunWindowDialog(() =>
