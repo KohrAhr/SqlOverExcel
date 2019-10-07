@@ -20,7 +20,7 @@ namespace SqlOverExcelUI.ViewModels
 {
     public class MainWindowVM
     {
-        private const string CONST_ACEOLEDBVERSION = "12.0";
+        private const string CONST_ACEOLEDBVERSION = "16.0";
 
         #region Commands definition
         public ICommand RunAnalyticsCommand { get; set; }
@@ -123,12 +123,13 @@ namespace SqlOverExcelUI.ViewModels
                 {
                     fileName = saveFileDialog.FileName;
                 }
-                else
-                {
-                    return;
-                }
             }
             );
+
+            if (String.IsNullOrEmpty(fileName))
+            {
+                return;
+            }
 
             // Save
             using (new WaitCursor())
