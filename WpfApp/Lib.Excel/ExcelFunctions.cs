@@ -544,10 +544,6 @@ namespace Lib.Excel
 
                 dataTable.Load(oRdr);
             }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
             finally
             {
                 oRdr?.Close();

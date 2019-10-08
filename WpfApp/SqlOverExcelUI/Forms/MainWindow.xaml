@@ -21,7 +21,7 @@
 
         <!-- -->
         <Label Style="{StaticResource ResourceKey=TitleRegular}" Content="{StaticResource ResourceKey=resWorksheetInfo}" Margin="10,85,10,0" />
-        <DataGrid Margin="10,116,165,0" Style="{StaticResource ResourceKey=DataGridMain}" ItemsSource="{Binding Path=Model.WorksheetItems}" MinHeight="50" Height="150" VerticalAlignment="Top">
+        <DataGrid x:Name="dgMain" Margin="10,116,165,0" Style="{StaticResource ResourceKey=DataGridMain}" ItemsSource="{Binding Path=Model.WorksheetItems}" MinHeight="50" Height="150" VerticalAlignment="Top">
 
             <DataGrid.Columns>
                 <DataGridTextColumn Header="{StaticResource ResourceKey=resWorksheetName}" ElementStyle="{StaticResource ResourceKey=TextBlockTrimmed}" Binding="{Binding Path=WorksheetName}" MinWidth="75" Width="5*"/>
@@ -32,7 +32,7 @@
                 <DataGridTextColumn Header="{StaticResource ResourceKey=resMaxCols}" ElementStyle="{StaticResource ResourceKey=TextBlockTrimmedCentered}" HeaderStyle="{StaticResource ResourceKey=HeaderStyleCentered}" Binding="{Binding Path=ColCount}" MinWidth="75" Width="1*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button IsEnabled="{Binding ElementName=txtExcelFile,Path=Text.Length}" Content="{StaticResource ResourceKey=resOpenExcelFile}" Margin="0,116,10,0" Style="{StaticResource ResourceKey=RegularButton}" HorizontalAlignment="Right" Command="{Binding Path=RunAnalyticsCommand}" />
+        <Button Content="{StaticResource ResourceKey=resOpenExcelFile}" Margin="0,116,10,0" Style="{StaticResource ResourceKey=RegularButton}" HorizontalAlignment="Right" Command="{Binding Path=RunAnalyticsCommand}" />
         <Button Content="{StaticResource ResourceKey=resUseTableName}" Margin="0,144,10,0" Style="{StaticResource ResourceKey=RegularButton}" HorizontalAlignment="Right" Command="{Binding Path=UseTableNameCommand}" CommandParameter="{Binding ElementName=dgMain, Path=SelectedItems}" />
 
         <!-- -->

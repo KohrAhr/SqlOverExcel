@@ -50,9 +50,9 @@ namespace SqlOverExcelUI.ViewModels
 
         private void InitCommands()
         {
-            RunAnalyticsCommand = new RelayCommand(RunAnalyticsProc);
+            RunAnalyticsCommand = new RelayCommand(RunAnalyticsProc, RunAnalyticsCommandEnabled);
             SelectFileCommand = new RelayCommand(SelectFileProc);
-            RunSqlQueryCommand = new RelayCommand(RunSqlQueryProc);
+            RunSqlQueryCommand = new RelayCommand(RunSqlQueryProc, RunSqlQueryCommandEnabled);
             SaveQueryResultCommand = new RelayCommand(SaveQueryResultProc, SaveQueryResultCommandEnabled);
             UseTableNameCommand = new RelayCommand(UseTableNameProc, UseTableNameCommandEnabled);
             AboutCommand = new RelayCommand(AboutProc);
@@ -195,6 +195,11 @@ namespace SqlOverExcelUI.ViewModels
             }
         }
 
+        private bool RunAnalyticsCommandEnabled(object o)
+        {
+            return !String.IsNullOrEmpty(Model.ExcelFileName);
+        }
+
         private void SelectFileProc(object o)
         {
             WindowsUI.RunWindowDialog(() =>
@@ -257,6 +262,10 @@ namespace SqlOverExcelUI.ViewModels
                 }
                 );
             }
+        }
+        private bool RunSqlQueryCommandEnabled(object o)
+        {
+            return !String.IsNullOrEmpty(Model.SqlQuery);
         }
         #endregion Commands implementation
     }
