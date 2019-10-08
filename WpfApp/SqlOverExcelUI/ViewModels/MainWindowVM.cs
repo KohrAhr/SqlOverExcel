@@ -255,7 +255,7 @@ namespace SqlOverExcelUI.ViewModels
                 {
                     MessageBox.Show(
                         StringsFunctions.ResourceString("resErrorDuringExecution") + 
-                            Environment.NewLine + Environment.NewLine + ex.Message,
+                            Environment.NewLine + Environment.NewLine + ex.InnerException.Message,
                         StringsFunctions.ResourceString("resError"),
                         MessageBoxButton.OK, MessageBoxImage.Hand
                     );
