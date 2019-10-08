@@ -30,4 +30,8 @@
     <system:String x:Key="resUseTableName">Use Table name</system:String>
     <system:String x:Key="resHDR">HDR</system:String>
     <system:String x:Key="resQueryCompleted">SQL Query execution was successfully completed</system:String>
+
+    <system:String x:Key="resTextForSearch">Text for search</system:String>
+    <system:String x:Key="resResetSearch">Reset</system:String>
+
 </ResourceDictionary>

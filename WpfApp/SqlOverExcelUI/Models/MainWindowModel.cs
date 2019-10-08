@@ -74,5 +74,10 @@ namespace SqlOverExcelUI.Models
             set { SetValue(() => HDR, value); }
         }
 
+        public string TextForSearch
+        {
+            get { return GetValue(() => TextForSearch); }
+            set { SetValue(() => TextForSearch, value); }
+        }
     }
 }
