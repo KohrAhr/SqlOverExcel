@@ -29,6 +29,7 @@ namespace SqlOverExcelUI.ViewModels
         public ICommand SaveQueryResultCommand { get; set; }
         public ICommand UseTableNameCommand { get; set; }
         public ICommand AboutCommand { get; set; }
+        public ICommand ResetSearchCommand { get; set; }
         #endregion Commands definition
 
         public MainWindowModel Model
@@ -55,10 +56,16 @@ namespace SqlOverExcelUI.ViewModels
             RunSqlQueryCommand = new RelayCommand(RunSqlQueryProc, RunSqlQueryCommandEnabled);
             SaveQueryResultCommand = new RelayCommand(SaveQueryResultProc, SaveQueryResultCommandEnabled);
             UseTableNameCommand = new RelayCommand(UseTableNameProc, UseTableNameCommandEnabled);
+            ResetSearchCommand = new RelayCommand(ResetSearchProc);
             AboutCommand = new RelayCommand(AboutProc);
         }
 
         #region Commands implementation
+        private void ResetSearchProc(object o)
+        {
+            Model.TextForSearch = "";
+        }
+
         private void AboutProc(object o)
         {
             WindowsUI.RunWindowDialog(() =>

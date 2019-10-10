@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SqlOverExcelUI"
         mc:Ignorable="d"
+        xmlns:f="clr-namespace:SqlOverExcelUI.Functions"
         WindowStartupLocation="CenterScreen" 
         Style="{StaticResource ResourceKey=Window}"
         Title="{StaticResource ResourceKey=resMainWindow}" Height="665" Width="900" MinWidth="640" MinHeight="600">
@@ -64,12 +65,33 @@
 
 
         <Label Style="{StaticResource ResourceKey=LabelRegular}" Content="{StaticResource ResourceKey=resTextForSearch}" HorizontalAlignment="Left" Margin="10,436,0,0" VerticalAlignment="Top" TextOptions.TextFormattingMode="Display"/>
-        <TextBox Text="{Binding Path=Model.TextForSearch, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MaxLength="50" Margin="160,436,165,0" Style="{StaticResource ResourceKey=TextBoxRegular}"/>
-        <Button Content="{StaticResource ResourceKey=resResetSearch}" Margin="0,436,10,0" Style="{StaticResource ResourceKey=RegularButton}" Width="150" HorizontalAlignment="Right"/>
+        <TextBox TextChanged="TextBox_TextChanged" x:Name="txtSearch" Text="{Binding Path=Model.TextForSearch, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MaxLength="50" Margin="160,436,165,0" Style="{StaticResource ResourceKey=TextBoxRegular}"/>
+        <Button IsEnabled="{Binding Path=Text.Length, ElementName=txtSearch}" Content="{StaticResource ResourceKey=resResetSearch}" Margin="0,436,10,0" Style="{StaticResource ResourceKey=RegularButton}" Width="150" HorizontalAlignment="Right" Command="{Binding Path=ResetSearchCommand}"/>
 
         <!-- -->
         <Label Style="{StaticResource ResourceKey=TitleRegular}" Content="{StaticResource ResourceKey=resSqlQueryResult}" Margin="10,407,10,0" />
-        <DataGrid SelectionMode="Extended" Margin="10,464,165,0" Style="{StaticResource ResourceKey=DataGridMain}" ItemsSource="{Binding Path=Model.QueryResult}" AutoGenerateColumns="True"/>
+        <DataGrid f:DataGridTextSearch.SearchValue="{Binding ElementName=txtSearch, Path=Text, UpdateSourceTrigger=PropertyChanged}"  x:Name="dgResult" SelectionMode="Extended" Margin="10,464,165,0" Style="{StaticResource ResourceKey=DataGridMain}" ItemsSource="{Binding Path=Model.QueryResult}" AutoGenerateColumns="True">
+            <DataGrid.Resources>
+                <f:SearchValueConverter x:Key="SearchValueConverter" />
+                <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource ResourceKey=DataGridCellTooltip}">
+                    <Setter Property="f:DataGridTextSearch.IsTextMatch">
+                        <Setter.Value>
+                            <MultiBinding Converter="{StaticResource SearchValueConverter}">
+                                <Binding RelativeSource="{RelativeSource Self}" Path="Content.Text" />
+                                <Binding RelativeSource="{RelativeSource Self}" Path="(f:DataGridTextSearch.SearchValue)" />
+                            </MultiBinding>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="f:DataGridTextSearch.IsTextMatch" Value="True">
+                            <Setter Property="Background" Value="LightGreen" />
+                            <Setter Property="Foreground" Value="Red" />
+                            <Setter Property="FontWeight" Value="Bold"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.Resources>
+        </DataGrid>
         <Button Content="{StaticResource ResourceKey=resSaveResult}" Margin="0,464,10,0" Style="{StaticResource ResourceKey=RegularButton}" Command="{Binding Path=SaveQueryResultCommand}" Width="150" HorizontalAlignment="Right" />
 
     </Grid>
