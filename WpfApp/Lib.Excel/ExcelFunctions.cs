@@ -259,7 +259,7 @@ namespace Lib.Excel
                         int x = 1;
                         foreach (object item in dataRow.ItemArray)
                         {
-                            ExcelApp.Sheets[sheetIndex].Cells[y, x++] = item.ToString();
+                            ExcelApp.Sheets[sheetIndex].Cells[y, x++] = item;
                         }
                         y++;
                     }
