@@ -15,13 +15,12 @@ using System.Windows;
 using Lib.UI;
 using Lib.Strings;
 using System.Collections.ObjectModel;
+using SqlOverExcelUI.Core;
 
 namespace SqlOverExcelUI.ViewModels
 {
     public class MainWindowVM
     {
-        private const string CONST_ACEOLEDBVERSION = "16.0";
-
         #region Commands definition
         public ICommand RunAnalyticsCommand { get; set; }
         public ICommand SelectFileCommand { get; set; }
@@ -166,7 +165,7 @@ namespace SqlOverExcelUI.ViewModels
             {
                 using (new WaitCursor())
                 {
-                    using (ExcelCore excelIn = new ExcelCore(Model.ExcelFileName, CONST_ACEOLEDBVERSION, Model.HDR))
+                    using (ExcelCore excelIn = new ExcelCore(Model.ExcelFileName, AppDataCore.AceVersion, Model.HDR))
                     {
                         List<string> worksheets = excelIn.GetWorksheets();
 
@@ -230,7 +229,7 @@ namespace SqlOverExcelUI.ViewModels
                 {
                     Task runQuery = new Task(() =>
                     {
-                        using (ExcelCore excelIn = new ExcelCore(Model.ExcelFileName, CONST_ACEOLEDBVERSION, Model.HDR))
+                        using (ExcelCore excelIn = new ExcelCore(Model.ExcelFileName, AppDataCore.AceVersion, Model.HDR))
                         {
                             DataTable queryResult = new DataTable();
 

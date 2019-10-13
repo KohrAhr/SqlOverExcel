@@ -13,6 +13,8 @@
 
         <Menu VerticalAlignment="Top">
             <MenuItem Header="About" Command="{Binding Path=AboutCommand}"/>
+            <MenuItem Header="Save" Command="{Binding Path=SaveCommand}"/>
+            <MenuItem Header="Load" Command="{Binding Path=LoadCommand}"/>
         </Menu>
 
         <!-- -->

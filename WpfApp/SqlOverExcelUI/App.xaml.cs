@@ -17,11 +17,17 @@ namespace SqlOverExcelUI
         void AppStartup(Object sender, StartupEventArgs e)
         {
             ErrorHandlingCore.Init();
+            AppSettingsCore.Init();
 
             Current.ShutdownMode = ShutdownMode.OnMainWindowClose;
 
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
+        }
+
+        private void AppExit(object sender, ExitEventArgs e)
+        {
+            // Thank you!
         }
     }
 }
