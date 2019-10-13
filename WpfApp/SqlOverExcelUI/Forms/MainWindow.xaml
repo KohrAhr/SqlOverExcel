@@ -23,8 +23,11 @@
         <!-- -->
         <Label Style="{StaticResource ResourceKey=TitleRegular}" Content="{StaticResource ResourceKey=resWorksheetInfo}" Margin="10,85,10,0" />
         <DataGrid x:Name="dgMain" Margin="10,116,165,0" Style="{StaticResource ResourceKey=DataGridMain}" ItemsSource="{Binding Path=Model.WorksheetItems}" MinHeight="50" Height="150" VerticalAlignment="Top">
+            <DataGrid.CellStyle>
+                <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource ResourceKey=DataGridMainCell}" />
+            </DataGrid.CellStyle>
 
-            <DataGrid.Columns>
+            <DataGrid.Columns >
                 <DataGridTextColumn Header="{StaticResource ResourceKey=resWorksheetName}" ElementStyle="{StaticResource ResourceKey=TextBlockTrimmed}" Binding="{Binding Path=WorksheetName}" MinWidth="75" Width="5*"/>
                 <DataGridTextColumn Header="{StaticResource ResourceKey=resWorksheetNameForQuery}" ElementStyle="{StaticResource ResourceKey=TextBlockTrimmed}" Binding="{Binding Path=WorksheetNameForQuery}" MinWidth="75" Width="5*"/>
 

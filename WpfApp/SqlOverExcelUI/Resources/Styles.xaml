@@ -37,11 +37,38 @@
     </Style>
 
 
+<!--=    <Style x:Key="DataGridCell" TargetType="DataGridCell">
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background" Value="DarkBlue"/>
+                <Setter Property="Foreground" Value="White"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>-->
 
-
-
-
-
+    <Style x:Key="DataGridMainCell" TargetType="{x:Type DataGridCell}">
+        <Style.Triggers>
+            <Trigger  Property="IsSelected" Value="true">
+                <Setter Property="Background" Value="DarkBlue" />
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+                <!--<Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+                            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}" />
+                            <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />-->
+            </Trigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding RelativeSource={RelativeSource Self}, Path=IsSelected}" Value="True" />
+                    <Condition Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=DataGrid}, Path=IsKeyboardFocusWithin}" Value="False" />
+                </MultiDataTrigger.Conditions>
+                <MultiDataTrigger.Setters>
+                    <Setter Property="Background" Value="LightSlateGray" />
+                    <Setter Property="Foreground" Value="Black" />
+                    <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
+                </MultiDataTrigger.Setters>
+            </MultiDataTrigger>
+        </Style.Triggers>
+    </Style>
 
 
     <Style x:Key="DataGridMain" TargetType="DataGrid">
@@ -53,7 +80,7 @@
         <Setter Property="AutoGenerateColumns" Value="False"/>
     </Style>
 
-    <Style x:Key="DataGridCellTooltip" TargetType="DataGridCell">
+    <Style x:Key="DataGridCellTooltip" TargetType="DataGridCell" BasedOn="{StaticResource ResourceKey=DataGridMainCell}">
         <Setter Property="ToolTip" Value="{Binding RelativeSource={RelativeSource Self},Path=Content.Text}"/>
     </Style>
 

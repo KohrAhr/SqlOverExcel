@@ -3,13 +3,14 @@
                     xmlns:system="clr-namespace:System;assembly=mscorlib"
                     xmlns:local="clr-namespace:SqlOverExcelUI">
 
-    <system:String x:Key="resMainWindow">SqlOverExcel -- Run SQL query over MS Excel file</system:String>
+    <system:String x:Key="resMainWindow">SqlOverExcel -- Run SQL query over MS Excel file [13/Oct/2019]</system:String>
     <system:String x:Key="resExcelFile">Файл MS Excel</system:String>
     <system:String x:Key="resSelectExcelFile">Выбрать файл</system:String>
     <system:String x:Key="resOpenExcelFile">Открыть файл</system:String>
     <system:String x:Key="resWorksheetInfo">Информация об Excel файле</system:String>
 
     <system:String x:Key="resWorksheetName">Название листа</system:String>
+    <system:String x:Key="resWorksheetNameForQuery">Worksheet name for SQL query</system:String>
     <system:String x:Key="resMaxRows">Кол-во строк</system:String>
     <system:String x:Key="resMaxCols">Кол-во колонок</system:String>
 
@@ -27,5 +28,10 @@
     <system:String x:Key="resInfo">Информация</system:String>
     <system:String x:Key="resResultSaved">Результат был сохранён в файл \"{0}\"</system:String>
     <system:String x:Key="resUseTableName">Использовать имя</system:String>
-    <system:String x:Key="resHDR">HDR</system:String>
+    <system:String x:Key="resHDR">Заголовок</system:String>
+    <system:String x:Key="resQueryCompleted">Выполнение SQL запроса успешно завершено</system:String>
+
+    <system:String x:Key="resTextForSearch">Текст для поиска</system:String>
+    <system:String x:Key="resResetSearch">Сброс</system:String>
+
 </ResourceDictionary>
