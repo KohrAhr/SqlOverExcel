@@ -69,6 +69,7 @@
     <Compile Include="Core\Core.ErrorHandling.cs" />
     <Compile Include="Functions\Functions.DataGrid.cs" />
     <Compile Include="Functions\Functions.ValueConverter.cs" />
+    <Compile Include="Models\AppSettingsModel.cs" />
     <Compile Include="Types\WorksheetItemsType.cs" />
     <Compile Include="Types\WorksheetItemType.cs" />
     <Compile Include="ViewModels\MainWindowVM.cs" />

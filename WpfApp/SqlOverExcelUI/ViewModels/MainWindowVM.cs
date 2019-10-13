@@ -165,7 +165,7 @@ namespace SqlOverExcelUI.ViewModels
             {
                 using (new WaitCursor())
                 {
-                    using (ExcelCore excelIn = new ExcelCore(Model.ExcelFileName, AppDataCore.AceVersion, Model.HDR))
+                    using (ExcelCore excelIn = new ExcelCore(Model.ExcelFileName, AppDataCore.Settings.AceVersion, Model.HDR))
                     {
                         List<string> worksheets = excelIn.GetWorksheets();
 
@@ -229,7 +229,7 @@ namespace SqlOverExcelUI.ViewModels
                 {
                     Task runQuery = new Task(() =>
                     {
-                        using (ExcelCore excelIn = new ExcelCore(Model.ExcelFileName, AppDataCore.AceVersion, Model.HDR))
+                        using (ExcelCore excelIn = new ExcelCore(Model.ExcelFileName, AppDataCore.Settings.AceVersion, Model.HDR))
                         {
                             DataTable queryResult = new DataTable();
 

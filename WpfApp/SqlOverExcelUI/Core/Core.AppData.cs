@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SqlOverExcelUI.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,8 +9,6 @@ namespace SqlOverExcelUI.Core
 {
     public static class AppDataCore
     {
-        public static string AceVersion = "";
-
-        public static string UILanguage = "";
+        public static AppSettingsModel Settings = new AppSettingsModel();
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SqlOverExcelUI.Models;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
@@ -41,27 +42,28 @@ namespace SqlOverExcelUI.Core
         /// </summary>
         public static void Init()
         {
-			if (File.Exists(SettingsFile))
+            AppSettingsModel result = null;
+
+            if (File.Exists(SettingsFile))
             {
-                LoadSettings(SettingsFile);
+                result = LoadSettings(SettingsFile);
             }
+
+            AppDataCore.Settings.AceVersion = result == null ? CONST_ACEOLEDBVERSION : result.AceVersion;
         }
 
-		public static void LoadSettings(string FileName)
+        public static AppSettingsModel LoadSettings(string FileName)
         {
+            AppSettingsModel result = new AppSettingsModel();
+
             ExeConfigurationFileMap map = new ExeConfigurationFileMap();
             map.ExeConfigFilename = SettingsFile;
 
             Configuration config = ConfigurationManager.OpenMappedExeConfiguration(map, ConfigurationUserLevel.None);
 
-            string value = "";
+            result.AceVersion = config.AppSettings.Settings["AceVer"]?.Value.ToString();
 
-            value = config.AppSettings.Settings["AceVer"]?.Value.ToString();
-            if (String.IsNullOrEmpty(value))
-            {
-                value = CONST_ACEOLEDBVERSION;
-            }
-            AppDataCore.AceVersion = value;
+            return result;
         }
     }
 }
