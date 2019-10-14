@@ -13,13 +13,13 @@
 
         <Menu VerticalAlignment="Top">
             <MenuItem Header="About" Command="{Binding Path=AboutCommand}"/>
-            <MenuItem Header="Save" Command="{Binding Path=SaveCommand}"/>
-            <MenuItem Header="Load" Command="{Binding Path=LoadCommand}"/>
+            <MenuItem Header="Save" Command="{Binding Path=SaveSetCommand}"/>
+            <MenuItem Header="Load" Command="{Binding Path=LoadSetCommand}"/>
         </Menu>
 
         <!-- -->
         <Label Style="{StaticResource ResourceKey=TitleRegular}" Content="{StaticResource ResourceKey=resExcelFile}" Margin="10,26,10,0" />
-        <TextBox Margin="10,57,167,0" Style="{StaticResource ResourceKey=TextBoxRegular}" Text="{Binding Path=Model.ExcelFileName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MaxLength="255"/>
+        <TextBox Margin="10,57,167,0" Style="{StaticResource ResourceKey=TextBoxRegular}" Text="{Binding Path=Model.BaseModel.ExcelFileName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MaxLength="255"/>
         <Button Content="{StaticResource ResourceKey=resSelectExcelFile}" Margin="0,57,10,0" Style="{StaticResource ResourceKey=RegularButton}" HorizontalAlignment="Right" Command="{Binding Path=SelectFileCommand}" />
 
         <!-- -->
@@ -43,7 +43,7 @@
 
         <!-- -->
         <Label Style="{StaticResource ResourceKey=TitleRegular}" Background="AntiqueWhite" Content="{StaticResource ResourceKey=resSqlQueryToRun}" Margin="10,271,10,0" />
-        <TextBox VerticalScrollBarVisibility="Visible" Height="100" Margin="10,302,165,0" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True" Text="{Binding Path=Model.SqlQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" MaxLines="255">
+        <TextBox VerticalScrollBarVisibility="Visible" Height="100" Margin="10,302,165,0" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True" Text="{Binding Path=Model.BaseModel.SqlQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" MaxLines="255">
             <TextBox.ToolTip>
                 <TextBlock>
                     SQL Query samples:
@@ -66,11 +66,11 @@
             </TextBox.ToolTip>
         </TextBox>
         <Button IsEnabled="{Binding Path=Text.Length, ElementName=txtQuery}" Content="{StaticResource ResourceKey=resRunSqlQuery}" Margin="0,302,10,0" Style="{StaticResource ResourceKey=RegularButton}" Command="{Binding RunSqlQueryCommand}" Width="150" HorizontalAlignment="Right" />
-        <CheckBox Content="{StaticResource ResourceKey=resHDR}" Margin="0,330,10,0" VerticalAlignment="Top" IsChecked="{Binding Path=Model.HDR, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Width="150"/>
+        <CheckBox Content="{StaticResource ResourceKey=resHDR}" Margin="0,330,10,0" VerticalAlignment="Top" IsChecked="{Binding Path=Model.BaseModel.HDR, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Width="150"/>
 
 
         <Label Style="{StaticResource ResourceKey=LabelRegular}" Content="{StaticResource ResourceKey=resTextForSearch}" HorizontalAlignment="Left" Margin="10,436,0,0" VerticalAlignment="Top" TextOptions.TextFormattingMode="Display"/>
-        <TextBox TextChanged="TextBox_TextChanged" x:Name="txtSearch" Text="{Binding Path=Model.TextForSearch, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MaxLength="50" Margin="160,436,165,0" Style="{StaticResource ResourceKey=TextBoxRegular}"/>
+        <TextBox TextChanged="TextBox_TextChanged" x:Name="txtSearch" Text="{Binding Path=Model.BaseModel.TextForSearch, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" MaxLength="50" Margin="160,436,165,0" Style="{StaticResource ResourceKey=TextBoxRegular}"/>
         <Button IsEnabled="{Binding Path=Text.Length, ElementName=txtSearch}" Content="{StaticResource ResourceKey=resResetSearch}" Margin="0,436,10,0" Style="{StaticResource ResourceKey=RegularButton}" Width="150" HorizontalAlignment="Right" Command="{Binding Path=ResetSearchCommand}"/>
 
         <!-- -->

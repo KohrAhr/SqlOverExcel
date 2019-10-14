@@ -12,7 +12,7 @@ namespace SqlOverExcelUI.Models
     /// <summary>
     ///     Model for Main Window
     /// </summary>
-    public class MainWindowModel : MainWindowBaseModel
+    public class MainWindowModel : PropertyChangedNotification
     {
         /// <summary>
         ///     Constructor
@@ -21,7 +21,8 @@ namespace SqlOverExcelUI.Models
         {
             WorksheetItems = new WorksheetItemsType();
             QueryResult = new DataTable();
-            HDR = true;
+
+            BaseModel = new MainWindowBaseModel();
         }
 
         /// <summary>
@@ -30,6 +31,12 @@ namespace SqlOverExcelUI.Models
         ~MainWindowModel()
         {
             GC.Collect();
+        }
+
+        public MainWindowBaseModel BaseModel
+        {
+            get { return GetValue(() => BaseModel); }
+            set { SetValue(() => BaseModel, value); }
         }
 
         /// <summary>

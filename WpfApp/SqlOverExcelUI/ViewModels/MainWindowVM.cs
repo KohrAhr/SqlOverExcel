@@ -29,6 +29,8 @@ namespace SqlOverExcelUI.ViewModels
         public ICommand UseTableNameCommand { get; set; }
         public ICommand AboutCommand { get; set; }
         public ICommand ResetSearchCommand { get; set; }
+        public ICommand LoadSetCommand { get; set; }
+        public ICommand SaveSetCommand { get; set; }
         #endregion Commands definition
 
         public MainWindowModel Model
@@ -57,12 +59,24 @@ namespace SqlOverExcelUI.ViewModels
             UseTableNameCommand = new RelayCommand(UseTableNameProc, UseTableNameCommandEnabled);
             ResetSearchCommand = new RelayCommand(ResetSearchProc);
             AboutCommand = new RelayCommand(AboutProc);
+            LoadSetCommand = new RelayCommand(LoadSetProc);
+            SaveSetCommand = new RelayCommand(SaveSetProc);
         }
 
         #region Commands implementation
+        private void LoadSetProc(object o)
+        {
+
+        }
+
+        private void SaveSetProc(object o)
+        {
+
+        }
+
         private void ResetSearchProc(object o)
         {
-            Model.TextForSearch = "";
+            Model.BaseModel.TextForSearch = "";
         }
 
         private void AboutProc(object o)
@@ -94,7 +108,7 @@ namespace SqlOverExcelUI.ViewModels
 
             string s = selectedItem.WorksheetNameForQuery;
 
-            Model.SqlQuery += s;
+            Model.BaseModel.SqlQuery += s;
         }
 
         private bool UseTableNameCommandEnabled(Object o)
@@ -165,7 +179,7 @@ namespace SqlOverExcelUI.ViewModels
             {
                 using (new WaitCursor())
                 {
-                    using (ExcelCore excelIn = new ExcelCore(Model.ExcelFileName, AppDataCore.Settings.AceVersion, Model.HDR))
+                    using (ExcelCore excelIn = new ExcelCore(Model.BaseModel.ExcelFileName, AppDataCore.Settings.AceVersion, Model.BaseModel.HDR))
                     {
                         List<string> worksheets = excelIn.GetWorksheets();
 
@@ -191,7 +205,7 @@ namespace SqlOverExcelUI.ViewModels
                 WindowsUI.RunWindowDialog(() =>
                 {
                     MessageBox.Show(
-                        String.Format(StringsFunctions.ResourceString("resErrorDuringOpening"), Model.ExcelFileName) +
+                        String.Format(StringsFunctions.ResourceString("resErrorDuringOpening"), Model.BaseModel.ExcelFileName) +
                             Environment.NewLine + Environment.NewLine + ex.Message,
                         StringsFunctions.ResourceString("resError"),
                         MessageBoxButton.OK, MessageBoxImage.Hand
@@ -203,7 +217,7 @@ namespace SqlOverExcelUI.ViewModels
 
         private bool RunAnalyticsCommandEnabled(object o)
         {
-            return !String.IsNullOrEmpty(Model.ExcelFileName);
+            return !String.IsNullOrEmpty(Model.BaseModel.ExcelFileName);
         }
 
         private void SelectFileProc(object o)
@@ -215,7 +229,7 @@ namespace SqlOverExcelUI.ViewModels
                 openFileDialog.InitialDirectory = Environment.CurrentDirectory;
                 if (openFileDialog.ShowDialog() == true)
                 {
-                    Model.ExcelFileName = openFileDialog.FileName;
+                    Model.BaseModel.ExcelFileName = openFileDialog.FileName;
                 }
             }
             );
@@ -229,12 +243,12 @@ namespace SqlOverExcelUI.ViewModels
                 {
                     Task runQuery = new Task(() =>
                     {
-                        using (ExcelCore excelIn = new ExcelCore(Model.ExcelFileName, AppDataCore.Settings.AceVersion, Model.HDR))
+                        using (ExcelCore excelIn = new ExcelCore(Model.BaseModel.ExcelFileName, AppDataCore.Settings.AceVersion, Model.BaseModel.HDR))
                         {
                             DataTable queryResult = new DataTable();
 
                             // Run query
-                            excelIn.RunSql(Model.SqlQuery, ref queryResult);
+                            excelIn.RunSql(Model.BaseModel.SqlQuery, ref queryResult);
 
                             // Populate result
                             Model.QueryResult = queryResult;
@@ -271,7 +285,7 @@ namespace SqlOverExcelUI.ViewModels
         }
         private bool RunSqlQueryCommandEnabled(object o)
         {
-            return !String.IsNullOrEmpty(Model.SqlQuery);
+            return !String.IsNullOrEmpty(Model.BaseModel.SqlQuery);
         }
         #endregion Commands implementation
     }

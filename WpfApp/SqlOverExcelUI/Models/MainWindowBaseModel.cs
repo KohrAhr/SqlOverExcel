@@ -10,6 +10,14 @@ namespace SqlOverExcelUI.Models
     public class MainWindowBaseModel : PropertyChangedNotification
     {
         /// <summary>
+        ///     Constructor
+        /// </summary>
+        public MainWindowBaseModel()
+        {
+            HDR = true;
+        }
+
+        /// <summary>
         ///     Excel file for proceed
         /// </summary>
         public string ExcelFileName
