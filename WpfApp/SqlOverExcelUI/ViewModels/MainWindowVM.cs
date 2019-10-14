@@ -16,6 +16,8 @@ using Lib.UI;
 using Lib.Strings;
 using System.Collections.ObjectModel;
 using SqlOverExcelUI.Core;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace SqlOverExcelUI.ViewModels
 {
@@ -66,12 +68,16 @@ namespace SqlOverExcelUI.ViewModels
         #region Commands implementation
         private void LoadSetProc(object o)
         {
+            string jsonString = File.ReadAllText("C:\\Temp\\Test.json");
 
+            Model.BaseModel = JsonConvert.DeserializeObject<MainWindowBaseModel>(jsonString);
         }
 
         private void SaveSetProc(object o)
         {
+            string jsonStr = JsonConvert.SerializeObject(Model.BaseModel);
 
+            File.WriteAllText("C:\\Temp\\Test.json", jsonStr);
         }
 
         private void ResetSearchProc(object o)
