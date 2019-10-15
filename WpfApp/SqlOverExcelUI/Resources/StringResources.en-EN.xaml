@@ -3,7 +3,7 @@
                     xmlns:system="clr-namespace:System;assembly=mscorlib"
                     xmlns:local="clr-namespace:SqlOverExcelUI">
 
-    <system:String x:Key="resMainWindow">SqlOverExcel -- Run SQL query over MS Excel file [13/Oct/2019]</system:String>
+    <system:String x:Key="resMainWindow">SqlOverExcel -- Run SQL query over MS Excel file [16/Oct/2019]</system:String>
     <system:String x:Key="resExcelFile">MS Excel file</system:String>
     <system:String x:Key="resSelectExcelFile">Select file</system:String>
     <system:String x:Key="resOpenExcelFile">Analyze file</system:String>
@@ -17,7 +17,8 @@
     <system:String x:Key="resSqlQueryToRun">SQL query for execution</system:String>
     <system:String x:Key="resRunSqlQuery">Execute SQL query</system:String>
 
-    <system:String x:Key="resFileTypes">Excel Workbook (*.xlsx)|*.xlsx|Excel Macro-Enabled Workbook (*.xlsm)|*.xlsm|Excel Binary Workbook|(*.xlsb)|Excel 97-2003 Workbook|(*.xls)|All files (*.*)|*.*</system:String>
+    <system:String x:Key="resFileTypes">Excel Workbook (*.xlsx)|*.xlsx|Excel Macro-Enabled Workbook (*.xlsm)|*.xlsm|Excel Binary Workbook (*.xlsb)|*.xlsb|Excel 97-2003 Workbook (*.xls)|*.xls|All files (*.*)|*.*</system:String>
+    <system:String x:Key="resConfigFileType">Configuration file (*.json)|*.json|All files (*.*)|*.*</system:String>
 
     <system:String x:Key="resErrorDuringOpening">Error during opening file "{0}"</system:String>
     <system:String x:Key="resErrorDuringExecution">The error has occured during SQL script execution</system:String>

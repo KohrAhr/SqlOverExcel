@@ -68,16 +68,53 @@ namespace SqlOverExcelUI.ViewModels
         #region Commands implementation
         private void LoadSetProc(object o)
         {
-            string jsonString = File.ReadAllText("C:\\Temp\\Test.json");
+            // Ask for a file name
+            string fileName = "";
+
+            WindowsUI.RunWindowDialog(() =>
+            {
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.Filter = StringsFunctions.ResourceString("resConfigFileType");
+                openFileDialog.InitialDirectory = Environment.CurrentDirectory;
+                if (openFileDialog.ShowDialog() == true)
+                {
+                    fileName = openFileDialog.FileName;
+                }
+            }
+            );
+
+            // Load
+            string jsonString = File.ReadAllText(fileName);
 
             Model.BaseModel = JsonConvert.DeserializeObject<MainWindowBaseModel>(jsonString);
         }
 
         private void SaveSetProc(object o)
         {
+            // Ask for a file name
+            string fileName = "";
+
+            WindowsUI.RunWindowDialog(() =>
+            {
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = StringsFunctions.ResourceString("resConfigFileType");
+                saveFileDialog.InitialDirectory = Environment.CurrentDirectory;
+                if (saveFileDialog.ShowDialog() == true)
+                {
+                    fileName = saveFileDialog.FileName;
+                }
+            }
+            );
+
+            if (String.IsNullOrEmpty(fileName))
+            {
+                return;
+            }
+
+            // Save
             string jsonStr = JsonConvert.SerializeObject(Model.BaseModel);
 
-            File.WriteAllText("C:\\Temp\\Test.json", jsonStr);
+            File.WriteAllText(fileName, jsonStr);
         }
 
         private void ResetSearchProc(object o)
