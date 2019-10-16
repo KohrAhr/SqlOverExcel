@@ -19,6 +19,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using SqlOverExcelUI.Functions;
+using System.Xml;
+using ICSharpCode.AvalonEdit.Highlighting;
+using ICSharpCode.AvalonEdit.CodeCompletion;
+using ICSharpCode.AvalonEdit.Folding;
 
 namespace SqlOverExcelUI
 {
@@ -32,6 +36,19 @@ namespace SqlOverExcelUI
             InitializeComponent();
 
             DataContext = new MainWindowVM();
+
+            string resName = "sql.xshd";
+
+            using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resName))
+            {
+                using (XmlTextReader reader = new XmlTextReader(resName))
+                {
+                    txtCode.SyntaxHighlighting =
+                        ICSharpCode.AvalonEdit.Highlighting.Xshd.HighlightingLoader.Load(reader, HighlightingManager.Instance);
+                }
+            }
+
+            txtCode.ShowLineNumbers = true;
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)

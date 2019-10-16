@@ -4,8 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SqlOverExcelUI"
+        xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
         mc:Ignorable="d"
         xmlns:f="clr-namespace:SqlOverExcelUI.Functions"
+        xmlns:c="clr-namespace:SqlOverExcelUI.Components"
         WindowStartupLocation="CenterScreen" 
         Style="{StaticResource ResourceKey=Window}"
         Title="{StaticResource ResourceKey=resMainWindow}" Height="665" Width="900" MinWidth="640" MinHeight="600">
@@ -43,28 +45,9 @@
 
         <!-- -->
         <Label Style="{StaticResource ResourceKey=TitleRegular}" Background="AntiqueWhite" Content="{StaticResource ResourceKey=resSqlQueryToRun}" Margin="10,271,10,0" />
-        <TextBox VerticalScrollBarVisibility="Visible" Height="100" Margin="10,302,165,0" TextWrapping="Wrap" AcceptsReturn="True" AcceptsTab="True" Text="{Binding Path=Model.BaseModel.SqlQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" MaxLines="255">
-            <TextBox.ToolTip>
-                <TextBlock>
-                    SQL Query samples:
-                    <LineBreak/>
-                    1) select count(field1) as e1 from [Worksheet1$]
-                    <LineBreak/>
-                    2) select count(field1) as e1, max(field2) as e2, min(field3) as e3 from [Worksheet1$]
-                    <LineBreak/>
-                    3) SELECT [Table1$].[ID], [Table2$].[ValueAddon], [Table1$].[TextValue] FROM [Table1$] LEFT JOIN[Table2$] ON[Table1$].[IKeyID] = [Table2$].[ID]
-                    <LineBreak/>
-                    4) SELECT [Table1$].ID, [Table2$].ValueAddon, [Table1$].TextValue FROM [Table1$] LEFT JOIN[Table2$] ON[Table1$].IKeyID = [Table2$].ID
-                    <LineBreak/>
-                    <LineBreak/>
-                    Main tips:
-                    <LineBreak/>
-                    Table name must be in square brasket []
-                    <LineBreak/>
-                    Table name must end with sign $
-                </TextBlock>
-            </TextBox.ToolTip>
-        </TextBox>
+
+        <c:BindableAvalonEditor ShowLineNumbers="True" WordWrap="True" x:Name="txtCode" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Visible" Height="100" Margin="10,302,165,0" VerticalAlignment="Top" Text="{Binding Path=Model.BaseModel.SqlQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
         <Button IsEnabled="{Binding Path=Text.Length, ElementName=txtQuery}" Content="{StaticResource ResourceKey=resRunSqlQuery}" Margin="0,302,10,0" Style="{StaticResource ResourceKey=RegularButton}" Command="{Binding RunSqlQueryCommand}" Width="150" HorizontalAlignment="Right" />
         <CheckBox Content="{StaticResource ResourceKey=resHDR}" Margin="0,330,10,0" VerticalAlignment="Top" IsChecked="{Binding Path=Model.BaseModel.HDR, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Right" Width="150"/>
 
