@@ -83,6 +83,11 @@ namespace SqlOverExcelUI.ViewModels
             }
             );
 
+            if (String.IsNullOrEmpty(fileName))
+            {
+                return;
+            }
+
             // Load
             string jsonString = File.ReadAllText(fileName);
 
